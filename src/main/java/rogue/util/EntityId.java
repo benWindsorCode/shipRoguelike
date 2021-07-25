@@ -4,6 +4,7 @@ public enum EntityId {
     // Animals
     BIG_FISH,
     CIVILIAN_SHIP,
+    COW,
     FOX,
     RAT,
     SMALL_FISH,
@@ -29,12 +30,14 @@ public enum EntityId {
 
     // Food
     RAT_MEAT,
+    RAW_BEEF,
     RAW_FISH,
 
     // Resources
     ASH_TREE,
     GOLD,
     IRON,
+    LEATHER,
     OAK_TREE,
     ROCK,
     STONE,

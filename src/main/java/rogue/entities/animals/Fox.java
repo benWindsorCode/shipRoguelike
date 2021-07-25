@@ -21,7 +21,7 @@ public class Fox extends Entity {
         this.add(new TileComponent(TileFactory.fox.glyph, TileFactory.fox.color));
         this.add(foxPosition);
         this.add(new HealthComponent(5));
-        this.add(new AiComponent<>(new WanderingLandAi<Fox>(this)));
+        this.add(new AiComponent<>(new WanderingLandAi<>(this)));
         this.add(new ComputerControlledComponent());
         this.add(new ExamineComponent(
                 "Fox",
