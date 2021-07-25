@@ -26,7 +26,7 @@ public class RatMeat extends Entity {
     public RatMeat(PositionComponent positionComponent, boolean isVisible) {
         UseItemEffectComponent useItemEffectComponent = new UseItemEffectComponent(UseTarget.PLAYER);
         useItemEffectComponent.addEffect(() -> new HealthActionComponent(4));
-        useItemEffectComponent.addEffect(() -> new HungerActionComponent(-20));
+        useItemEffectComponent.addEffect(() -> new HungerActionComponent(-25));
 
         // shares Position Component with the object that spawns it
         this.add(positionComponent);

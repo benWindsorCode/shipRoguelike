@@ -35,7 +35,7 @@ public class HungerSystem extends EntitySystem {
         }
 
         if(hungerComponent.turnsUntilIncrease == 0) {
-            hungerComponent.currentHunger += hungerComponent.increaseAmount;
+            hungerComponent.currentHunger = Math.min(hungerComponent.maxHunger, hungerComponent.currentHunger + hungerComponent.increaseAmount);
             hungerComponent.turnsUntilIncrease = hungerComponent.turnsPerIncrease;
         }
     }
@@ -44,7 +44,7 @@ public class HungerSystem extends EntitySystem {
         HungerActionComponent hungerActionComponent = MapperFactory.hungerActionComponent.get(e);
         HungerComponent hungerComponent = MapperFactory.hungerComponent.get(e);
 
-        hungerComponent.currentHunger += hungerActionComponent.pointsDelta;
+        hungerComponent.currentHunger = Math.max(0, Math.min(hungerComponent.maxHunger, hungerComponent.currentHunger + hungerActionComponent.pointsDelta));
 
         e.remove(HungerActionComponent.class);
     }
