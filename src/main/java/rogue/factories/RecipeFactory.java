@@ -5,10 +5,7 @@ import rogue.components.TileComponent;
 import rogue.crafting.Recipe;
 import rogue.crafting.RecipeBook;
 import rogue.entities.crafting.*;
-import rogue.entities.resources.Gold;
-import rogue.entities.resources.Iron;
-import rogue.entities.resources.Stone;
-import rogue.entities.resources.Wood;
+import rogue.entities.resources.*;
 import rogue.loot.LootTable;
 import rogue.loot.LootTableEntry;
 
@@ -37,6 +34,13 @@ public class RecipeFactory {
         deconstructLootTable.addLoot(new LootTableEntry(Wood::new, 1.0, 3));
 
         return new Recipe(Chest::new, ingredients, deconstructLootTable);
+    }
+
+    public static Recipe breadRecipe() {
+        Map<Entity, Integer> ingredients = new HashMap<>();
+        ingredients.put(new Wheat(), 4);
+
+        return new Recipe(Bread::new, ingredients);
     }
 
     public static Recipe ironChestRecipe() {
@@ -81,6 +85,7 @@ public class RecipeFactory {
         recipeBook.addRecipe(RecipeFactory.ironChestRecipe());
         recipeBook.addRecipe(RecipeFactory.repairKitRecipe());
         recipeBook.addRecipe(RecipeFactory.shipUpgradeKitRecipe());
+        recipeBook.addRecipe(RecipeFactory.breadRecipe());
 
         return recipeBook;
     }

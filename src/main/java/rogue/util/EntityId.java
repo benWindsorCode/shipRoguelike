@@ -15,6 +15,7 @@ public enum EntityId {
     VERTICAL_RAIL,
 
     // Crafting
+    BREAD,
     CHEST,
     IRON_CHEST,
     REPAIR_KIT,
@@ -37,6 +38,8 @@ public enum EntityId {
     OAK_TREE,
     ROCK,
     STONE,
+    WHEAT,
+    WHEAT_PLANT,
     WOOD,
 
     // World

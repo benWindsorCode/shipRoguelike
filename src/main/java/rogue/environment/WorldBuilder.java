@@ -10,6 +10,7 @@ import rogue.entities.*;
 import rogue.entities.resources.AshTree;
 import rogue.entities.resources.Rock;
 import rogue.entities.resources.OakTree;
+import rogue.entities.resources.WheatPlant;
 import rogue.entities.world.*;
 import rogue.environment.prefabs.Prefab;
 import rogue.factories.MapperFactory;
@@ -341,6 +342,7 @@ public class WorldBuilder {
         Supplier<Entity> oakTreeSupplier = OakTree::new;
         Supplier<Entity> rockSupplier = Rock::new;
         Supplier<Entity> ashTreeSupplier = AshTree::new;
+        Supplier<Entity> wheatPlantSupplier = WheatPlant::new;
 
         // TODO: use gaussian here instead?
         // TODO: Perhaps first coin toss to pick 'dense' or 'sparse' then pick density out of different ranges depending
@@ -356,10 +358,12 @@ public class WorldBuilder {
         double oakTreeDensity = RandomUtil.getRandomDouble(-0.2, 0.3);
         double ashTreeDensity = RandomUtil.getRandomDouble(-0.2, 0.3);
         double rockDensity = RandomUtil.getRandomDouble(-0.1, 0.2);
+        double wheatPlantDensity = RandomUtil.getRandomDouble(-0.5, 0.1);
 
         point.add(oakTreeSupplier, oakTreeDensity);
         point.add(ashTreeSupplier, ashTreeDensity);
         point.add(rockSupplier, rockDensity);
+        point.add(wheatPlantSupplier, wheatPlantDensity);
 
         return point;
     }

@@ -23,6 +23,8 @@ public class TileFactory {
     public static final TileComponent weakBandit = new TileComponent((char)2, AsciiPanel.red);
     public static final TileComponent oakTree = new TileComponent((char)210, new Color(77, 38, 0));
     public static final TileComponent ashTree = new TileComponent((char)210, new Color(102, 51, 0));
+    public static final TileComponent wheatPlant = new TileComponent((char)244, new Color(255, 195, 77));
+    public static final TileComponent wheat = new TileComponent((char)240, new Color(255, 195, 77));
     public static final TileComponent wood = new TileComponent((char)186, new Color(77, 38, 0));
     public static final TileComponent iron = new TileComponent((char)219, new Color(115, 115, 115));
     public static final TileComponent gold = new TileComponent((char)219, new Color(255, 163, 0));
@@ -31,6 +33,7 @@ public class TileFactory {
     public static final TileComponent stone = new TileComponent((char)177, new Color(115, 115, 115));
     public static final TileComponent examine = new TileComponent('X', AsciiPanel.brightWhite);
     public static final TileComponent chest = new TileComponent((char)8, new Color(77, 38, 0));
+    public static final TileComponent bread = new TileComponent('b', new Color(255, 195, 77));
     public static final TileComponent repairKit = new TileComponent('r', new Color(77, 38, 0));
     public static final TileComponent ironChest = new TileComponent((char)8, new Color(110, 115, 100));
     public static final TileComponent stoneAltar = new TileComponent((char)8, new Color(115, 115, 115));

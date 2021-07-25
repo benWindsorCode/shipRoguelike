@@ -24,7 +24,11 @@ public class Recipe extends Entity {
     private Supplier<Entity> entityCreator;
 
     public Recipe(Supplier<Entity> entityCreator) {
-        this.entityCreator = entityCreator;
+        this(entityCreator, new HashMap<>(), new LootTable());
+    }
+
+    public Recipe(Supplier<Entity> entityCreator, Map<Entity, Integer> ingredients) {
+        this(entityCreator, ingredients, new LootTable());
     }
 
     public Recipe(Supplier<Entity> entityCreator, Map<Entity, Integer> ingredients, LootTable deconstructLootTable) {

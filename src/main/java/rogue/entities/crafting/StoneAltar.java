@@ -4,8 +4,10 @@ import com.badlogic.ashley.core.Entity;
 import rogue.components.*;
 import rogue.components.traits.CanBeCraftedComponent;
 import rogue.components.traits.CannotEnterComponent;
+import rogue.components.traits.IdComponent;
 import rogue.factories.RecipeFactory;
 import rogue.factories.TileFactory;
+import rogue.util.EntityId;
 
 public class StoneAltar extends Entity {
     public StoneAltar() {
@@ -16,6 +18,7 @@ public class StoneAltar extends Entity {
 
         // Create components
         this.add(new RenderableComponent());
+        this.add(new IdComponent(EntityId.STONE_ALTAR));
         this.add(new PositionComponent(x, y));
         this.add(new TileComponent(TileFactory.stoneAltar.glyph, TileFactory.stoneAltar.color));
         this.add(new CanBeCraftedComponent(RecipeFactory.stoneAlterRecipe()));

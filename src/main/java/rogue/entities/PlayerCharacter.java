@@ -25,7 +25,7 @@ public class PlayerCharacter extends Entity {
         this.add(new PlayerShipComponent(playerShip));
         this.add(new CanHarvestComponent());
         this.add(new InventoryComponent(12));
-        this.add(new HungerComponent(35));
+        this.add(new HungerComponent(55));
         this.add(new StrengthComponent(5));
         this.add(new RecipeBookComponent(RecipeFactory.playerBook()));
         this.add(new ExamineComponent(
