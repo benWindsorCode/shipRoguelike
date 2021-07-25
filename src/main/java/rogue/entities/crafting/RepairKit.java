@@ -2,7 +2,7 @@ package rogue.entities.crafting;
 
 import com.badlogic.ashley.core.Entity;
 import rogue.components.*;
-import rogue.components.actions.HealActionComponent;
+import rogue.components.actions.HealthActionComponent;
 import rogue.components.items.UseItemEffectComponent;
 import rogue.components.traits.CanBeCraftedComponent;
 import rogue.components.traits.CanBeDeconstructedComponent;
@@ -25,7 +25,7 @@ public class RepairKit extends Entity {
         this.add(new CanBeDeconstructedComponent());
         this.add(new TileComponent(TileFactory.ironChest.glyph, TileFactory.ironChest.color));
         this.add(new CanBeCraftedComponent(RecipeFactory.repairKitRecipe()));
-        this.add(new UseItemEffectComponent(UseTarget.PLAYER_SHIP, () -> new HealActionComponent(10)));
+        this.add(new UseItemEffectComponent(UseTarget.PLAYER_SHIP, () -> new HealthActionComponent(10)));
         this.add(new ExamineComponent(
                 "Repair Kit",
                 "Repair Kits",

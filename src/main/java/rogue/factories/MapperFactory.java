@@ -3,6 +3,7 @@ package rogue.factories;
 import com.badlogic.ashley.core.ComponentMapper;
 import rogue.components.*;
 import rogue.components.actions.*;
+import rogue.components.hunger.HungerComponent;
 import rogue.components.items.UseItemEffectComponent;
 import rogue.components.player.PlayerShipComponent;
 import rogue.components.ship.PlayerOnboardComponent;
@@ -44,10 +45,12 @@ public class MapperFactory {
     public static final ComponentMapper<CanStoreItemsInComponent> canStoreItemsInComponentComponentMapper = ComponentMapper.getFor(CanStoreItemsInComponent.class);
     public static final ComponentMapper<CannotEnterComponent> cannotEnterComponent = ComponentMapper.getFor(CannotEnterComponent.class);
     public static final ComponentMapper<SpawnLootComponent> spawnLootComponent = ComponentMapper.getFor(SpawnLootComponent.class);
-    public static final ComponentMapper<HealActionComponent> healActionComponent = ComponentMapper.getFor(HealActionComponent.class);
+    public static final ComponentMapper<HealthActionComponent> healActionComponent = ComponentMapper.getFor(HealthActionComponent.class);
     public static final ComponentMapper<UseItemActionComponent> useItemActionComponent = ComponentMapper.getFor(UseItemActionComponent.class);
     public static final ComponentMapper<UseItemEffectComponent> useItemEffectComponent = ComponentMapper.getFor(UseItemEffectComponent.class);
     public static final ComponentMapper<IdComponent> idComponent = ComponentMapper.getFor(IdComponent.class);
     public static final ComponentMapper<CanBeDeconstructedComponent> canBeDeconstructedComponent = ComponentMapper.getFor(CanBeDeconstructedComponent.class);
     public static final ComponentMapper<DeconstructActionComponent> deconstructActionComponent = ComponentMapper.getFor(DeconstructActionComponent.class);
+    public static final ComponentMapper<HungerComponent> hungerComponent = ComponentMapper.getFor(HungerComponent.class);
+    public static final ComponentMapper<HungerActionComponent> hungerActionComponent = ComponentMapper.getFor(HungerActionComponent.class);
 }

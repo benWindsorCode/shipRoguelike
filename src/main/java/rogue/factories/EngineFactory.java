@@ -36,6 +36,9 @@ public class EngineFactory {
         ItemSystem itemSystem = new ItemSystem();
         engine.addSystem(itemSystem);
 
+        HungerSystem hungerSystem = new HungerSystem();
+        engine.addSystem(hungerSystem);
+
         return engine;
     }
 }

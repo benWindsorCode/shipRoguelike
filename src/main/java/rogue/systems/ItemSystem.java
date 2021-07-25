@@ -18,6 +18,8 @@ import rogue.factories.MapperFactory;
 import rogue.loot.LootTable;
 
 import java.util.List;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 public class ItemSystem extends EntitySystem {
     private ImmutableArray<Entity> itemsUsed;
@@ -43,13 +45,16 @@ public class ItemSystem extends EntitySystem {
         e.remove(UseItemActionComponent.class);
 
         UseItemEffectComponent useItemEffectComponent = MapperFactory.useItemEffectComponent.get(itemUsed);
-        Component itemEffect = useItemEffectComponent.componentSupplier.get();
+        List<Component> itemEffects = useItemEffectComponent.componentSuppliers.stream()
+                .map(Supplier::get)
+                .collect(Collectors.toList());
+
         inventoryComponent.remove(itemUsed);
 
         // TODO: could have a 'destroyed on use' field to check if we want to do this or not
         getEngine().removeEntity(itemUsed);
 
-        target.add(itemEffect);
+        itemEffects.forEach(target::add);
     }
 
     private void deconstructItem(Entity e) {

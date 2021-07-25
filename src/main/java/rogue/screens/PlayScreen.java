@@ -6,6 +6,7 @@ import com.badlogic.ashley.core.Entity;
 import rogue.ai.CursorAi;
 import rogue.components.*;
 import rogue.components.actions.SendMessageComponent;
+import rogue.components.hunger.HungerComponent;
 import rogue.components.player.PlayerShipComponent;
 import rogue.components.ship.PlayerOnboardComponent;
 import rogue.components.actions.MovingComponent;
@@ -127,15 +128,18 @@ public class PlayScreen implements Screen {
 
             HealthComponent shipHealth = MapperFactory.healthComponent.get(playerShip);
             HealthComponent playerHealth = MapperFactory.healthComponent.get(playerCharacter);
+            HungerComponent playerHunger = MapperFactory.hungerComponent.get(playerCharacter);
             InventoryComponent shipInventory = MapperFactory.inventoryComponent.get(playerShip);
             InventoryComponent playerInventory = MapperFactory.inventoryComponent.get(playerCharacter);
 
             terminal.write(String.format(
-                    "Health %d/%d. Inventory %d/%d.     Ship Health %d/%d. Ship Inventory %d/%d.",
+                    "Health %d/%d. Inventory %d/%d. Hunger %d/%d.    Ship Health %d/%d. Ship Inventory %d/%d.",
                     playerHealth.hitpoints,
                     playerHealth.maxHitpoints,
                     playerInventory.currentSize,
                     playerInventory.maxSize,
+                    playerHunger.currentHunger,
+                    playerHunger.maxHunger,
                     shipHealth.hitpoints,
                     shipHealth.maxHitpoints,
                     shipInventory.currentSize,
@@ -152,15 +156,18 @@ public class PlayScreen implements Screen {
 
             HealthComponent shipHealth = MapperFactory.healthComponent.get(playerShip);
             HealthComponent playerHealth = MapperFactory.healthComponent.get(playerCharacter);
+            HungerComponent playerHunger = MapperFactory.hungerComponent.get(playerCharacter);
             InventoryComponent shipInventory = MapperFactory.inventoryComponent.get(playerShip);
             InventoryComponent playerInventory = MapperFactory.inventoryComponent.get(playerCharacter);
 
             terminal.write(String.format(
-                    "Health %d/%d. Inventory %d/%d.     Ship Health %d/%d. Ship Inventory %d/%d.",
+                    "Health %d/%d. Inventory %d/%d. Hunger %d/%d.     Ship Health %d/%d. Ship Inventory %d/%d.",
                     playerHealth.hitpoints,
                     playerHealth.maxHitpoints,
                     playerInventory.currentSize,
                     playerInventory.maxSize,
+                    playerHunger.currentHunger,
+                    playerHunger.maxHunger,
                     shipHealth.hitpoints,
                     shipHealth.maxHitpoints,
                     shipInventory.currentSize,

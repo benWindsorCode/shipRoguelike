@@ -3,6 +3,7 @@ package rogue.factories;
 import com.badlogic.ashley.core.Family;
 import rogue.components.*;
 import rogue.components.actions.*;
+import rogue.components.hunger.HungerComponent;
 import rogue.components.traits.WorldTileComponent;
 import rogue.components.world.SpawnLootComponent;
 import rogue.components.world.SpawnPortalComponent;
@@ -19,7 +20,7 @@ public class FamilyFactory {
     public static final Family inventoryAdd = Family.all(InventoryAddActionComponent.class, InventoryComponent.class).get();
     public static final Family inventoryRemove = Family.all(InventoryRemoveActionComponent.class, InventoryComponent.class).get();
     public static final Family attacking = Family.all(AttackActionComponent.class).get();
-    public static final Family healing = Family.all(HealActionComponent.class, HealthComponent.class).get();
+    public static final Family healthUpdates = Family.all(HealthActionComponent.class, HealthComponent.class).get();
     public static final Family dropping = Family.all(DropActionComponent.class, InventoryComponent.class).get();
     public static final Family directionalDropping = Family.all(DropDirectionActionComponent.class, InventoryComponent.class).get();
     public static final Family transferring = Family.all(InventoryTransferActionComponent.class, InventoryComponent.class).get();
@@ -29,4 +30,6 @@ public class FamilyFactory {
     public static final Family spawnLoot = Family.all(SpawnLootComponent.class).get();
     public static final Family itemsUsed = Family.all(UseItemActionComponent.class).get();
     public static final Family deconstruct = Family.all(DeconstructActionComponent.class, InventoryComponent.class).get();
+    public static final Family hungerUpdates = Family.all(HungerComponent.class, HealthComponent.class).get();
+    public static final Family hungerActions = Family.all(HungerActionComponent.class, HungerComponent.class).get();
 }

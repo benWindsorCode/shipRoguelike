@@ -6,30 +6,27 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
 import rogue.components.*;
 import rogue.components.actions.AttackActionComponent;
-import rogue.components.actions.DropActionComponent;
-import rogue.components.actions.HealActionComponent;
+import rogue.components.actions.HealthActionComponent;
 import rogue.components.actions.InventoryAddActionComponent;
 import rogue.components.traits.CanBeAttackedComponent;
 import rogue.components.world.SpawnLootComponent;
 import rogue.factories.FamilyFactory;
 import rogue.factories.MapperFactory;
 import rogue.util.EntityUtil;
-import rogue.util.TileUtil;
 
 import java.util.List;
-import java.util.Map;
 
 public class CombatSystem extends EntitySystem {
     private ImmutableArray<Entity> entitiesAttacking;
-    private ImmutableArray<Entity> entitiesHealing;
+    private ImmutableArray<Entity> healthUpdates;
 
     public void addedToEngine(Engine engine) {
         entitiesAttacking = engine.getEntitiesFor(FamilyFactory.attacking);
-        entitiesHealing = engine.getEntitiesFor(FamilyFactory.healing);
+        healthUpdates = engine.getEntitiesFor(FamilyFactory.healthUpdates);
     }
 
     public void update(float deltaTime) {
-        entitiesHealing.forEach(this::processHealing);
+        healthUpdates.forEach(this::processHealthUpdate);
         entitiesAttacking.forEach(this::processAttack);
     }
 
@@ -85,15 +82,19 @@ public class CombatSystem extends EntitySystem {
         }
     }
 
-    private void processHealing(Entity e) {
-        HealActionComponent healActionComponent = MapperFactory.healActionComponent.get(e);
+    private void processHealthUpdate(Entity e) {
+        HealthActionComponent healthActionComponent = MapperFactory.healActionComponent.get(e);
         HealthComponent healthComponent = MapperFactory.healthComponent.get(e);
 
-        healthComponent.hitpoints = Math.min(
+        healthComponent.hitpoints = Math.max( 0, Math.min(
                 healthComponent.maxHitpoints,
-                healthComponent.hitpoints + healActionComponent.pointsToHeal
-        );
+                healthComponent.hitpoints + healthActionComponent.pointsDelta
+        ) );
 
-        e.remove(HealActionComponent.class);
+        if(healthComponent.hitpoints == 0) {
+            getEngine().removeEntity(e);
+        }
+
+        e.remove(HealthActionComponent.class);
     }
 }
