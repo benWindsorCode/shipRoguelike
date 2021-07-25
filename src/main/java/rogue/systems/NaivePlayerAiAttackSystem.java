@@ -26,23 +26,25 @@ public class NaivePlayerAiAttackSystem extends EntitySystem {
     }
 
     public void update(float deltaTime) {
-        for(Entity e: entitiesToUpdate) {
-            AiComponent<?> aiComponent = MapperFactory.aiComponent.get(e);
+        entitiesToUpdate.forEach(this::processUpdates);
+    }
 
-            // TODO: its not nice to manually have to flag which Ai are wondering or not
-            // skip any ai that isn't wandering ai
-            if(!(aiComponent.ai.getClass().equals(NaivePlayerSeaAttackAi.class)
+    private void processUpdates(final Entity e) {
+        AiComponent<?> aiComponent = MapperFactory.aiComponent.get(e);
+
+        // TODO: its not nice to manually have to flag which Ai are wondering or not
+        // skip any ai that isn't wandering ai
+        if(!(aiComponent.ai.getClass().equals(NaivePlayerSeaAttackAi.class)
                 || aiComponent.ai.getClass().equals(NaivePlayerLandAttackAi.class))
-            )
-                continue;
+        )
+            return;
 
-            WorldSystem worldSystem = getEngine().getSystem(WorldSystem.class);
-            Entity player = worldSystem.getPlayerEntity();
-            PositionComponent playerPos = MapperFactory.positionComponent.get(player);
+        WorldSystem worldSystem = getEngine().getSystem(WorldSystem.class);
+        Entity player = worldSystem.getPlayerEntity();
+        PositionComponent playerPos = MapperFactory.positionComponent.get(player);
 
-            MovingComponent nextMove = aiComponent.ai.nextMove(worldSystem.getRenderGrid(), null, player, worldSystem.getWorldGrid().get(playerPos.x, playerPos.y));
+        MovingComponent nextMove = aiComponent.ai.nextMove(worldSystem.getRenderGrid(), null, player, worldSystem.getWorldGrid().get(playerPos.x, playerPos.y));
 
-            e.add(nextMove);
-        }
+        e.add(nextMove);
     }
 }

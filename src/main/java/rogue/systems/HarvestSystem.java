@@ -23,33 +23,35 @@ public class HarvestSystem extends EntitySystem {
     }
 
     public void update(float deltaTime) {
-        for(Entity e: entitiesToHarvest) {
-            HarvestActionComponent harvestActionComponent = MapperFactory.harvestableActionComponent.get(e);
-            CanBeHarvestedComponent canBeHarvestedComponent = MapperFactory.harvestableComponent.get(e);
-            Entity harvester = harvestActionComponent.harvester;
-            PositionComponent harvestedPos = MapperFactory.positionComponent.get(e);
+        entitiesToHarvest.forEach(this::processEntitiesToHarvest);
+    }
 
-            CanHarvestComponent canHarvestComponent = MapperFactory.canHarvestComponent.get(harvester);
+    private void processEntitiesToHarvest(final Entity e) {
+        HarvestActionComponent harvestActionComponent = MapperFactory.harvestableActionComponent.get(e);
+        CanBeHarvestedComponent canBeHarvestedComponent = MapperFactory.harvestableComponent.get(e);
+        Entity harvester = harvestActionComponent.harvester;
+        PositionComponent harvestedPos = MapperFactory.positionComponent.get(e);
 
-            if(canHarvestComponent == null) {
-                System.out.println("Cant harvest as harvester not enabled");
-                continue;
-            }
+        CanHarvestComponent canHarvestComponent = MapperFactory.canHarvestComponent.get(harvester);
 
-            System.out.println("Harvesting");
-            LootableComponent lootableComponent = MapperFactory.lootableComponent.get(e);
-            List<Entity> harvestResult = lootableComponent.lootTable.dropLoot();
-            harvestResult.forEach(loot -> {
-                RenderableComponent harvestResultRender = MapperFactory.renderableComponent.get(loot);
-                PositionComponent lootPos = MapperFactory.positionComponent.get(loot);
-                lootPos.x = harvestedPos.x;
-                lootPos.y = harvestedPos.y;
-
-                harvestResultRender.visible = true;
-                getEngine().addEntity(loot);
-            });
-
-            getEngine().removeEntity(e);
+        if(canHarvestComponent == null) {
+            System.out.println("Cant harvest as harvester not enabled");
+            return;
         }
+
+        System.out.println("Harvesting");
+        LootableComponent lootableComponent = MapperFactory.lootableComponent.get(e);
+        List<Entity> harvestResult = lootableComponent.lootTable.dropLoot();
+        harvestResult.forEach(loot -> {
+            RenderableComponent harvestResultRender = MapperFactory.renderableComponent.get(loot);
+            PositionComponent lootPos = MapperFactory.positionComponent.get(loot);
+            lootPos.x = harvestedPos.x;
+            lootPos.y = harvestedPos.y;
+
+            harvestResultRender.visible = true;
+            getEngine().addEntity(loot);
+        });
+
+        getEngine().removeEntity(e);
     }
 }

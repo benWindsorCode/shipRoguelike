@@ -11,7 +11,7 @@ Broken down by java modules:
 - rogue.components = the components of the ECS pattern, they function as both data stores and events to be processed by systems
 - rogue.crafting = crafting classes, recipes and recipe books to group recipes
 - rogue.entities = the entities of the ECS pattern, groups together and initialises components. Each entity class has a unique EntityId
-- rogue.environment = world generation code. The world grid is a list of entities
+- rogue.environment = world generation code. The world grid is a 2D array of entities, on top of which other generation is applied
 - rogue.factories = factories to create various objects for both the ECS pattern and tiles/entities/recipes etc.
 - rogue.familygeneration = procedural family generation code, to create a family tree
 - rogue.loot = loot table creation and loot drop logic

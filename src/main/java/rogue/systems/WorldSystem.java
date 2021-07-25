@@ -31,7 +31,7 @@ public class WorldSystem extends EntitySystem {
     private ImmutableArray<Entity> ai;
 
     // World entity singleton which can have universal events dropped on it
-    private World worldEntity;
+    private final World worldEntity;
 
     // keeps all base world tiles, e.g. ground, sea
     private WorldGrid worldGrid;
@@ -42,10 +42,8 @@ public class WorldSystem extends EntitySystem {
     // keeps grid of all non world tile entities at each location
     private EntityListGrid entityListGrid;
 
-    //private TileComponent[][] worldTiles;
-    private TileComponent[][] nonWorldTiles;
-    private int width;
-    private int height;
+    private final int width;
+    private final int height;
 
     public WorldSystem(final WorldGrid worldGrid, final int width, final int height, final World worldEntity) {
         super();
@@ -75,8 +73,6 @@ public class WorldSystem extends EntitySystem {
         populateEntityListGrid();
 
         // wipe tiles
-        nonWorldTiles = new TileComponent[width][height];
-
         RenderGrid renderGrid = new RenderGrid(worldGrid.getWorldTiles());
 
         // TODO: deal with multiple entities at the same spot
@@ -117,10 +113,6 @@ public class WorldSystem extends EntitySystem {
             entityListGrid.addEntity(pos.x, pos.y, e);
         }
     }
-
-//    public TileComponent[][] getWorldTiles() {
-//        return worldTiles;
-//    }
 
     public RenderGrid getRenderGrid() {
         return renderGrid;

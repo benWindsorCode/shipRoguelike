@@ -26,19 +26,21 @@ public class WanderingAiSystem extends EntitySystem {
     }
 
     public void update(float deltaTime) {
-        for(Entity e: entitiesToUpdate) {
-            AiComponent<?> aiComponent = MapperFactory.aiComponent.get(e);
+        entitiesToUpdate.forEach(this::processUpdates);
+    }
 
-            // TODO: its not nice to manually have to flag which Ai are wondering or not
-            // skip any ai that isn't wandering ai
-            if(!(aiComponent.ai.getClass().equals(WanderingSeaAi.class)
-                    || aiComponent.ai.getClass().equals(WanderingLandAi.class)
-                    || aiComponent.ai.getClass().equals(WanderingPeacefulSeaAi.class))
-            )
-                continue;
+    private void processUpdates(final Entity e) {
+        AiComponent<?> aiComponent = MapperFactory.aiComponent.get(e);
 
-            e.add(aiComponent.ai.nextMove(null, null, null, null));
-        }
+        // TODO: its not nice to manually have to flag which Ai are wondering or not
+        // skip any ai that isn't wandering ai
+        if(!(aiComponent.ai.getClass().equals(WanderingSeaAi.class)
+                || aiComponent.ai.getClass().equals(WanderingLandAi.class)
+                || aiComponent.ai.getClass().equals(WanderingPeacefulSeaAi.class))
+        )
+            return;
+
+        e.add(aiComponent.ai.nextMove(null, null, null, null));
     }
 
 }
