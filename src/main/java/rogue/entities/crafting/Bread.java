@@ -5,10 +5,7 @@ import rogue.components.*;
 import rogue.components.actions.HealthActionComponent;
 import rogue.components.actions.HungerActionComponent;
 import rogue.components.items.UseItemEffectComponent;
-import rogue.components.traits.CanBeCraftedComponent;
-import rogue.components.traits.CanStoreItemsInComponent;
-import rogue.components.traits.CannotEnterComponent;
-import rogue.components.traits.IdComponent;
+import rogue.components.traits.*;
 import rogue.factories.RecipeFactory;
 import rogue.factories.TileFactory;
 import rogue.util.EntityId;
@@ -30,6 +27,7 @@ public class Bread extends Entity {
         this.add(new IdComponent(EntityId.BREAD));
         this.add(new TileComponent(TileFactory.bread.glyph, TileFactory.bread.color));
         this.add(new CanBeCraftedComponent(RecipeFactory.breadRecipe()));
+        this.add(new CanAddToInventoryComponent());
         this.add(useItemEffectComponent);
         this.add(new ExamineComponent(
                 "Bread",

@@ -20,8 +20,8 @@ public class RecipeFactory {
         ingredients.put(new Gold(), 1);
 
         LootTable deconstructLootTable = new LootTable();
-        deconstructLootTable.addLoot(new LootTableEntry(Stone::new, 1.0, 3));
-        deconstructLootTable.addLoot(new LootTableEntry(Gold::new, 1.0, 1));
+        deconstructLootTable.addLoot(new LootTableEntry(Stone::new, 0.8, 3));
+        deconstructLootTable.addLoot(new LootTableEntry(Gold::new, 0.6, 1));
 
         return new Recipe(StoneAltar::new, ingredients, deconstructLootTable);
     }
@@ -31,7 +31,7 @@ public class RecipeFactory {
         ingredients.put(new Wood(), 3);
 
         LootTable deconstructLootTable = new LootTable();
-        deconstructLootTable.addLoot(new LootTableEntry(Wood::new, 1.0, 3));
+        deconstructLootTable.addLoot(new LootTableEntry(Wood::new, 0.8, 3));
 
         return new Recipe(Chest::new, ingredients, deconstructLootTable);
     }
@@ -49,8 +49,8 @@ public class RecipeFactory {
         ingredients.put(new Iron(), 2);
 
         LootTable deconstructLootTable = new LootTable();
-        deconstructLootTable.addLoot(new LootTableEntry(Wood::new, 1.0, 3));
-        deconstructLootTable.addLoot(new LootTableEntry(Iron::new, 1.0, 2));
+        deconstructLootTable.addLoot(new LootTableEntry(Wood::new, 0.8, 3));
+        deconstructLootTable.addLoot(new LootTableEntry(Iron::new, 0.8, 2));
 
         return new Recipe(IronChest::new, ingredients, deconstructLootTable);
     }
@@ -60,7 +60,7 @@ public class RecipeFactory {
         ingredients.put(new Wood(), 5);
 
         LootTable deconstructLootTable = new LootTable();
-        deconstructLootTable.addLoot(new LootTableEntry(Wood::new, 1.0, 5));
+        deconstructLootTable.addLoot(new LootTableEntry(Wood::new, 0.8, 5));
 
         return new Recipe(RepairKit::new, ingredients, deconstructLootTable);
     }
@@ -71,8 +71,8 @@ public class RecipeFactory {
         ingredients.put(new Iron(), 1);
 
         LootTable deconstructLootTable = new LootTable();
-        deconstructLootTable.addLoot(new LootTableEntry(Wood::new, 1.0, 3));
-        deconstructLootTable.addLoot(new LootTableEntry(Iron::new, 1.0, 1));
+        deconstructLootTable.addLoot(new LootTableEntry(Wood::new, 0.8, 3));
+        deconstructLootTable.addLoot(new LootTableEntry(Iron::new, 0.8, 1));
 
         return new Recipe(ShipUpgradeKit::new, ingredients, deconstructLootTable);
     }
