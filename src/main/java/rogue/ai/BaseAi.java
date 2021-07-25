@@ -19,5 +19,5 @@ public abstract class BaseAi<T extends Entity> {
     public abstract void onEnter(int x, int y, Entity renderEntity, Entity worldEntity);
 
     // TODO: is this generic enough to have at BaseAi level, shoudl I have a PathfindingAi subclass?
-    public abstract MovingComponent nextMove(RenderGrid renderGrid, Entity renderEntity, Entity targetEntity);
+    public abstract MovingComponent nextMove(RenderGrid renderGrid, Entity renderEntity, Entity targetEntity, Entity targetWorldEntity);
 }

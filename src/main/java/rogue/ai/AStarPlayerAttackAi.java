@@ -58,7 +58,7 @@ public class AStarPlayerAttackAi extends BaseAi<EnemyShip>  {
 
     // TODO: no need to recalculate path every turn?
     @Override
-    public MovingComponent nextMove(RenderGrid renderGrid, Entity renderEntity, Entity targetEntity) {
+    public MovingComponent nextMove(RenderGrid renderGrid, Entity renderEntity, Entity targetEntity, Entity targetWorldEntity) {
         if(turnsSincePathfindingGraphUpdated == 0) {
             pathfindingGraph = new PathfindingGraph(renderGrid);
             turnsSincePathfindingGraphUpdated = 10;

@@ -12,7 +12,7 @@ import rogue.render.RenderGrid;
 import rogue.util.EntityUtil;
 import rogue.util.TileUtil;
 
-public class WanderingSeaAi<T extends Entity> extends BaseAi<T> {
+public class WanderingSeaAi<T extends Entity> extends WanderingAi<T> {
 
     public WanderingSeaAi(T entity) {
         super(entity);
@@ -34,10 +34,5 @@ public class WanderingSeaAi<T extends Entity> extends BaseAi<T> {
             pos.y = y;
             return;
         }
-    }
-
-    @Override
-    public MovingComponent nextMove(RenderGrid renderGrid, Entity renderEntity, Entity targetEntity) {
-        return null;
     }
 }

@@ -7,6 +7,7 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import rogue.components.PositionComponent;
 import rogue.components.RenderableComponent;
 import rogue.components.TileComponent;
+import rogue.components.ship.PlayerOnboardComponent;
 import rogue.components.world.SpawnPortalComponent;
 import rogue.entities.Portal;
 import rogue.entities.World;
@@ -18,6 +19,7 @@ import rogue.factories.FamilyFactory;
 import rogue.factories.MapperFactory;
 import rogue.factories.TileFactory;
 import rogue.render.RenderGrid;
+import rogue.util.EntityUtil;
 import rogue.util.TileUtil;
 
 public class WorldSystem extends EntitySystem {
@@ -203,6 +205,19 @@ public class WorldSystem extends EntitySystem {
         }
 
         return playerControlledEntities.get(0);
+    }
+
+    public Entity getPlayerCharacterEntity() {
+        Entity playerEntity = getPlayerEntity();
+
+        if(EntityUtil.isPlayerCharacter(playerEntity)) {
+            return playerEntity;
+        } else if(EntityUtil.isShip(playerEntity)) {
+            PlayerOnboardComponent playerOnboardComponent = MapperFactory.playerOnboardComponent.get(playerEntity);
+            return playerOnboardComponent.player;
+        }
+
+        throw new RuntimeException("Cannot locate player character");
     }
 
     public boolean playerAlive() {

@@ -54,7 +54,7 @@ public class PlayerShipAi extends BaseAi<PlayerShip> {
     }
 
     @Override
-    public MovingComponent nextMove(RenderGrid renderGrid, Entity renderEntity, Entity targetEntity) {
+    public MovingComponent nextMove(RenderGrid renderGrid, Entity renderEntity, Entity targetEntity, Entity targetWorldEntity) {
         return null;
     }
 }

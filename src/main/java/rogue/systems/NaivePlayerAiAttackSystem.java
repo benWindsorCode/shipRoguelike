@@ -38,35 +38,11 @@ public class NaivePlayerAiAttackSystem extends EntitySystem {
 
             WorldSystem worldSystem = getEngine().getSystem(WorldSystem.class);
             Entity player = worldSystem.getPlayerEntity();
-
-            PositionComponent pos = MapperFactory.positionComponent.get(e);
             PositionComponent playerPos = MapperFactory.positionComponent.get(player);
-            TileComponent targetPlayerTile = worldSystem.getWorldGrid().getTileComponent(playerPos.x, playerPos.y);
-            double distToPlayer = Math.abs((playerPos.x - pos.x)*(playerPos.x - pos.x)) + Math.abs((playerPos.y - pos.y)*(playerPos.y - pos.y));
 
-            // if 10 away from player then do wandering AI
-            // TODO: this logic should be in the nextMove function of the AI
-            if(distToPlayer > 150
-                    || (aiComponent.ai.getClass().equals(NaivePlayerSeaAttackAi.class) && TileUtil.isLand(targetPlayerTile))
-                    || (aiComponent.ai.getClass().equals(NaivePlayerLandAttackAi.class) && TileUtil.isSea(targetPlayerTile))
-            ) {
-                List<Double> directions = Arrays.asList(-1d, 1d);
-                double mxDirection = RandomUtil.getRandom(directions);
-                double myDirection = RandomUtil.getRandom(directions);
+            MovingComponent nextMove = aiComponent.ai.nextMove(worldSystem.getRenderGrid(), null, player, worldSystem.getWorldGrid().get(playerPos.x, playerPos.y));
 
-                int moveSize = 2;
-                int mx = (int)(Math.random() * moveSize*mxDirection);
-                int my = (int)(Math.random() * moveSize*myDirection);
-
-                e.add(new MovingComponent(mx, my));
-            } else {
-
-                // TODO: we dont use the middle field yet so ignore for now
-                MovingComponent nextMove = aiComponent.ai.nextMove(worldSystem.getRenderGrid(), null, player);
-
-                e.add(nextMove);
-            }
-
+            e.add(nextMove);
         }
     }
 }

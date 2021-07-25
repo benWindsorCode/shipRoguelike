@@ -34,8 +34,17 @@ public class EntityUtil {
     }
 
     public static boolean isLand(Entity entity) {
-        IdComponent idComponent = MapperFactory.idComponent.get(entity);
+        return matchesId(entity, EntityId.WORLD_GRASS);
+    }
 
-        return idComponent.entityId == EntityId.WORLD_GRASS;
+    public static boolean isPlayerCharacter(Entity entity) {
+        return matchesId(entity, EntityId.PLAYER_CHARACTER);
+    }
+
+    public static boolean isShip(Entity entity) {
+        return matchesId(entity, EntityId.PLAYER_SHIP)
+                || matchesId(entity, EntityId.ENEMY_SHIP)
+                || matchesId(entity, EntityId.ENEMY_SHIP_STRONG)
+                || matchesId(entity, EntityId.CIVILIAN_SHIP);
     }
 }

@@ -61,8 +61,8 @@ public class PathfindingAttackAiSystem extends EntitySystem {
                 AStarPlayerAttackAi ai = (AStarPlayerAttackAi) aiComponent.ai;
                 PathfindingGraph pathfindingGraph = new PathfindingGraph(worldSystem.getRenderGrid());
 
-                // TODO: we dont use the middle field yet so ignore for now
-                MovingComponent nextMove = ai.nextMove(worldSystem.getRenderGrid(), null, player);
+                // TODO: we dont use the middle or last field yet so ignore for now
+                MovingComponent nextMove = ai.nextMove(worldSystem.getRenderGrid(), null, player, null);
 
                 e.add(nextMove);
             }

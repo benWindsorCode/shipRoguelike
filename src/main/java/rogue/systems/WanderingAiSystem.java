@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
+import rogue.ai.WanderingAi;
 import rogue.ai.WanderingLandAi;
 import rogue.ai.WanderingPeacefulSeaAi;
 import rogue.ai.WanderingSeaAi;
@@ -36,15 +37,7 @@ public class WanderingAiSystem extends EntitySystem {
             )
                 continue;
 
-            List<Double> directions = Arrays.asList(-1d, 1d);
-            double mxDirection = RandomUtil.getRandom(directions);
-            double myDirection = RandomUtil.getRandom(directions);
-
-            int moveSize = 2;
-            int mx = (int)(Math.random() * moveSize*mxDirection);
-            int my = (int)(Math.random() * moveSize*myDirection);
-
-            e.add(new MovingComponent(mx, my));
+            e.add(aiComponent.ai.nextMove(null, null, null, null));
         }
     }
 
