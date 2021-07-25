@@ -10,10 +10,12 @@ import rogue.components.TileComponent;
 import rogue.components.actions.CraftActionComponent;
 import rogue.components.actions.InventoryRemoveActionComponent;
 import rogue.components.traits.CanBeCraftedComponent;
+import rogue.components.traits.IdComponent;
 import rogue.components.world.SpawnPortalComponent;
 import rogue.entities.crafting.StoneAltar;
 import rogue.factories.FamilyFactory;
 import rogue.factories.MapperFactory;
+import rogue.util.EntityId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,21 +36,21 @@ public class CraftingSystem extends EntitySystem {
             Entity toCraft = MapperFactory.craftActionComponent.get(e).entityToCraft;
             CanBeCraftedComponent canBeCraftedComponent = MapperFactory.craftableComponent.get(toCraft);
 
-            Map<TileComponent, Integer> recipeLeft = canBeCraftedComponent.recipe.getRecipe();
+            Map<EntityId, Integer> recipeLeft = canBeCraftedComponent.recipe.getRecipeByEntityId();
 
             e.remove(CraftActionComponent.class);
 
             // TODO: this assumes player has enough in inv to craft
             List<Entity> inventoryToRemove = new ArrayList<>();
             for(Entity item: inventory) {
-                TileComponent tile = MapperFactory.tileComponent.get(item);
+                IdComponent idComponent = MapperFactory.idComponent.get(item);
 
-                if(recipeLeft.containsKey(tile)) {
-                    int currentLeft = recipeLeft.get(tile);
+                if(recipeLeft.containsKey(idComponent.entityId)) {
+                    int currentLeft = recipeLeft.get(idComponent.entityId);
                     if(currentLeft <= 0)
                         continue;
                     inventoryToRemove.add(item);
-                    recipeLeft.put(tile, currentLeft - 1);
+                    recipeLeft.put(idComponent.entityId, currentLeft - 1);
                 }
             }
 

@@ -2,7 +2,9 @@ package rogue.components;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
+import rogue.components.traits.IdComponent;
 import rogue.factories.MapperFactory;
+import rogue.util.EntityId;
 import rogue.util.TileUtil;
 
 import java.util.*;
@@ -37,16 +39,20 @@ public class InventoryComponent implements Component {
         return true;
     }
 
-    public Map<TileComponent, Integer> itemCounts() {
-        List<TileComponent> tiles = this.inventory.stream()
-                .map(MapperFactory.tileComponent::get)
+    public Map<EntityId, Integer> itemCountsByEntityId() {
+        // Get Entity Ids and reduce to a set
+        List<EntityId> entityIds = this.inventory.stream()
+                .map(MapperFactory.idComponent::get)
+                .map(idComponent -> idComponent.entityId)
                 .collect(Collectors.toList());
 
-        Set<TileComponent> tileSet = new HashSet<>(tiles);
-        Map<TileComponent, Integer> counts = new HashMap<>();
-        for(TileComponent tile: tileSet) {
-            int count = Collections.frequency(tiles, tile);
-            counts.put(tile, count);
+        Set<EntityId> entityIdSet = new HashSet<>(entityIds);
+
+        // Group the items by entity Id
+        Map<EntityId, Integer> counts = new HashMap<>();
+        for(EntityId entityId: entityIdSet) {
+            int count = Collections.frequency(entityIds, entityId);
+            counts.put(entityId, count);
         }
 
         return counts;

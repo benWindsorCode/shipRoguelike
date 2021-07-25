@@ -9,6 +9,7 @@ import rogue.components.actions.UpgradeShipComponent;
 import rogue.components.items.UseItemEffectComponent;
 import rogue.components.traits.CanBeCraftedComponent;
 import rogue.components.traits.IdComponent;
+import rogue.crafting.Recipe;
 import rogue.factories.RecipeFactory;
 import rogue.factories.TileFactory;
 import rogue.util.EntityId;
@@ -30,9 +31,9 @@ public class ShipUpgradeKit extends Entity {
         this.add(new TileComponent(TileFactory.ironChest.glyph, TileFactory.ironChest.color));
         this.add(new CanBeCraftedComponent(RecipeFactory.repairKitRecipe()));
 
-        Map<TileComponent, Integer> recipe = RecipeFactory.shipUpgradeKitRecipe().getRecipe();
-        int shipUpgradeWoodAmount = recipe.get(TileFactory.wood);
-        int shipUpgradeIronAmount = recipe.get(TileFactory.iron);
+        Map<EntityId, Integer> recipe = RecipeFactory.shipUpgradeKitRecipe().getRecipeByEntityId();
+        int shipUpgradeWoodAmount = recipe.get(EntityId.WOOD);
+        int shipUpgradeIronAmount = recipe.get(EntityId.IRON);
         this.add(new UseItemEffectComponent(UseTarget.PLAYER, () -> new UpgradeShipComponent(shipUpgradeWoodAmount, shipUpgradeIronAmount)));
         this.add(new ExamineComponent(
                 "Ship Upgrade Kit",

@@ -11,6 +11,7 @@ import rogue.crafting.Recipe;
 import rogue.crafting.RecipeBook;
 import rogue.entities.PlayerCharacter;
 import rogue.factories.MapperFactory;
+import rogue.util.EntityId;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -72,7 +73,7 @@ public class DualCraftingScreen extends DualListBasedScreen{
         ArrayList<String> list = new ArrayList<>();
 
         for(Map.Entry<String, Recipe> entry : getAllRecipes().entrySet()) {
-            list.add(String.format("Recipe for: %s %s", entry.getKey(), entry.getValue().getRecipeAsString()));
+            list.add(String.format("Recipe: %s = %s", entry.getKey(), entry.getValue().getRecipeAsString()));
         }
 
 
@@ -131,13 +132,13 @@ public class DualCraftingScreen extends DualListBasedScreen{
 
         RecipeBook recipeBook = recipeBookComponent.recipeBook;
         InventoryComponent inventoryComponent = MapperFactory.inventoryComponent.get(first);
-        Map<TileComponent, Integer> itemCounts = inventoryComponent.itemCounts();
+        Map<EntityId, Integer> itemCounts = inventoryComponent.itemCountsByEntityId();
         System.out.println(itemCounts);
 
         // For each recipe check if player has ingredients
         for(Recipe recipe: recipeBook.getRecipes()) {
             boolean canCraft = true;
-            for(Map.Entry<TileComponent, Integer> entry: recipe.getRecipe().entrySet()) {
+            for(Map.Entry<EntityId, Integer> entry: recipe.getRecipeByEntityId().entrySet()) {
                 canCraft = canCraft && itemCounts.containsKey(entry.getKey()) && itemCounts.get(entry.getKey()) >= entry.getValue();
             }
 

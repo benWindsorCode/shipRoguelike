@@ -1,7 +1,11 @@
 package rogue.crafting;
 
 import com.badlogic.ashley.core.Entity;
+import rogue.components.ExamineComponent;
 import rogue.components.TileComponent;
+import rogue.components.traits.IdComponent;
+import rogue.factories.MapperFactory;
+import rogue.util.EntityId;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,7 +19,7 @@ import java.util.function.Supplier;
 // TODO: one reason to change mapping is to be able to get examine names from the ingredients
 // Made Recipe an entity to use in DualListBasedScreen, was that a good idea?
 public class Recipe extends Entity {
-    private Map<TileComponent, Integer> recipe;
+    private Map<Entity, Integer> recipe;
 
     private Supplier<Entity> entityCreator;
 
@@ -23,20 +27,32 @@ public class Recipe extends Entity {
         this.entityCreator = entityCreator;
     }
 
-    public Recipe(Supplier<Entity> entityCreator, Map<TileComponent, Integer> ingredients) {
+    public Recipe(Supplier<Entity> entityCreator, Map<Entity, Integer> ingredients) {
         this.entityCreator = entityCreator;
         this.recipe = ingredients;
     }
 
-    public void addIngredient(TileComponent tile, Integer amount) {
+    public void addIngredient(Entity tile, Integer amount) {
         if(recipe.containsKey(tile)) {
             amount = recipe.get(tile) + amount;
         }
         recipe.put(tile, amount);
     }
 
-    public Map<TileComponent, Integer> getRecipe() {
+    public Map<Entity, Integer> getRecipe() {
         return recipe;
+    }
+
+    public Map<EntityId, Integer> getRecipeByEntityId() {
+        Map<EntityId, Integer> recipeByEntityId = new HashMap<>();
+
+        for(Map.Entry<Entity, Integer> entry: recipe.entrySet()) {
+            IdComponent idComponent = MapperFactory.idComponent.get(entry.getKey());
+
+            recipeByEntityId.put(idComponent.entityId, entry.getValue());
+        }
+
+        return recipeByEntityId;
     }
 
     public Supplier<Entity> getEntityCreator() {
@@ -45,8 +61,11 @@ public class Recipe extends Entity {
 
     public String getRecipeAsString() {
         List<String> components = new ArrayList<>();
-        for(Map.Entry<TileComponent, Integer> entry : recipe.entrySet()) {
-            components.add(String.format("%s x %d", entry.getKey().glyph, entry.getValue()));
+        for(Map.Entry<Entity, Integer> entry : recipe.entrySet()) {
+            Entity entity = entry.getKey();
+            TileComponent tile = MapperFactory.tileComponent.get(entity);
+            ExamineComponent examineComponent = MapperFactory.examineComponent.get(entity);
+            components.add(String.format("%s %s x %d", tile.glyph, examineComponent.name, entry.getValue()));
         }
 
         return String.join( ", ", components);
