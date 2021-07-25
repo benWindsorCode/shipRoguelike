@@ -11,16 +11,19 @@ import rogue.components.actions.UseItemActionComponent;
 import rogue.components.items.UseItemEffectComponent;
 import rogue.components.player.PlayerShipComponent;
 import rogue.components.ship.PlayerOnboardComponent;
+import rogue.components.traits.CanBeDeconstructedComponent;
 import rogue.entities.PlayerCharacter;
 import rogue.entities.PlayerShip;
 import rogue.entities.crafting.RepairKit;
 import rogue.entities.food.RatMeat;
 import rogue.entities.food.RawFish;
 import rogue.factories.MapperFactory;
+import rogue.util.EntityId;
 import rogue.util.UseTarget;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class SelectBasedInventoryScreen extends SelectBasedScreen {
@@ -32,7 +35,54 @@ public class SelectBasedInventoryScreen extends SelectBasedScreen {
     @Override
     protected Entity[] getItems() {
         InventoryComponent inventoryComponent = MapperFactory.inventoryComponent.get(player);
-        return inventoryComponent.inventory.toArray(new Entity[0]);
+        Map<EntityId, List<Entity>> itemsByEntityId = inventoryComponent.itemsByEntityId();
+
+        // Take first item from list as sample
+        List<Entity> items = new ArrayList<>();
+        for(Map.Entry<EntityId, List<Entity>> entry: itemsByEntityId.entrySet()) {
+            items.add(entry.getValue().get(0));
+        }
+
+        return items.toArray(new Entity[0]);
+    }
+
+    // Most common list is just the description of the items
+    @Override
+    protected ArrayList<String> getList() {
+        ArrayList<String> list = new ArrayList<>();
+        InventoryComponent inventoryComponent = MapperFactory.inventoryComponent.get(player);
+        Map<EntityId, List<Entity>> itemsByEntityId = inventoryComponent.itemsByEntityId();
+
+        for(Entity e: getItems()) {
+            ExamineComponent examineComponent = MapperFactory.examineComponent.get(e);
+            UseItemEffectComponent useItemEffectComponent = MapperFactory.useItemEffectComponent.get(e);
+            CanBeDeconstructedComponent canBeDeconstructedComponent = MapperFactory.canBeDeconstructedComponent.get(e);
+            EntityId entityId = MapperFactory.idComponent.get(e).entityId;
+
+            int multiplicity = itemsByEntityId.get(entityId).size();
+
+            if(examineComponent != null) {
+                String itemText = String.format( "%s x %d", examineComponent.name, multiplicity);
+                List<String> actionsAvailable = new ArrayList<>();
+
+                if(useItemEffectComponent != null)
+                    actionsAvailable.add("usable");
+
+                if(canBeDeconstructedComponent != null)
+                    actionsAvailable.add("deconstructable");
+
+                if(actionsAvailable.size() > 0) {
+                    String actionsAvailableString = String.join(", ", actionsAvailable);
+                    itemText = String.format("%s (%s)", itemText, actionsAvailableString);
+                }
+
+                list.add(itemText);
+            } else {
+                list.add("No Description available");
+            }
+        }
+
+        return list;
     }
 
     @Override

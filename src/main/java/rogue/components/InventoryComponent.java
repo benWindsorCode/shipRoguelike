@@ -41,11 +41,7 @@ public class InventoryComponent implements Component {
 
     public Map<EntityId, Integer> itemCountsByEntityId() {
         // Get Entity Ids and reduce to a set
-        List<EntityId> entityIds = this.inventory.stream()
-                .map(MapperFactory.idComponent::get)
-                .map(idComponent -> idComponent.entityId)
-                .collect(Collectors.toList());
-
+        List<EntityId> entityIds = getEntityIds();
         Set<EntityId> entityIdSet = new HashSet<>(entityIds);
 
         // Group the items by entity Id
@@ -58,6 +54,31 @@ public class InventoryComponent implements Component {
         return counts;
     }
 
+    public Map<EntityId, List<Entity>> itemsByEntityId() {
+        // Group the items by entity Id
+        Map<EntityId, List<Entity>> itemsByEntityId = new HashMap<>();
+        for (Entity item: inventory) {
+            EntityId entityId = MapperFactory.idComponent.get(item).entityId;
+
+            if(itemsByEntityId.containsKey(entityId)) {
+                itemsByEntityId.get(entityId).add(item);
+            } else {
+                itemsByEntityId.put(entityId, new ArrayList<>());
+                itemsByEntityId.get(entityId).add(item);
+            }
+        }
+
+        return itemsByEntityId;
+    }
+
+    private List<EntityId> getEntityIds() {
+        List<EntityId> entityIds = this.inventory.stream()
+                .map(MapperFactory.idComponent::get)
+                .map(idComponent -> idComponent.entityId)
+                .collect(Collectors.toList());
+
+        return entityIds;
+    }
     public boolean isFull() {
         return maxSize == currentSize;
     }
