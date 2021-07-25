@@ -30,9 +30,6 @@ public class EngineFactory {
         SpawnSystem spawnSystem = new SpawnSystem();
         engine.addSystem(spawnSystem);
 
-        PathfindingAttackAiSystem pathfindingAttackAiSystem = new PathfindingAttackAiSystem();
-        engine.addSystem(pathfindingAttackAiSystem);
-
         NaivePlayerAiAttackSystem naivePlayerAiAttackSystem = new NaivePlayerAiAttackSystem();
         engine.addSystem(naivePlayerAiAttackSystem);
 
