@@ -17,6 +17,7 @@ import rogue.entities.PlayerCharacter;
 import rogue.entities.PlayerShip;
 import rogue.factories.MapperFactory;
 import rogue.render.RenderGrid;
+import rogue.util.EntityUtil;
 import rogue.util.TileUtil;
 
 public class PlayerCharacterAi extends BaseAi<PlayerCharacter> {
@@ -29,7 +30,6 @@ public class PlayerCharacterAi extends BaseAi<PlayerCharacter> {
     public void onEnter(int x, int y, Entity renderEntity, Entity worldEntity) {
         // TODO: ideally we also pass and use the List<Entity> on this tile too
         TileComponent renderTile = MapperFactory.tileComponent.get(renderEntity);
-        TileComponent worldTile = MapperFactory.tileComponent.get(worldEntity);
         CannotEnterComponent cannotEnterComponent = MapperFactory.cannotEnterComponent.get(renderEntity);
         PlayerShipComponent playerShipComponent = MapperFactory.playerShipComponent.get(entity);
 
@@ -40,7 +40,7 @@ public class PlayerCharacterAi extends BaseAi<PlayerCharacter> {
             return;
         }
 
-        if(TileUtil.isLand(worldTile) && cannotEnterComponent == null) {
+        if(EntityUtil.isLand(worldEntity) && cannotEnterComponent == null) {
             PositionComponent pos = MapperFactory.positionComponent.get(entity);
             pos.x = x;
             pos.y = y;
@@ -48,7 +48,8 @@ public class PlayerCharacterAi extends BaseAi<PlayerCharacter> {
         }
 
         // TODO: differentiate between any ship and player owned ship, to allow hijacking docked ships
-        if(TileUtil.isPlayerShip(renderTile)) {
+        //if(TileUtil.isPlayerShip(renderTile)) {
+        if(playerShipComponent.playerShip.equals(renderEntity)) {
             // move player onto ship
             PositionComponent pos = MapperFactory.positionComponent.get(entity);
             pos.x = x;

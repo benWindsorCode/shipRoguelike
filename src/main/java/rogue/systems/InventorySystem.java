@@ -12,6 +12,7 @@ import rogue.components.actions.*;
 import rogue.environment.WorldGrid;
 import rogue.factories.FamilyFactory;
 import rogue.factories.MapperFactory;
+import rogue.util.EntityUtil;
 import rogue.util.TileUtil;
 
 import java.util.List;
@@ -140,10 +141,10 @@ public class InventorySystem extends EntitySystem {
         int dropY = pos.y + my;
         WorldSystem worldSystem = getEngine().getSystem(WorldSystem.class);
         WorldGrid renderGrid = worldSystem.getWorldGrid();
-        TileComponent tileComponent = renderGrid.getTileComponent(dropX, dropY);
+        Entity renderEntityInDropLocation = renderGrid.get(dropX, dropY);
 
         // TODO: replace with an 'is empty' check rather than just checking under you
-        if(!TileUtil.isLand(tileComponent)) {
+        if(!EntityUtil.isLand(renderEntityInDropLocation)) {
             System.out.println("Cant drop on non-land");
             return;
         }

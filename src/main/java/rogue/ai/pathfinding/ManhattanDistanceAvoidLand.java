@@ -5,6 +5,7 @@ import com.badlogic.gdx.ai.pfa.Heuristic;
 import rogue.components.PositionComponent;
 import rogue.components.TileComponent;
 import rogue.factories.MapperFactory;
+import rogue.util.EntityUtil;
 import rogue.util.TileUtil;
 
 public class ManhattanDistanceAvoidLand implements Heuristic<Entity> {
@@ -13,10 +14,8 @@ public class ManhattanDistanceAvoidLand implements Heuristic<Entity> {
     public float estimate(Entity node, Entity endNode) {
         PositionComponent nodePos = MapperFactory.positionComponent.get(node);
         PositionComponent endPos = MapperFactory.positionComponent.get(endNode);
-        TileComponent nodeTile = MapperFactory.tileComponent.get(node);
-        TileComponent endTile = MapperFactory.tileComponent.get(endNode);
 
-        if(TileUtil.isLand(nodeTile) || TileUtil.isLand(endTile)) {
+        if(EntityUtil.isLand(node) || EntityUtil.isLand(endNode)) {
             return Float.MAX_VALUE;
         }
 

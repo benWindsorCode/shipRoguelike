@@ -9,6 +9,7 @@ import rogue.components.traits.CanBeAttackedComponent;
 import rogue.components.traits.CannotEnterComponent;
 import rogue.factories.MapperFactory;
 import rogue.render.RenderGrid;
+import rogue.util.EntityUtil;
 import rogue.util.TileUtil;
 
 public class NaivePlayerLandAttackAi <T extends Entity> extends BaseAi<T> {
@@ -19,9 +20,6 @@ public class NaivePlayerLandAttackAi <T extends Entity> extends BaseAi<T> {
 
     @Override
     public void onEnter(int x, int y, Entity renderEntity, Entity worldEntity) {
-        TileComponent tile = MapperFactory.tileComponent.get(renderEntity);
-        TileComponent worldTile = MapperFactory.tileComponent.get(worldEntity);
-
         // TODO: Need the not equals self check to ensure ships dont attack their own entity, bit awkward their render entity is themselves? Do they have moves of zero?
         // Enemies should be able to attack us and others
         CanBeAttackedComponent canBeAttackedComponent = MapperFactory.canAttackComponent.get(renderEntity);
@@ -32,7 +30,7 @@ public class NaivePlayerLandAttackAi <T extends Entity> extends BaseAi<T> {
 
         // Use world tile here so they can walk over chopped stone etc, but cant walk over if a tree is in the way
         CannotEnterComponent cannotEnterComponent = MapperFactory.cannotEnterComponent.get(renderEntity);
-        if(TileUtil.isLand(worldTile) && cannotEnterComponent == null) {
+        if(EntityUtil.isLand(worldEntity) && cannotEnterComponent == null) {
             PositionComponent pos = MapperFactory.positionComponent.get(entity);
             pos.x = x;
             pos.y = y;
@@ -52,7 +50,6 @@ public class NaivePlayerLandAttackAi <T extends Entity> extends BaseAi<T> {
         int mx = Integer.compare(xDiff, 0);
         int my = Integer.compare(yDiff, 0);
 
-        MovingComponent nextMove = new MovingComponent(mx, my);
-        return nextMove;
+        return new MovingComponent(mx, my);
     }
 }

@@ -9,6 +9,7 @@ import rogue.components.actions.MovingComponent;
 import rogue.components.traits.CanBeAttackedComponent;
 import rogue.factories.MapperFactory;
 import rogue.render.RenderGrid;
+import rogue.util.EntityUtil;
 import rogue.util.TileUtil;
 
 public class WanderingPeacefulSeaAi<T extends Entity> extends BaseAi<T> {
@@ -18,9 +19,7 @@ public class WanderingPeacefulSeaAi<T extends Entity> extends BaseAi<T> {
 
     @Override
     public void onEnter(int x, int y, Entity renderEntity, Entity worldEntity) {
-        TileComponent tile = MapperFactory.tileComponent.get(renderEntity);
-
-        if(TileUtil.isSea(tile)) {
+        if(EntityUtil.isSea(renderEntity)) {
             PositionComponent pos = MapperFactory.positionComponent.get(entity);
             pos.x = x;
             pos.y = y;

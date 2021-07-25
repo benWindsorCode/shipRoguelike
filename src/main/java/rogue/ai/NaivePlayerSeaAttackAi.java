@@ -9,6 +9,7 @@ import rogue.components.traits.CanBeAttackedComponent;
 import rogue.entities.enemies.EnemyShip;
 import rogue.factories.MapperFactory;
 import rogue.render.RenderGrid;
+import rogue.util.EntityUtil;
 import rogue.util.TileUtil;
 
 // If player close enough move in their general direction
@@ -20,7 +21,6 @@ public class NaivePlayerSeaAttackAi<T extends Entity> extends BaseAi<T> {
 
     @Override
     public void onEnter(int x, int y, Entity renderEntity, Entity worldEntity) {
-        TileComponent tile = MapperFactory.tileComponent.get(renderEntity);
         // TODO: Need the not equals self check to ensure ships dont attack their own entity, bit awkward their render entity is themselves? Do they have moves of zero?
         // Enemies should be able to attack us and others
         CanBeAttackedComponent canBeAttackedComponent = MapperFactory.canAttackComponent.get(renderEntity);
@@ -29,7 +29,7 @@ public class NaivePlayerSeaAttackAi<T extends Entity> extends BaseAi<T> {
             return;
         }
 
-        if(TileUtil.isSea(tile)) {
+        if(EntityUtil.isSea(renderEntity)) {
             PositionComponent pos = MapperFactory.positionComponent.get(entity);
             pos.x = x;
             pos.y = y;

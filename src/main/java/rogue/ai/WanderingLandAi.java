@@ -7,6 +7,7 @@ import rogue.components.TileComponent;
 import rogue.components.actions.MovingComponent;
 import rogue.factories.MapperFactory;
 import rogue.render.RenderGrid;
+import rogue.util.EntityUtil;
 import rogue.util.TileUtil;
 
 public class WanderingLandAi<T extends Entity> extends BaseAi<T>  {
@@ -16,9 +17,7 @@ public class WanderingLandAi<T extends Entity> extends BaseAi<T>  {
 
     @Override
     public void onEnter(int x, int y, Entity renderEntity, Entity worldEntity) {
-        TileComponent tile = MapperFactory.tileComponent.get(renderEntity);
-
-        if(TileUtil.isLand(tile)) {
+        if(EntityUtil.isLand(renderEntity)) {
             PositionComponent pos = MapperFactory.positionComponent.get(entity);
             pos.x = x;
             pos.y = y;

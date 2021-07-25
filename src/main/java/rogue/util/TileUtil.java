@@ -29,11 +29,6 @@ public class TileUtil {
 
     public static boolean isPortal(TileComponent tile) { return TileUtil.sameTile(tile, TileFactory.portal); }
 
-    // TODO: replace with finding exact ship tile player currently has + check pos too somewhere?
-    public static boolean isPlayerShip(TileComponent tile) {
-        return TileUtil.sameTile(tile, TileFactory.shipV1) || TileUtil.sameTile(tile, TileFactory.shipV2);
-    }
-
     public static boolean sameTile(TileComponent first, TileComponent second) {
         return first.glyph == second.glyph && first.color.equals(second.color);
     }

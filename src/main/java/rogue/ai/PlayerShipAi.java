@@ -11,6 +11,7 @@ import rogue.entities.PlayerCharacter;
 import rogue.entities.PlayerShip;
 import rogue.factories.MapperFactory;
 import rogue.render.RenderGrid;
+import rogue.util.EntityUtil;
 import rogue.util.TileUtil;
 
 public class PlayerShipAi extends BaseAi<PlayerShip> {
@@ -21,16 +22,14 @@ public class PlayerShipAi extends BaseAi<PlayerShip> {
 
     @Override
     public void onEnter(int x, int y, Entity renderEntity, Entity worldEntity) {
-        TileComponent tile = MapperFactory.tileComponent.get(renderEntity);
-
-        if(TileUtil.isSea(tile)) {
+        if(EntityUtil.isSea(renderEntity)) {
             PositionComponent pos = MapperFactory.positionComponent.get(entity);
             pos.x = x;
             pos.y = y;
             return;
         }
 
-        if(TileUtil.isLand(tile)) {
+        if(EntityUtil.isLand(renderEntity)) {
             PlayerOnboardComponent playerOnboardComponent = MapperFactory.playerOnboardComponent.get(entity);
             PlayerCharacter player = playerOnboardComponent.player;
 

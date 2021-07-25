@@ -13,6 +13,7 @@ import rogue.components.traits.CanBeAttackedComponent;
 import rogue.components.world.SpawnLootComponent;
 import rogue.factories.FamilyFactory;
 import rogue.factories.MapperFactory;
+import rogue.util.EntityUtil;
 import rogue.util.TileUtil;
 
 import java.util.List;
@@ -70,8 +71,7 @@ public class CombatSystem extends EntitySystem {
             if(lootableComponent != null) {
                 WorldSystem worldSystem = getEngine().getSystem(WorldSystem.class);
                 Entity worldEntityUnderEnemy = worldSystem.getWorldGrid().get(attackedEntityPos.x, attackedEntityPos.y);
-                TileComponent worldTileUnderEnemy = MapperFactory.tileComponent.get(worldEntityUnderEnemy);
-                if(TileUtil.isLand(worldTileUnderEnemy)) {
+                if(EntityUtil.isLand(worldEntityUnderEnemy)) {
                     e.add(new SpawnLootComponent(lootableComponent.lootTable, new PositionComponent(attackedEntityPos.x, attackedEntityPos.y)));
                 } else {
                     // If loot going straight to inventory, then first register it with engine
