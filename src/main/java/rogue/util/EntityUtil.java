@@ -26,6 +26,13 @@ public class EntityUtil {
                 || idComponent.entityId == EntityId.WORLD_SHALLOW_SEA;
     }
 
+    public static boolean isMountain(Entity entity) {
+        IdComponent idComponent = MapperFactory.idComponent.get(entity);
+
+        return idComponent.entityId == EntityId.WORLD_MOUNTAIN
+                || idComponent.entityId == EntityId.WORLD_HIGH_MOUNTAIN;
+    }
+
     public static boolean isLand(Entity entity) {
         IdComponent idComponent = MapperFactory.idComponent.get(entity);
 

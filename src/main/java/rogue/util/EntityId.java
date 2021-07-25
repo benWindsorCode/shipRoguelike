@@ -42,6 +42,8 @@ public enum EntityId {
     // World
     WORLD_DEEP_SEA,
     WORLD_GRASS,
+    WORLD_HIGH_MOUNTAIN,
+    WORLD_MOUNTAIN,
     WORLD_SEA,
     WORLD_SHALLOW_SEA,
 

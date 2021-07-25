@@ -6,10 +6,10 @@ import rogue.entities.WorldTile;
 import rogue.factories.MapperFactory;
 
 public class WorldGrid {
-    private WorldTile[][] worldTiles;
+    private Entity[][] worldTiles;
     private TileComponent[][] tileComponents;
 
-    public WorldGrid(WorldTile[][] tiles) {
+    public WorldGrid(Entity[][] tiles) {
         this.worldTiles = tiles;
 
         int height = tiles[0].length;
@@ -25,11 +25,11 @@ public class WorldGrid {
         }
     }
 
-    public WorldTile get(int x, int y) {
+    public Entity get(int x, int y) {
         return worldTiles[x][y];
     }
 
-    public WorldTile[][] getWorldTiles() {
+    public Entity[][] getWorldTiles() {
         return this.worldTiles;
     }
 

@@ -10,10 +10,12 @@ import rogue.entities.*;
 import rogue.entities.resources.AshTree;
 import rogue.entities.resources.Rock;
 import rogue.entities.resources.OakTree;
+import rogue.entities.world.*;
 import rogue.environment.prefabs.Prefab;
 import rogue.factories.MapperFactory;
 import rogue.factories.TileFactory;
 import rogue.systems.WorldSystem;
+import rogue.util.EntityUtil;
 import rogue.util.RandomUtil;
 import rogue.util.TileUtil;
 
@@ -21,7 +23,7 @@ import java.util.*;
 import java.util.function.Supplier;
 
 public class WorldBuilder {
-    private final TileComponent[][] tiles;
+    private final Entity[][] tiles;
     private final List<Entity> entities;
     private final int width;
     private final int height;
@@ -43,22 +45,21 @@ public class WorldBuilder {
         this.worldEntity = worldEntity;
 
         // tiles to form the background WorldGrid
-        tiles = new TileComponent[width][height];
+        tiles = new Entity[width][height];
 
         // entities to live on top of the WorldGrid
         entities = new ArrayList<>();
     }
 
     public void build() {
-        WorldTile[][] worldTiles = new WorldTile[width][height];
+        Entity[][] worldTiles = new Entity[width][height];
         for(int x = 0; x < width; x++) {
             for(int y = 0; y < height; y++) {
-                TileComponent tile = tiles[x][y];
+                Entity tile = tiles[x][y];
 
-                WorldTile worldTile = new WorldTile(tile.glyph, tile.color, x, y);
-                worldTiles[x][y] = worldTile;
+                worldTiles[x][y] = tile;
 
-                engine.addEntity(worldTile);
+                engine.addEntity(tile);
             }
         }
 
@@ -103,7 +104,7 @@ public class WorldBuilder {
         // Fill with sea
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                tiles[x][y] = TileFactory.sea;
+                tiles[x][y] = new WorldSea(x, y);
             }
         }
 
@@ -138,17 +139,17 @@ public class WorldBuilder {
                 double noise = noisePlane.getValue(noiseX, noiseY);
                 //System.out.println(String.format("(%f, %f) %f", noiseX, noiseY, noise));
                 if(noise > 1.27) {
-                    tiles[x][y] = TileFactory.highMountain;
+                    tiles[x][y] = new WorldHighMountain(x, y);
                 }else if(noise > 1.25) {
-                    tiles[x][y] = TileFactory.mountain;
+                    tiles[x][y] = new WorldMountain(x, y);
                 }else if(noise > 1.0) {
-                    tiles[x][y] = TileFactory.grass;
+                    tiles[x][y] = new WorldGrass(x, y);
                 } else if( noise <= 1.0 && noise > 0.95) {
-                    tiles[x][y] = TileFactory.shallowSea;
+                    tiles[x][y] = new WorldShallowSea(x, y);
                 } else if(noise <= 0.95 && noise > 0.8) {
-                    tiles[x][y] = TileFactory.sea;
+                    tiles[x][y] = new WorldSea(x, y);
                 } else {
-                    tiles[x][y] = TileFactory.deepSea;
+                    tiles[x][y] = new WorldDeepSea(x, y);
                 }
             }
         }
@@ -189,7 +190,7 @@ public class WorldBuilder {
             do {
                 landTopLeftX = (int)(Math.random() * width);
                 landTopLeftY = (int)(Math.random() * height);
-            } while (!TileUtil.isLand(tiles[landTopLeftX][landTopLeftY]));
+            } while (!EntityUtil.isLand(tiles[landTopLeftX][landTopLeftY]));
 
             // Add prefab to the world, only where it still continues to be on land
             Map<Coordinate, Entity> prefabEntities = prefab.generateEntities(landTopLeftX, landTopLeftY);
@@ -199,8 +200,8 @@ public class WorldBuilder {
                 if (prefabCoord.getX() >= width || prefabCoord.getY() >= height)
                     continue;
 
-                TileComponent worldTile = tiles[prefabCoord.getX()][prefabCoord.getY()];
-                if(TileUtil.isSea(worldTile))
+                Entity worldTile = tiles[prefabCoord.getX()][prefabCoord.getY()];
+                if(EntityUtil.isSea(worldTile) || EntityUtil.isMountain(worldTile))
                     continue;
 
                 entities.add(entry.getValue());
@@ -219,7 +220,7 @@ public class WorldBuilder {
         int top_y = Math.max(0, Math.min(y - y_diff, height - 1));
         int bottom_y = Math.max(0, Math.min(y + y_diff, height - 1));
 
-        fillSquare(top_x, top_y, bottom_x, bottom_y, TileFactory.grass);
+        fillSquare(top_x, top_y, bottom_x, bottom_y, () -> new WorldGrass(0, 0));
 
         double treeDensity = RandomUtil.getRandomDouble(0.9, 1.0);
         if(withTrees) {
@@ -243,9 +244,13 @@ public class WorldBuilder {
         }
     }
 
-    private void fillSquare(int top_x, int top_y, int bottom_x, int bottom_y, final TileComponent tile) {
+    private void fillSquare(int top_x, int top_y, int bottom_x, int bottom_y, final Supplier<Entity> tileSupplier) {
         for (int x = top_x; x < bottom_x; x++) {
             for (int y = top_y; y < bottom_y; y++) {
+                Entity tile = tileSupplier.get();
+                PositionComponent pos = MapperFactory.positionComponent.get(tile);
+                pos.x = x;
+                pos.y = y;
                 tiles[x][y] = tile;
             }
         }
@@ -268,9 +273,9 @@ public class WorldBuilder {
         Map<Integer, VoronoiPoint> voronoiMap = generateVoronoiMap(voronoiCells);
         for(int x = 0; x < width; x++) {
             for(int y = 0; y < height; y++) {
-                TileComponent worldTile = tiles[x][y];
+                Entity worldTile = tiles[x][y];
                 int voronoiCell = voronoiGrid[x][y];
-                if(TileUtil.isLand(worldTile)) {
+                if(EntityUtil.isLand(worldTile)) {
                     VoronoiPoint voronoiPoint = voronoiMap.get(voronoiCell);
                     List<Entity> entities = voronoiPoint.generateEntities();
                     int finalX = x;
