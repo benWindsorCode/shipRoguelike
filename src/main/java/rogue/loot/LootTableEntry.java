@@ -8,9 +8,9 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public class LootTableEntry {
-    private Supplier<Entity> entitySupplier;
-    private double prob;
-    private int numRolls;
+    private final Supplier<Entity> entitySupplier;
+    private final double prob;
+    private final int numRolls;
 
     public LootTableEntry(Supplier<Entity> entitySupplier, double prob, int numRolls) {
         this.entitySupplier = entitySupplier;

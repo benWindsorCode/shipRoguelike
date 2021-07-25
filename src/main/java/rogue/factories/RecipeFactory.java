@@ -1,7 +1,6 @@
 package rogue.factories;
 
 import com.badlogic.ashley.core.Entity;
-import rogue.components.TileComponent;
 import rogue.crafting.Recipe;
 import rogue.crafting.RecipeBook;
 import rogue.entities.buildings.StoneWall;

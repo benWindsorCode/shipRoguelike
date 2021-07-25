@@ -47,4 +47,8 @@ public class EntityUtil {
                 || matchesId(entity, EntityId.ENEMY_SHIP_STRONG)
                 || matchesId(entity, EntityId.CIVILIAN_SHIP);
     }
+
+    public static boolean isPortal(final Entity entity) {
+        return matchesId(entity, EntityId.PORTAL);
+    }
 }

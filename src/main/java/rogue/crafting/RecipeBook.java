@@ -7,7 +7,7 @@ import java.util.List;
 
 // Made an entity to be able to pass to DualListBasedScreen, is this wise?
 public class RecipeBook extends Entity {
-    private List<Recipe> recipes;
+    private final List<Recipe> recipes;
 
     public RecipeBook() {
         recipes = new ArrayList<>();

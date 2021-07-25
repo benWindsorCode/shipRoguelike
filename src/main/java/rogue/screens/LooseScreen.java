@@ -5,9 +5,9 @@ import asciiPanel.AsciiPanel;
 import java.awt.event.KeyEvent;
 
 public class LooseScreen implements Screen {
-    private int panelWidth;
-    private int panelHeight;
-    private AsciiPanel terminal;
+    private final int panelWidth;
+    private final int panelHeight;
+    private final AsciiPanel terminal;
 
     public LooseScreen(int panelWidth, int panelHeight, AsciiPanel terminal) {
         super();

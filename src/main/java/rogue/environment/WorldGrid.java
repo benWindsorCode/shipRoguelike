@@ -2,12 +2,11 @@ package rogue.environment;
 
 import com.badlogic.ashley.core.Entity;
 import rogue.components.TileComponent;
-import rogue.entities.WorldTile;
 import rogue.factories.MapperFactory;
 
 public class WorldGrid {
-    private Entity[][] worldTiles;
-    private TileComponent[][] tileComponents;
+    private final Entity[][] worldTiles;
+    private final TileComponent[][] tileComponents;
 
     public WorldGrid(Entity[][] tiles) {
         this.worldTiles = tiles;

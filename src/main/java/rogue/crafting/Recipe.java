@@ -14,8 +14,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
-// TODO: do we really want to do this by TileComponent? but at same time feels wrong making new entities each time
-// TODO: one reason to change mapping is to be able to get examine names from the ingredients
 // Made Recipe an entity to use in DualListBasedScreen, was that a good idea?
 public class Recipe extends Entity {
     private Map<Entity, Integer> recipe;

@@ -23,7 +23,6 @@ import rogue.util.EntityUtil;
 import rogue.util.TileUtil;
 
 public class WorldSystem extends EntitySystem {
-    private ImmutableArray<Entity> renderableEntities;
     private ImmutableArray<Entity> renderableNonWorldEntities;
     private ImmutableArray<Entity> playerControlledEntities;
     private ImmutableArray<Entity> portalsToSpawn;
@@ -34,7 +33,7 @@ public class WorldSystem extends EntitySystem {
     private final World worldEntity;
 
     // keeps all base world tiles, e.g. ground, sea
-    private WorldGrid worldGrid;
+    private final WorldGrid worldGrid;
 
     // keeps grid of all tiles player sees
     private RenderGrid renderGrid;
@@ -60,7 +59,6 @@ public class WorldSystem extends EntitySystem {
     }
 
     public void addedToEngine(Engine engine) {
-        renderableEntities = engine.getEntitiesFor(FamilyFactory.renderable);
         playerControlledEntities = engine.getEntitiesFor(FamilyFactory.playerControlled);
         renderableNonWorldEntities = engine.getEntitiesFor(FamilyFactory.renderableNonWorld);
         nonWorldEntities = engine.getEntitiesFor(FamilyFactory.nonWorld);

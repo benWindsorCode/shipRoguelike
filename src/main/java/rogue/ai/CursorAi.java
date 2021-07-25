@@ -1,7 +1,6 @@
 package rogue.ai;
 
 import com.badlogic.ashley.core.Entity;
-import rogue.ai.pathfinding.PathfindingGraph;
 import rogue.components.PositionComponent;
 import rogue.components.actions.MovingComponent;
 import rogue.factories.MapperFactory;

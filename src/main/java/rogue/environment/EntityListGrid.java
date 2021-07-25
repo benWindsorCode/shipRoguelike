@@ -7,7 +7,7 @@ import java.util.*;
 public class EntityListGrid {
     // TODO: Had i know about Object.hash to sort Coordinate obj hashing, I would have done Map<Coordinate, List<Entity>>
     // each x,y coord has a list of entities
-    private Map<Integer, Map<Integer, List<Entity>>> entityGrid;
+    private final Map<Integer, Map<Integer, List<Entity>>> entityGrid;
     private final int width;
     private final int height;
 

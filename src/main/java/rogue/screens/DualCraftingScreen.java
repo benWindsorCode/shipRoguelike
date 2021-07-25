@@ -5,7 +5,6 @@ import com.badlogic.ashley.core.Entity;
 import rogue.components.ExamineComponent;
 import rogue.components.InventoryComponent;
 import rogue.components.RecipeBookComponent;
-import rogue.components.TileComponent;
 import rogue.components.actions.CraftActionComponent;
 import rogue.crafting.Recipe;
 import rogue.crafting.RecipeBook;

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LootTable {
-    List<LootTableEntry> lootTable;
+    private List<LootTableEntry> lootTable;
 
     public LootTable() {
         lootTable = new ArrayList<>();

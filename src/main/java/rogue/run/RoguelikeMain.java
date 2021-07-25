@@ -7,11 +7,13 @@ import rogue.screens.Screen;
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.Serial;
 
 public class RoguelikeMain extends JFrame implements KeyListener {
+    @Serial
     private static final long serialVersionUID = 1060623638149583738L;
 
-    private AsciiPanel terminal;
+    private final AsciiPanel terminal;
     private Screen screen;
     private final int panelWidth = 140;
     private final int panelHeight = 40;

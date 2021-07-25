@@ -15,7 +15,7 @@ import java.util.List;
 // TODO: this doesn't work :( I suspect to do with how/when repaint() is called in RoguelikeMain, perhaps wait until LibGDX
 public class MessageSystem extends EntitySystem {
     private int screenHeight;
-    private AsciiPanel terminal;
+    private final AsciiPanel terminal;
     private ImmutableArray<Entity> messagesWaiting;
 
     public MessageSystem(AsciiPanel terminal) {

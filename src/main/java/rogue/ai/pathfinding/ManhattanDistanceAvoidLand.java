@@ -3,10 +3,8 @@ package rogue.ai.pathfinding;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ai.pfa.Heuristic;
 import rogue.components.PositionComponent;
-import rogue.components.TileComponent;
 import rogue.factories.MapperFactory;
 import rogue.util.EntityUtil;
-import rogue.util.TileUtil;
 
 public class ManhattanDistanceAvoidLand implements Heuristic<Entity> {
 

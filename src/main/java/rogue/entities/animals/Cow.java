@@ -2,12 +2,10 @@ package rogue.entities.animals;
 
 import com.badlogic.ashley.core.Entity;
 import rogue.ai.WanderingLandAi;
-import rogue.ai.WanderingPeacefulSeaAi;
 import rogue.components.*;
 import rogue.components.traits.CanBeAttackedComponent;
 import rogue.components.traits.IdComponent;
 import rogue.entities.food.RawBeef;
-import rogue.entities.food.RawFish;
 import rogue.entities.resources.Leather;
 import rogue.factories.TileFactory;
 import rogue.loot.LootTable;

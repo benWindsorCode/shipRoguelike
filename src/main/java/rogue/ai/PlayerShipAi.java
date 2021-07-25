@@ -1,7 +1,6 @@
 package rogue.ai;
 
 import com.badlogic.ashley.core.Entity;
-import rogue.ai.pathfinding.PathfindingGraph;
 import rogue.components.*;
 import rogue.components.actions.AttackActionComponent;
 import rogue.components.actions.MovingComponent;
@@ -12,7 +11,6 @@ import rogue.entities.PlayerShip;
 import rogue.factories.MapperFactory;
 import rogue.render.RenderGrid;
 import rogue.util.EntityUtil;
-import rogue.util.TileUtil;
 
 public class PlayerShipAi extends BaseAi<PlayerShip> {
 

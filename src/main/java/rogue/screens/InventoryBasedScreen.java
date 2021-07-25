@@ -2,13 +2,11 @@ package rogue.screens;
 
 import asciiPanel.AsciiPanel;
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.scenes.scene2d.ui.List;
 import rogue.components.ExamineComponent;
 import rogue.components.InventoryComponent;
 import rogue.components.TileComponent;
 import rogue.factories.MapperFactory;
 
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 public abstract class InventoryBasedScreen extends ListBasedScreen {

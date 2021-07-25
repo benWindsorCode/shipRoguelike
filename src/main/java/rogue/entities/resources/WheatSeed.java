@@ -5,14 +5,10 @@ import rogue.components.ExamineComponent;
 import rogue.components.PositionComponent;
 import rogue.components.RenderableComponent;
 import rogue.components.TileComponent;
-import rogue.components.actions.HealthActionComponent;
-import rogue.components.actions.HungerActionComponent;
-import rogue.components.items.UseItemEffectComponent;
 import rogue.components.traits.CanAddToInventoryComponent;
 import rogue.components.traits.IdComponent;
 import rogue.factories.TileFactory;
 import rogue.util.EntityId;
-import rogue.util.UseTarget;
 
 public class WheatSeed extends Entity {
     public WheatSeed() {

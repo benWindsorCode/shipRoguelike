@@ -2,16 +2,13 @@ package rogue.ai;
 
 import com.badlogic.ashley.core.Entity;
 import rogue.components.PositionComponent;
-import rogue.components.TileComponent;
 import rogue.components.actions.AttackActionComponent;
 import rogue.components.actions.MovingComponent;
 import rogue.components.traits.CanBeAttackedComponent;
-import rogue.entities.enemies.EnemyShip;
 import rogue.factories.MapperFactory;
 import rogue.render.RenderGrid;
 import rogue.util.EntityUtil;
 import rogue.util.RandomUtil;
-import rogue.util.TileUtil;
 
 import java.util.Arrays;
 import java.util.List;

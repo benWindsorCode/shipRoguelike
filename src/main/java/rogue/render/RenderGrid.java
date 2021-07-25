@@ -11,9 +11,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class RenderGrid {
-    private Entity[][] renderGrid;
-    private int width;
-    private int height;
+    private final Entity[][] renderGrid;
+    private final int width;
+    private final int height;
 
     public RenderGrid(int width, int height) {
         renderGrid = new Entity[width][height];
@@ -40,6 +40,7 @@ public class RenderGrid {
         renderGrid[x][y] = e;
     }
 
+    // TODO: should this get and return a TileFactory.bounds entity if out of bounds?
     public Entity get(int x, int y) {
         return renderGrid[x][y];
     }

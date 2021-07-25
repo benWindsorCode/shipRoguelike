@@ -2,10 +2,8 @@ package rogue.components;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
-import rogue.components.traits.IdComponent;
 import rogue.factories.MapperFactory;
 import rogue.util.EntityId;
-import rogue.util.TileUtil;
 
 import java.util.*;
 import java.util.stream.Collectors;

@@ -2,7 +2,6 @@ package rogue.entities.enemies;
 
 import com.badlogic.ashley.core.Entity;
 import rogue.ai.NaivePlayerLandAttackAi;
-import rogue.ai.NaivePlayerSeaAttackAi;
 import rogue.components.*;
 import rogue.components.traits.CanBeAttackedComponent;
 import rogue.components.traits.IdComponent;

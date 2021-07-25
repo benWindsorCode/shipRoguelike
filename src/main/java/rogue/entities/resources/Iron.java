@@ -10,7 +10,6 @@ import rogue.components.traits.IdComponent;
 import rogue.factories.TileFactory;
 import rogue.util.EntityId;
 
-// TODO: Bug: Iron chunk doesn't appear when dropped on ground.
 public class Iron extends Entity {
 
     public Iron() {

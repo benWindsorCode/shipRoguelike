@@ -1,15 +1,12 @@
 package rogue.ai;
 
 import com.badlogic.ashley.core.Entity;
-import rogue.ai.pathfinding.PathfindingGraph;
 import rogue.components.*;
 import rogue.components.actions.AttackActionComponent;
 import rogue.components.actions.HarvestActionComponent;
-import rogue.components.actions.InventoryAddActionComponent;
 import rogue.components.actions.MovingComponent;
 import rogue.components.player.PlayerShipComponent;
 import rogue.components.ship.PlayerOnboardComponent;
-import rogue.components.traits.CanAddToInventoryComponent;
 import rogue.components.traits.CanBeAttackedComponent;
 import rogue.components.traits.CanBeHarvestedComponent;
 import rogue.components.traits.CannotEnterComponent;
@@ -18,7 +15,6 @@ import rogue.entities.PlayerShip;
 import rogue.factories.MapperFactory;
 import rogue.render.RenderGrid;
 import rogue.util.EntityUtil;
-import rogue.util.TileUtil;
 
 public class PlayerCharacterAi extends BaseAi<PlayerCharacter> {
 

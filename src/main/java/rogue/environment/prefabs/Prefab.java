@@ -12,9 +12,9 @@ import java.util.function.Supplier;
 // Class to represent a set of world tiles which can be placed as a block in the world
 // coordinates of prefab start at (0,0) for top left, and are all relative to the prefabs top left
 public class Prefab {
-    private int width;
-    private int height;
-    private Map<Coordinate, Supplier<? extends Entity>> entitySuppliers;
+    private final int width;
+    private final int height;
+    private final Map<Coordinate, Supplier<? extends Entity>> entitySuppliers;
 
     public Prefab(int width, int height) {
         entitySuppliers = new HashMap<>();

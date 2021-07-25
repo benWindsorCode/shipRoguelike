@@ -11,7 +11,6 @@ import rogue.components.traits.IdComponent;
 import rogue.factories.RecipeFactory;
 import rogue.factories.TileFactory;
 import rogue.util.EntityId;
-import rogue.util.TileUtil;
 
 public class StoneWall extends Entity {
     public StoneWall() {

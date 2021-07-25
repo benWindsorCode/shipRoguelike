@@ -6,7 +6,6 @@ import rogue.components.ExamineComponent;
 import rogue.components.InventoryComponent;
 import rogue.components.TileComponent;
 import rogue.components.actions.InventoryTransferActionComponent;
-import rogue.components.ship.PlayerOnboardComponent;
 import rogue.factories.MapperFactory;
 
 import java.util.ArrayList;

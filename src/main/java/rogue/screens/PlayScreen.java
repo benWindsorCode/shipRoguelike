@@ -26,6 +26,7 @@ import rogue.factories.PrefabFactory;
 import rogue.factories.TileFactory;
 import rogue.render.RenderGrid;
 import rogue.systems.*;
+import rogue.util.EntityUtil;
 import rogue.util.TileUtil;
 
 import java.awt.event.KeyEvent;
@@ -327,10 +328,10 @@ public class PlayScreen implements Screen {
             RenderGrid renderGrid = worldSystem.getRenderGrid();
             PositionComponent pos = MapperFactory.positionComponent.get(player);
             TileComponent playerTile = MapperFactory.tileComponent.get(player);
-            TileComponent newTile = renderGrid.getTileComponent(pos.x + mx, pos.y + my);
+            Entity newTile = renderGrid.get(pos.x + mx, pos.y + my);
 
             // You can win by entering the portal with upgraded ship
-            if(TileUtil.isPortal(newTile) && TileUtil.sameTile(playerTile, TileFactory.shipV2))
+            if(EntityUtil.isPortal(newTile) && TileUtil.sameTile(playerTile, TileFactory.shipV2))
                 return new WinScreen(panelWidth, panelHeight, terminal);
 
             if (mx != 0 || my != 0) {

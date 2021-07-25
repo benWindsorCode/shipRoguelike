@@ -2,7 +2,6 @@ package rogue.screens;
 
 import asciiPanel.AsciiPanel;
 import com.badlogic.ashley.core.Entity;
-import rogue.components.actions.DropActionComponent;
 
 public class DropScreen extends InventoryBasedScreen {
 

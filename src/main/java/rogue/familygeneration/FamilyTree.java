@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class FamilyTree {
-    private List<Person> people;
-    private Faker faker;
+    private final List<Person> people;
+    private final Faker faker;
 
     public FamilyTree(int initialPopulation, boolean randomiseAges) {
         people = new ArrayList<>();

@@ -5,7 +5,6 @@ import rogue.components.ExamineComponent;
 import rogue.components.PositionComponent;
 import rogue.components.RenderableComponent;
 import rogue.components.TileComponent;
-import rogue.components.traits.CannotEnterComponent;
 import rogue.components.traits.IdComponent;
 import rogue.factories.TileFactory;
 import rogue.util.EntityId;

@@ -1,7 +1,6 @@
 package rogue.entities.animals;
 
 import com.badlogic.ashley.core.Entity;
-import rogue.ai.NaivePlayerSeaAttackAi;
 import rogue.ai.WanderingSeaAi;
 import rogue.components.*;
 import rogue.components.traits.CanBeAttackedComponent;

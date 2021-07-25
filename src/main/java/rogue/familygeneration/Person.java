@@ -15,7 +15,7 @@ public class Person {
     private final int reproduceUpperMaleThreshold = Integer.MAX_VALUE;
     private final int reproduceUpperFemaleThreshold = 40;
     public static final int maxAge = 95;
-    private Gender gender;
+    private final Gender gender;
     private Attractiveness attractiveness;
     private String firstName;
     private String surName;

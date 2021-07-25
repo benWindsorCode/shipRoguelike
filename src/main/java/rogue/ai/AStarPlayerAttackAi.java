@@ -1,16 +1,13 @@
 package rogue.ai;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.pfa.DefaultGraphPath;
 import com.badlogic.gdx.ai.pfa.PathFinderQueue;
-import com.badlogic.gdx.ai.pfa.PathFinderRequest;
 import com.badlogic.gdx.ai.pfa.indexed.IndexedAStarPathFinder;
 import com.badlogic.gdx.utils.Array;
 import rogue.ai.pathfinding.ManhattanDistanceAvoidLand;
 import rogue.ai.pathfinding.PathfindingGraph;
 import rogue.components.PositionComponent;
-import rogue.components.TileComponent;
 import rogue.components.actions.AttackActionComponent;
 import rogue.components.actions.MovingComponent;
 import rogue.components.traits.CanBeAttackedComponent;
@@ -18,10 +15,6 @@ import rogue.entities.enemies.EnemyShip;
 import rogue.factories.MapperFactory;
 import rogue.render.RenderGrid;
 import rogue.util.EntityUtil;
-import rogue.util.TileUtil;
-
-import java.nio.file.Path;
-import java.util.Map;
 
 public class AStarPlayerAttackAi extends BaseAi<EnemyShip>  {
     private PathfindingGraph pathfindingGraph;

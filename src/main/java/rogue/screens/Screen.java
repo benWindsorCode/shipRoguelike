@@ -1,11 +1,9 @@
 package rogue.screens;
 
-import asciiPanel.AsciiPanel;
-
 import java.awt.event.KeyEvent;
 
 public interface Screen {
-    public void displayOutput();
+    void displayOutput();
 
-    public Screen respondToUserInput(KeyEvent key);
+    Screen respondToUserInput(KeyEvent key);
 }

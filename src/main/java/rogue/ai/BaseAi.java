@@ -1,11 +1,7 @@
 package rogue.ai;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.ai.steer.utils.Path;
-import rogue.ai.pathfinding.PathfindingGraph;
-import rogue.components.TileComponent;
 import rogue.components.actions.MovingComponent;
-import rogue.entities.WorldTile;
 import rogue.render.RenderGrid;
 
 public abstract class BaseAi<T extends Entity> {
@@ -18,6 +14,6 @@ public abstract class BaseAi<T extends Entity> {
 
     public abstract void onEnter(int x, int y, Entity renderEntity, Entity worldEntity);
 
-    // TODO: is this generic enough to have at BaseAi level, shoudl I have a PathfindingAi subclass?
+    // TODO: is this generic enough to have at BaseAi level, should I have a PathfindingAi subclass?
     public abstract MovingComponent nextMove(RenderGrid renderGrid, Entity renderEntity, Entity targetEntity, Entity targetWorldEntity);
 }

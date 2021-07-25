@@ -5,7 +5,6 @@ import com.badlogic.ashley.core.Entity;
 import org.spongepowered.noise.model.Plane;
 import org.spongepowered.noise.module.source.Perlin;
 import rogue.components.PositionComponent;
-import rogue.components.TileComponent;
 import rogue.entities.*;
 import rogue.entities.resources.AshTree;
 import rogue.entities.resources.Rock;
@@ -18,7 +17,6 @@ import rogue.factories.TileFactory;
 import rogue.systems.WorldSystem;
 import rogue.util.EntityUtil;
 import rogue.util.RandomUtil;
-import rogue.util.TileUtil;
 
 import java.util.*;
 import java.util.function.Supplier;

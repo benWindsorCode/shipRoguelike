@@ -10,8 +10,6 @@ import rogue.components.traits.WorldTileComponent;
 import rogue.factories.TileFactory;
 import rogue.util.EntityId;
 
-import java.awt.*;
-
 public class WorldGrass extends Entity {
     public WorldGrass(int x, int y) {
         super();
