@@ -9,6 +9,8 @@ import rogue.entities.resources.Gold;
 import rogue.entities.resources.Iron;
 import rogue.entities.resources.Stone;
 import rogue.entities.resources.Wood;
+import rogue.loot.LootTable;
+import rogue.loot.LootTableEntry;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,14 +22,21 @@ public class RecipeFactory {
         ingredients.put(new Stone(), 3);
         ingredients.put(new Gold(), 1);
 
-        return new Recipe(StoneAltar::new, ingredients);
+        LootTable deconstructLootTable = new LootTable();
+        deconstructLootTable.addLoot(new LootTableEntry(Stone::new, 1.0, 3));
+        deconstructLootTable.addLoot(new LootTableEntry(Gold::new, 1.0, 1));
+
+        return new Recipe(StoneAltar::new, ingredients, deconstructLootTable);
     }
 
     public static Recipe chestRecipe() {
         Map<Entity, Integer> ingredients = new HashMap<>();
         ingredients.put(new Wood(), 3);
 
-        return new Recipe(Chest::new, ingredients);
+        LootTable deconstructLootTable = new LootTable();
+        deconstructLootTable.addLoot(new LootTableEntry(Wood::new, 1.0, 3));
+
+        return new Recipe(Chest::new, ingredients, deconstructLootTable);
     }
 
     public static Recipe ironChestRecipe() {
@@ -35,14 +44,21 @@ public class RecipeFactory {
         ingredients.put(new Wood(), 3);
         ingredients.put(new Iron(), 2);
 
-        return new Recipe(IronChest::new, ingredients);
+        LootTable deconstructLootTable = new LootTable();
+        deconstructLootTable.addLoot(new LootTableEntry(Wood::new, 1.0, 3));
+        deconstructLootTable.addLoot(new LootTableEntry(Iron::new, 1.0, 2));
+
+        return new Recipe(IronChest::new, ingredients, deconstructLootTable);
     }
 
     public static Recipe repairKitRecipe() {
         Map<Entity, Integer> ingredients = new HashMap<>();
         ingredients.put(new Wood(), 5);
 
-        return new Recipe(RepairKit::new, ingredients);
+        LootTable deconstructLootTable = new LootTable();
+        deconstructLootTable.addLoot(new LootTableEntry(Wood::new, 1.0, 5));
+
+        return new Recipe(RepairKit::new, ingredients, deconstructLootTable);
     }
 
     public static Recipe shipUpgradeKitRecipe() {
@@ -50,7 +66,11 @@ public class RecipeFactory {
         ingredients.put(new Wood(), 3);
         ingredients.put(new Iron(), 1);
 
-        return new Recipe(ShipUpgradeKit::new, ingredients);
+        LootTable deconstructLootTable = new LootTable();
+        deconstructLootTable.addLoot(new LootTableEntry(Wood::new, 1.0, 3));
+        deconstructLootTable.addLoot(new LootTableEntry(Iron::new, 1.0, 1));
+
+        return new Recipe(ShipUpgradeKit::new, ingredients, deconstructLootTable);
     }
 
     public static RecipeBook playerBook() {

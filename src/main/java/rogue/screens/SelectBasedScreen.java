@@ -4,10 +4,12 @@ import asciiPanel.AsciiPanel;
 import com.badlogic.ashley.core.Entity;
 import rogue.components.ExamineComponent;
 import rogue.components.items.UseItemEffectComponent;
+import rogue.components.traits.CanBeDeconstructedComponent;
 import rogue.factories.MapperFactory;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class SelectBasedScreen implements Screen {
     protected abstract Entity[] getItems();
@@ -32,12 +34,22 @@ public abstract class SelectBasedScreen implements Screen {
         for(Entity e: getItems()) {
             ExamineComponent examineComponent = MapperFactory.examineComponent.get(e);
             UseItemEffectComponent useItemEffectComponent = MapperFactory.useItemEffectComponent.get(e);
+            CanBeDeconstructedComponent canBeDeconstructedComponent = MapperFactory.canBeDeconstructedComponent.get(e);
 
             if(examineComponent != null) {
                 String itemText = examineComponent.name;
+                List<String> actionsAvailable = new ArrayList<>();
 
                 if(useItemEffectComponent != null)
-                    itemText = String.format("%s (usable)", itemText);
+                    actionsAvailable.add("usable");
+
+                if(canBeDeconstructedComponent != null)
+                    actionsAvailable.add("deconstructable");
+
+                if(actionsAvailable.size() > 0) {
+                    String actionsAvailableString = String.join(", ", actionsAvailable);
+                    itemText = String.format("%s (%s)", itemText, actionsAvailableString);
+                }
 
                 list.add(itemText);
             } else {

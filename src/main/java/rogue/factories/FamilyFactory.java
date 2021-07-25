@@ -28,4 +28,5 @@ public class FamilyFactory {
     public static final Family messagesWaiting = Family.all(SendMessageComponent.class).get();
     public static final Family spawnLoot = Family.all(SpawnLootComponent.class).get();
     public static final Family itemsUsed = Family.all(UseItemActionComponent.class).get();
+    public static final Family deconstruct = Family.all(DeconstructActionComponent.class, InventoryComponent.class).get();
 }

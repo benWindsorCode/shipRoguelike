@@ -5,6 +5,7 @@ import rogue.components.*;
 import rogue.components.actions.HealActionComponent;
 import rogue.components.items.UseItemEffectComponent;
 import rogue.components.traits.CanBeCraftedComponent;
+import rogue.components.traits.CanBeDeconstructedComponent;
 import rogue.components.traits.IdComponent;
 import rogue.factories.RecipeFactory;
 import rogue.factories.TileFactory;
@@ -21,6 +22,7 @@ public class RepairKit extends Entity {
         this.add(new RenderableComponent());
         this.add(new IdComponent(EntityId.REPAIR_KIT));
         this.add(new PositionComponent(x, y));
+        this.add(new CanBeDeconstructedComponent());
         this.add(new TileComponent(TileFactory.ironChest.glyph, TileFactory.ironChest.color));
         this.add(new CanBeCraftedComponent(RecipeFactory.repairKitRecipe()));
         this.add(new UseItemEffectComponent(UseTarget.PLAYER_SHIP, () -> new HealActionComponent(10)));

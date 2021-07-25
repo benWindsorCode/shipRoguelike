@@ -37,7 +37,7 @@ public class MapperFactory {
     public static final ComponentMapper<SpawnPortalComponent> spawnPortalComponent = ComponentMapper.getFor(SpawnPortalComponent.class);
     public static final ComponentMapper<ExamineComponent> examineComponent = ComponentMapper.getFor(ExamineComponent.class);
     public static final ComponentMapper<ReturnControlComponent> returnControlComponent = ComponentMapper.getFor(ReturnControlComponent.class);
-    public static final ComponentMapper<CanBeCraftedComponent> craftableComponent = ComponentMapper.getFor(CanBeCraftedComponent.class);
+    public static final ComponentMapper<CanBeCraftedComponent> canBeCraftedComponent = ComponentMapper.getFor(CanBeCraftedComponent.class);
     public static final ComponentMapper<CraftActionComponent> craftActionComponent = ComponentMapper.getFor(CraftActionComponent.class);
     public static final ComponentMapper<RecipeBookComponent> recipeBookComponent = ComponentMapper.getFor(RecipeBookComponent.class);
     public static final ComponentMapper<SendMessageComponent> sendMessageComponent = ComponentMapper.getFor(SendMessageComponent.class);
@@ -48,4 +48,6 @@ public class MapperFactory {
     public static final ComponentMapper<UseItemActionComponent> useItemActionComponent = ComponentMapper.getFor(UseItemActionComponent.class);
     public static final ComponentMapper<UseItemEffectComponent> useItemEffectComponent = ComponentMapper.getFor(UseItemEffectComponent.class);
     public static final ComponentMapper<IdComponent> idComponent = ComponentMapper.getFor(IdComponent.class);
+    public static final ComponentMapper<CanBeDeconstructedComponent> canBeDeconstructedComponent = ComponentMapper.getFor(CanBeDeconstructedComponent.class);
+    public static final ComponentMapper<DeconstructActionComponent> deconstructActionComponent = ComponentMapper.getFor(DeconstructActionComponent.class);
 }

@@ -5,8 +5,6 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
 import rogue.components.InventoryComponent;
-import rogue.components.PositionComponent;
-import rogue.components.TileComponent;
 import rogue.components.actions.CraftActionComponent;
 import rogue.components.actions.InventoryRemoveActionComponent;
 import rogue.components.traits.CanBeCraftedComponent;
@@ -34,7 +32,7 @@ public class CraftingSystem extends EntitySystem {
             List<Entity> inventory = inventoryComponent.inventory;
 
             Entity toCraft = MapperFactory.craftActionComponent.get(e).entityToCraft;
-            CanBeCraftedComponent canBeCraftedComponent = MapperFactory.craftableComponent.get(toCraft);
+            CanBeCraftedComponent canBeCraftedComponent = MapperFactory.canBeCraftedComponent.get(toCraft);
 
             Map<EntityId, Integer> recipeLeft = canBeCraftedComponent.recipe.getRecipeByEntityId();
 

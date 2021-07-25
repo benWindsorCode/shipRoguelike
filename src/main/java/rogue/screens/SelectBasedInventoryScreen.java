@@ -6,6 +6,7 @@ import rogue.components.ExamineComponent;
 import rogue.components.HealthComponent;
 import rogue.components.InventoryComponent;
 import rogue.components.RecipeBookComponent;
+import rogue.components.actions.DeconstructActionComponent;
 import rogue.components.actions.UseItemActionComponent;
 import rogue.components.items.UseItemEffectComponent;
 import rogue.components.player.PlayerShipComponent;
@@ -39,7 +40,7 @@ public class SelectBasedInventoryScreen extends SelectBasedScreen {
         HealthComponent healthComponent = MapperFactory.healthComponent.get(player);
         InventoryComponent inventoryComponent = MapperFactory.inventoryComponent.get(player);
         return String.format(
-                "Player inventory. %d/%d items. %d/%d health. 'enter' to use, 'd' to drop, 'c' to craft",
+                "Player inventory. %d/%d items. %d/%d health. 'enter' to use, 'd' to drop, 'c' to craft, 'k' to deconstruct",
                 inventoryComponent.currentSize,
                 inventoryComponent.maxSize,
                 healthComponent.hitpoints,
@@ -57,6 +58,13 @@ public class SelectBasedInventoryScreen extends SelectBasedScreen {
 
                 Entity dropItem = getItems()[currentItem];
                 return new DirectionChoiceScreen(terminal, player, dropItem);
+            case KeyEvent.VK_K:
+                if(getItems().length == 0)
+                    return this;
+
+                Entity deconstructItem = getItems()[currentItem];
+                player.add(new DeconstructActionComponent(deconstructItem));
+                break;
             case KeyEvent.VK_C:
                 if(player.getClass().equals(PlayerCharacter.class)) {
                     RecipeBookComponent recipeBookComponent = MapperFactory.recipeBookComponent.get(player);
