@@ -74,12 +74,8 @@ public class PlayerCharacterAi extends BaseAi<PlayerCharacter> {
             renderEntity.add(new HarvestActionComponent(entity));
             return;
         }
-
-//        CanAddToInventoryComponent canAddToInventoryComponent = MapperFactory.canAddToInventoryComponent.get(other);
-//        if(canAddToInventoryComponent != null) {
-//            entity.add(new InventoryAddActionComponent(other));
-//        }
     }
+
     @Override
     public MovingComponent nextMove(RenderGrid renderGrid, Entity renderEntity, Entity targetEntity, Entity targetWorldEntity) {
         return null;

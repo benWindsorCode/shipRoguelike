@@ -10,6 +10,7 @@ import rogue.factories.MapperFactory;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SelectBasedGrabScreen extends SelectBasedScreen {
@@ -29,7 +30,7 @@ public class SelectBasedGrabScreen extends SelectBasedScreen {
     protected String getMessage() {
         InventoryComponent inventoryComponent = MapperFactory.inventoryComponent.get(player);
         return String.format(
-                "'enter' to pick up. Player inventory %d/%d items.",
+                "'enter' to pick up. 'e' to pick up all. Player inventory %d/%d items.",
                 inventoryComponent.currentSize,
                 inventoryComponent.maxSize
         );
@@ -43,6 +44,12 @@ public class SelectBasedGrabScreen extends SelectBasedScreen {
                     return this;
                 Entity item = getItems()[currentItem];
                 player.add(new InventoryAddActionComponent(item));
+                break;
+            case KeyEvent.VK_E:
+                if(getItems().length == 0)
+                    return this;
+                List<Entity> items = Arrays.asList(getItems());
+                player.add(new InventoryAddActionComponent(items));
                 break;
             case KeyEvent.VK_LEFT:
             case KeyEvent.VK_RIGHT:

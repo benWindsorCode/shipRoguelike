@@ -21,6 +21,7 @@ public class WheatPlant extends Entity {
         PositionComponent wheatPosition = new PositionComponent(x, y);
         LootTable wheatPlantLootTable = new LootTable();
         wheatPlantLootTable.addLoot(new LootTableEntry(Wheat::new, 1.0, 1));
+        wheatPlantLootTable.addLoot(new LootTableEntry(WheatSeed::new, 0.8, 2));
 
         this.add(new CanBeHarvestedComponent());
         this.add(new IdComponent(EntityId.WHEAT_PLANT));

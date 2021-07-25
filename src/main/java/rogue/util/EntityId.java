@@ -1,5 +1,6 @@
 package rogue.util;
 
+// N.B.: KEEP IN ORDER OF ENTITIES FOLDER
 public enum EntityId {
     // Animals
     BIG_FISH,
@@ -43,6 +44,7 @@ public enum EntityId {
     STONE,
     WHEAT,
     WHEAT_PLANT,
+    WHEAT_SEED,
     WOOD,
 
     // World

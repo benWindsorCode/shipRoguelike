@@ -103,6 +103,9 @@ public abstract class DualListBasedScreen implements Screen {
             return secondItemUse(secondItems[upperLetters.indexOf(c)]);
         } else if(key.getKeyCode() == KeyEvent.VK_ESCAPE) {
             return null;
+        } else if(key.getKeyCode() == KeyEvent.VK_I) {
+            // TODO: should this do 'first' or 'second' inventory?
+            return new SelectBasedInventoryScreen(terminal, first);
         } else {
             return null;
         }

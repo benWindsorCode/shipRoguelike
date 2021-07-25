@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import rogue.components.TileComponent;
 import rogue.crafting.Recipe;
 import rogue.crafting.RecipeBook;
+import rogue.entities.buildings.StoneWall;
 import rogue.entities.crafting.*;
 import rogue.entities.resources.*;
 import rogue.loot.LootTable;
@@ -24,6 +25,16 @@ public class RecipeFactory {
         deconstructLootTable.addLoot(new LootTableEntry(Gold::new, 0.6, 1));
 
         return new Recipe(StoneAltar::new, ingredients, deconstructLootTable);
+    }
+
+    public static Recipe stoneWallRecipe() {
+        Map<Entity, Integer> ingredients = new HashMap<>();
+        ingredients.put(new Stone(), 3);
+
+        LootTable deconstructLootTable = new LootTable();
+        deconstructLootTable.addLoot(new LootTableEntry(Stone::new, 0.8, 3));
+
+        return new Recipe(StoneWall::new, ingredients, deconstructLootTable);
     }
 
     public static Recipe chestRecipe() {
@@ -86,6 +97,7 @@ public class RecipeFactory {
         recipeBook.addRecipe(RecipeFactory.repairKitRecipe());
         recipeBook.addRecipe(RecipeFactory.shipUpgradeKitRecipe());
         recipeBook.addRecipe(RecipeFactory.breadRecipe());
+        recipeBook.addRecipe(RecipeFactory.stoneWallRecipe());
 
         return recipeBook;
     }

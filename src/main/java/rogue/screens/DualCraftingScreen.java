@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DualCraftingScreen extends DualListBasedScreen{
+public class DualCraftingScreen extends DualListBasedScreen {
 
     // first == player, second == recipeBook
     public DualCraftingScreen(AsciiPanel terminal, Entity player, Entity recipeBook) {

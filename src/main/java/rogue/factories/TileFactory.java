@@ -25,6 +25,7 @@ public class TileFactory {
     public static final TileComponent ashTree = new TileComponent((char)210, new Color(102, 51, 0));
     public static final TileComponent wheatPlant = new TileComponent((char)244, new Color(255, 195, 77));
     public static final TileComponent wheat = new TileComponent((char)240, new Color(255, 195, 77));
+    public static final TileComponent wheatSeed = new TileComponent((char)176, new Color(255, 195, 77));
     public static final TileComponent wood = new TileComponent((char)186, new Color(77, 38, 0));
     public static final TileComponent iron = new TileComponent((char)219, new Color(115, 115, 115));
     public static final TileComponent gold = new TileComponent((char)219, new Color(255, 163, 0));
