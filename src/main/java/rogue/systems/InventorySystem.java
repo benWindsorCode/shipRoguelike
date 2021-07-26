@@ -4,16 +4,16 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import rogue.components.InventoryComponent;
 import rogue.components.PositionComponent;
 import rogue.components.RenderableComponent;
-import rogue.components.TileComponent;
 import rogue.components.actions.*;
 import rogue.environment.WorldGrid;
 import rogue.factories.FamilyFactory;
 import rogue.factories.MapperFactory;
 import rogue.util.EntityUtil;
-import rogue.util.TileUtil;
 
 import java.util.List;
 
@@ -23,6 +23,7 @@ public class InventorySystem extends EntitySystem {
     private ImmutableArray<Entity> entitiesToDropFrom;
     private ImmutableArray<Entity> entitiesToDirectionalDropFrom;
     private ImmutableArray<Entity> entitiesToPerformTransfer;
+    private final static Logger logger = LogManager.getLogger(InventorySystem.class);
 
     public void addedToEngine(Engine engine) {
         entitiesToAddTo = engine.getEntitiesFor(FamilyFactory.inventoryAdd);
@@ -60,12 +61,11 @@ public class InventorySystem extends EntitySystem {
         e.remove(InventoryAddActionComponent.class);
 
         if(!succeeded) {
-            System.out.println("Failed to pick up, inventory full");
+            logger.error("Failed to pick up, inventory full");
             return;
         }
 
-        System.out.println("Picked up");
-        System.out.println(inventoryComponent.inventory);
+        logger.info(String.format("Inventory after add: %s", inventoryComponent.inventory));
     }
 
     private void performRemove(Entity e) {
@@ -80,7 +80,7 @@ public class InventorySystem extends EntitySystem {
             boolean succeeded = inventoryComponent.remove(entityToRemove);
 
             if(!succeeded) {
-                System.out.println("Failed to remove item");
+                logger.error(String.format("Failed to remove item: %s", entityToRemove));
             }
 
             if(destroy) {
@@ -88,8 +88,7 @@ public class InventorySystem extends EntitySystem {
             }
         }
 
-        System.out.println("Removed from inventory");
-        System.out.println(inventoryComponent.inventory);
+        logger.info(String.format("Inventory after remove: %s", inventoryComponent.inventory));
     }
 
     // TODO: The drop action creates an inventory remove action, does two actions make this not doable in one update?
@@ -114,13 +113,13 @@ public class InventorySystem extends EntitySystem {
 
         boolean removeSucceeded = inventoryComponent.remove(entityToTransfer);
         if(!removeSucceeded) {
-            System.out.println("Transfer couldn't complete as item couldn't be removed");
+            logger.error("Transfer couldn't complete as item couldn't be removed");
             return;
         }
 
         boolean addSucceeded = recieverInventory.add(entityToTransfer);
         if(!addSucceeded) {
-            System.out.println("Transfer couldn't complete as item couldn't be added. Attempting to put back.");
+            logger.error("Transfer couldn't complete as item couldn't be added. Attempting to put back.");
 
             // TODO: some error checking here?
             inventoryComponent.add(entityToTransfer);
@@ -145,7 +144,7 @@ public class InventorySystem extends EntitySystem {
 
         // TODO: replace with an 'is empty' check rather than just checking under you
         if(!EntityUtil.isLand(renderEntityInDropLocation)) {
-            System.out.println("Cant drop on non-land");
+            logger.error("Cant drop on non-land");
             return;
         }
 

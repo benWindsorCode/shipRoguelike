@@ -4,6 +4,8 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import rogue.components.PositionComponent;
 import rogue.components.RenderableComponent;
 import rogue.components.TileComponent;
@@ -19,6 +21,7 @@ import rogue.factories.FamilyFactory;
 import rogue.factories.MapperFactory;
 import rogue.factories.TileFactory;
 import rogue.render.RenderGrid;
+import rogue.screens.PlayScreen;
 import rogue.util.EntityUtil;
 import rogue.util.TileUtil;
 
@@ -43,10 +46,11 @@ public class WorldSystem extends EntitySystem {
 
     private final int width;
     private final int height;
+    private final static Logger logger = LogManager.getLogger(WorldSystem.class);
 
     public WorldSystem(final WorldGrid worldGrid, final int width, final int height, final World worldEntity) {
         super();
-        System.out.println("Starting initialisation of WorldSystem");
+        logger.info("Starting initialisation of WorldSystem");
         this.width = width;
         this.height = height;
         this.worldGrid = worldGrid;
@@ -55,7 +59,7 @@ public class WorldSystem extends EntitySystem {
         // cant populate yet as the nonWorldEntities list is null
         // populateEntityListGrid();
 
-        System.out.println("Finished initialisation of WorldSystem");
+        logger.info("Finished initialisation of WorldSystem");
     }
 
     public void addedToEngine(Engine engine) {
@@ -165,7 +169,7 @@ public class WorldSystem extends EntitySystem {
 
     // TODO: should be managed by a SpawnSystem?
     public void spawnPortal(Entity e) {
-        System.out.println("Spawning portal");
+        logger.info("Spawning portal");
         Portal portal = new Portal(0, 0);
         addAtEmptySeaLocation(portal);
         e.remove(SpawnPortalComponent.class);

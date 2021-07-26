@@ -4,6 +4,8 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import rogue.components.LootableComponent;
 import rogue.components.PositionComponent;
 import rogue.components.RenderableComponent;
@@ -17,6 +19,7 @@ import java.util.List;
 
 public class HarvestSystem extends EntitySystem {
     private ImmutableArray<Entity> entitiesToHarvest;
+    private final static Logger logger = LogManager.getLogger(HarvestSystem.class);
 
     public void addedToEngine(Engine engine) {
         entitiesToHarvest = engine.getEntitiesFor(FamilyFactory.harvest);
@@ -35,11 +38,11 @@ public class HarvestSystem extends EntitySystem {
         CanHarvestComponent canHarvestComponent = MapperFactory.canHarvestComponent.get(harvester);
 
         if(canHarvestComponent == null) {
-            System.out.println("Cant harvest as harvester not enabled");
+            logger.error(String.format("Cant harvest as harvester not enabled. Harvester: %s, Entity harvested: %s", harvester, e));
             return;
         }
 
-        System.out.println("Harvesting");
+        logger.info(String.format("Harvesting: %s", e));
         LootableComponent lootableComponent = MapperFactory.lootableComponent.get(e);
         List<Entity> harvestResult = lootableComponent.lootTable.dropLoot();
         harvestResult.forEach(loot -> {

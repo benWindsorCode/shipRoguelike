@@ -4,6 +4,8 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import rogue.components.HealthComponent;
 import rogue.components.InventoryComponent;
 import rogue.components.StrengthComponent;
@@ -23,6 +25,7 @@ import java.util.List;
 
 public class UpgradeSystem extends EntitySystem {
     private ImmutableArray<Entity> upgradeRequested;
+    private final static Logger logger = LogManager.getLogger(UpgradeSystem.class);
 
     public void addedToEngine(Engine engine) {
         upgradeRequested = engine.getEntitiesFor(FamilyFactory.upgrading);
@@ -42,7 +45,7 @@ public class UpgradeSystem extends EntitySystem {
 
         PlayerShipComponent playerShipComponent = MapperFactory.playerShipComponent.get(e);
         if(playerShipComponent == null) {
-            System.out.println("Couldn't locate player ship to upgrade");
+            logger.error("Couldn't locate player ship to upgrade");
             return;
         }
 
@@ -66,19 +69,17 @@ public class UpgradeSystem extends EntitySystem {
         List<Entity> inventoryToRemove = new ArrayList<>();
         for(Entity item: inventory) {
             if(EntityUtil.isIron(item) && ironToRemove > 0) {
-                System.out.println("Marking iron for remove");
                 inventoryToRemove.add(item);
                 ironToRemove--;
             }
 
             if(EntityUtil.isWood(item) && woodToRemove > 0) {
-                System.out.println("Marking wood for remove");
                 inventoryToRemove.add(item);
                 woodToRemove--;
             }
         }
 
-        System.out.println(String.format("Removing %d items after upgrade", inventoryToRemove.size()));
+        logger.info(String.format("Removing %d items after upgrade", inventoryToRemove.size()));
         e.add(new InventoryRemoveActionComponent(inventoryToRemove, true));
     }
 }

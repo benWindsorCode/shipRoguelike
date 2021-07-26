@@ -4,6 +4,8 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import rogue.components.*;
 import rogue.components.actions.AttackActionComponent;
 import rogue.components.actions.HealthActionComponent;
@@ -19,6 +21,7 @@ import java.util.List;
 public class CombatSystem extends EntitySystem {
     private ImmutableArray<Entity> entitiesAttacking;
     private ImmutableArray<Entity> healthUpdates;
+    private final static Logger logger = LogManager.getLogger(CombatSystem.class);
 
     public void addedToEngine(Engine engine) {
         entitiesAttacking = engine.getEntitiesFor(FamilyFactory.attacking);
@@ -42,17 +45,16 @@ public class CombatSystem extends EntitySystem {
         e.remove(AttackActionComponent.class);
 
         if(canBeAttackedComponent == null) {
-            System.out.println("Cant attack this entity");
+            logger.warn("Cant attack this entity");
             return;
         }
 
-        System.out.println("Attacking");
         HealthComponent attackedHealth = MapperFactory.healthComponent.get(attackedEntity);
 
         StrengthComponent entityStrength = MapperFactory.strengthComponent.get(e);
         int remainingHealth = Math.max(0, attackedHealth.hitpoints - entityStrength.strength);
 
-        System.out.println(String.format(
+        logger.info(String.format(
                 "%s Attacked opponent %s. %d -> %d (strength %d)",
                 attackingExamineComponent.name,
                 attackedExamineComponent.name,
@@ -64,7 +66,7 @@ public class CombatSystem extends EntitySystem {
 
         // TODO: in combat on sea which inventory to drop loot into? ship or player?
         if(attackedHealth.hitpoints <= 0) {
-            System.out.println("Killed entity");
+            logger.info(String.format("%s Killed entity %s", attackingExamineComponent.name, attackedExamineComponent.name));
             LootableComponent lootableComponent = MapperFactory.lootableComponent.get(attackedEntity);
 
 

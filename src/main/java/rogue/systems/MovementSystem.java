@@ -4,6 +4,8 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import rogue.components.*;
 import rogue.components.actions.MovingComponent;
 import rogue.components.ship.PlayerOnboardComponent;
@@ -17,8 +19,6 @@ public class MovementSystem extends EntitySystem {
 
     public MovementSystem(int priority) {
         super(priority);
-
-        System.out.println("Initialised MovementSystem");
     }
 
     public void addedToEngine(Engine engine) {

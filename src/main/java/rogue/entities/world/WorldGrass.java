@@ -31,7 +31,6 @@ public class WorldGrass extends Entity {
         int greenDeviation = RandomUtil.getRandom(deviations);
         this.add(new TileComponent(TileFactory.grass.glyph, new Color(red, green + greenDeviation, blue)));
 
-        System.out.println("Creating world grass");
         this.add(new PositionComponent(x, y));
         this.add(new ExamineComponent(
                 "Grass",

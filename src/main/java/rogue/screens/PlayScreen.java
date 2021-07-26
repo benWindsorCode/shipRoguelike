@@ -3,8 +3,9 @@ package rogue.screens;
 import asciiPanel.AsciiPanel;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import rogue.ai.CursorAi;
 import rogue.components.*;
 import rogue.components.actions.SendMessageComponent;
@@ -42,6 +43,7 @@ public class PlayScreen implements Screen {
     private final int screenHeight;
     private Screen subscreen;
     private final AsciiPanel terminal;
+    private final static Logger logger = LogManager.getLogger(PlayScreen.class);
 
     public PlayScreen(AsciiPanel terminal) {
         this.terminal = terminal;
@@ -53,13 +55,13 @@ public class PlayScreen implements Screen {
         int worldWidth = 300;
         int worldHeight = 200;
 
-        System.out.printf(
-           "Creating PlayScreen. screenWidth: %d, screenHeight: %d, worldWidth: %d, worldHeight: %d\n",
-            screenWidth,
-            screenHeight,
-            worldWidth,
-            worldHeight
-        );
+        logger.info( String.format(
+                "Creating PlayScreen. screenWidth: %d, screenHeight: %d, worldWidth: %d, worldHeight: %d",
+                screenWidth,
+                screenHeight,
+                worldWidth,
+                worldHeight
+        ) );
 
         engine = EngineFactory.makeEngine();
 
@@ -225,7 +227,6 @@ public class PlayScreen implements Screen {
                     for(Entity e: surrounding) {
                         CanStoreItemsInComponent canStoreItemsInComponent = MapperFactory.canStoreItemsInComponentComponentMapper.get(e);
                         if(canStoreItemsInComponent != null) {
-                            System.out.println("Near chest!!!");
                             subscreen = new DualTransferScreen(terminal, player, e);
                             break;
                         }
@@ -285,7 +286,6 @@ public class PlayScreen implements Screen {
 
                         // TODO: why didnt this write to terminal?
                         if(examineComponent != null) {
-                            System.out.println(examineComponent.description);
                             String examineString = examineComponent.description;
 
                             HealthComponent healthComponent = MapperFactory.healthComponent.get(cursorAi.getTileEntered());
@@ -294,7 +294,6 @@ public class PlayScreen implements Screen {
                             }
                             subscreen = new ExamineScreen(panelWidth, panelHeight, terminal, examineString);
                         } else {
-                            System.out.println("No description available");
                             subscreen = new ExamineScreen(panelWidth, panelHeight, terminal, "No description available.");
                         }
                         ReturnControlComponent returnControlComponent = MapperFactory.returnControlComponent.get(player);
@@ -349,7 +348,7 @@ public class PlayScreen implements Screen {
         while(!done && instantActionCount < 15) {
             ImmutableArray<Entity> instant = engine.getEntitiesFor(FamilyFactory.instantActions);
             if(instant.size() > 0) {
-                System.out.println(String.format("Processing instant actions for: %s", instant));
+                logger.info(String.format("Processing instant actions for: %s", instant));
                 engine.update(0.1f);
             }
             done = instant.size() == 0 && instant.size() == 0;

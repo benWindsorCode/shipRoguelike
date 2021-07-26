@@ -2,6 +2,8 @@ package rogue.environment;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.spongepowered.noise.model.Plane;
 import org.spongepowered.noise.module.source.Perlin;
 import rogue.components.PositionComponent;
@@ -32,6 +34,7 @@ public class WorldBuilder {
     private boolean withVoronoiBiomes;
     private int voronoiCells;
     private final World worldEntity;
+    private final static Logger logger = LogManager.getLogger(WorldSystem.class);
 
     public WorldBuilder(Engine engine, int width, int height, World worldEntity) {
         this.engine = engine;
@@ -126,7 +129,7 @@ public class WorldBuilder {
     }
 
     public WorldBuilder buildNoiseIslands() {
-        System.out.println("Building from noise");
+        logger.info("Building from noise");
         Perlin perlin = new Perlin();
         perlin.setOctaveCount(6);
         perlin.setFrequency(4);
@@ -153,7 +156,7 @@ public class WorldBuilder {
             }
         }
 
-        System.out.println("Finished building from noise");
+        logger.info("Finished building from noise");
         return this;
     }
 
