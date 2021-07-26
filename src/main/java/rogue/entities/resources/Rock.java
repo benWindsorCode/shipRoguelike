@@ -2,6 +2,8 @@ package rogue.entities.resources;
 
 import com.badlogic.ashley.core.Entity;
 import rogue.components.*;
+import rogue.components.render.RenderableComponent;
+import rogue.components.render.TileComponent;
 import rogue.components.traits.CanBeHarvestedComponent;
 import rogue.components.traits.CannotEnterComponent;
 import rogue.components.traits.IdComponent;

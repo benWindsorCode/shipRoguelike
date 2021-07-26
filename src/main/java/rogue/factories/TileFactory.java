@@ -1,7 +1,7 @@
 package rogue.factories;
 
 import asciiPanel.AsciiPanel;
-import rogue.components.TileComponent;
+import rogue.components.render.TileComponent;
 
 import java.awt.*;
 
@@ -43,6 +43,7 @@ public class TileFactory {
     public static final TileComponent bigFish = new TileComponent('F', new Color(102, 153, 255));
     public static final TileComponent cow = new TileComponent('c', new Color(102, 51, 0));
     public static final TileComponent leather = new TileComponent('l', new Color(102, 51, 0));
+    public static final TileComponent leatherBodyArmour = new TileComponent('a', new Color(102, 51, 0));
     public static final TileComponent rat = new TileComponent('r', new Color(115, 115, 115));
     public static final TileComponent ratMeat = new TileComponent('r', AsciiPanel.brightRed);
     public static final TileComponent rawBeef = new TileComponent('c', AsciiPanel.brightRed);

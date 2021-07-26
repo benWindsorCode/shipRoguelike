@@ -1,7 +1,7 @@
 package rogue.render;
 
 import com.badlogic.ashley.core.Entity;
-import rogue.components.TileComponent;
+import rogue.components.render.TileComponent;
 import rogue.environment.Coordinate;
 import rogue.factories.MapperFactory;
 import rogue.factories.TileFactory;

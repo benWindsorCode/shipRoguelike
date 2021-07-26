@@ -6,6 +6,8 @@ import rogue.components.actions.AttackActionComponent;
 import rogue.components.actions.HarvestActionComponent;
 import rogue.components.actions.MovingComponent;
 import rogue.components.player.PlayerShipComponent;
+import rogue.components.render.RenderableComponent;
+import rogue.components.render.TileComponent;
 import rogue.components.ship.PlayerOnboardComponent;
 import rogue.components.traits.CanBeAttackedComponent;
 import rogue.components.traits.CanBeHarvestedComponent;

@@ -5,6 +5,8 @@ import rogue.components.*;
 import rogue.components.actions.HealthActionComponent;
 import rogue.components.actions.HungerActionComponent;
 import rogue.components.items.UseItemEffectComponent;
+import rogue.components.render.RenderableComponent;
+import rogue.components.render.TileComponent;
 import rogue.components.traits.*;
 import rogue.factories.RecipeFactory;
 import rogue.factories.TileFactory;

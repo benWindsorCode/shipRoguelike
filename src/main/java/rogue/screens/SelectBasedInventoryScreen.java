@@ -7,11 +7,13 @@ import rogue.components.HealthComponent;
 import rogue.components.InventoryComponent;
 import rogue.components.RecipeBookComponent;
 import rogue.components.actions.DeconstructActionComponent;
+import rogue.components.actions.EquipActionComponent;
 import rogue.components.actions.UseItemActionComponent;
 import rogue.components.items.UseItemEffectComponent;
 import rogue.components.player.PlayerShipComponent;
 import rogue.components.ship.PlayerOnboardComponent;
 import rogue.components.traits.CanBeDeconstructedComponent;
+import rogue.components.traits.CanEquipComponent;
 import rogue.entities.PlayerCharacter;
 import rogue.entities.PlayerShip;
 import rogue.entities.crafting.RepairKit;
@@ -57,6 +59,8 @@ public class SelectBasedInventoryScreen extends SelectBasedScreen {
             ExamineComponent examineComponent = MapperFactory.examineComponent.get(e);
             UseItemEffectComponent useItemEffectComponent = MapperFactory.useItemEffectComponent.get(e);
             CanBeDeconstructedComponent canBeDeconstructedComponent = MapperFactory.canBeDeconstructedComponent.get(e);
+            CanEquipComponent canEquipComponent = MapperFactory.canEquipComponent.get(e);
+
             EntityId entityId = MapperFactory.idComponent.get(e).entityId;
 
             int multiplicity = itemsByEntityId.get(entityId).size();
@@ -70,6 +74,9 @@ public class SelectBasedInventoryScreen extends SelectBasedScreen {
 
                 if(canBeDeconstructedComponent != null)
                     actionsAvailable.add("deconstructable");
+
+                if(canEquipComponent != null)
+                    actionsAvailable.add("wearable");
 
                 if(actionsAvailable.size() > 0) {
                     String actionsAvailableString = String.join(", ", actionsAvailable);
@@ -90,7 +97,7 @@ public class SelectBasedInventoryScreen extends SelectBasedScreen {
         HealthComponent healthComponent = MapperFactory.healthComponent.get(player);
         InventoryComponent inventoryComponent = MapperFactory.inventoryComponent.get(player);
         return String.format(
-                "Player inventory. %d/%d items. %d/%d health. 'enter' to use, 'd' to drop, 'c' to craft, 'k' to deconstruct",
+                "Player inventory. %d/%d items. %d/%d health. 'enter' to use, 'd' to drop, 'c' to craft, 'k' to deconstruct, 'e' to wear",
                 inventoryComponent.currentSize,
                 inventoryComponent.maxSize,
                 healthComponent.hitpoints,
@@ -123,6 +130,18 @@ public class SelectBasedInventoryScreen extends SelectBasedScreen {
                     PlayerOnboardComponent playerOnboardComponent = MapperFactory.playerOnboardComponent.get(player);
                     RecipeBookComponent recipeBookComponent = MapperFactory.recipeBookComponent.get(playerOnboardComponent.player);
                     return new DualCraftingScreen(terminal, playerOnboardComponent.player, recipeBookComponent.recipeBook);
+                }
+                break;
+            case KeyEvent.VK_E:
+                if(getItems().length == 0)
+                    return this;
+
+                Entity equipItem = getItems()[currentItem];
+                if(player.getClass().equals(PlayerCharacter.class)) {
+                    player.add(new EquipActionComponent(equipItem));
+                } else {
+                    // TODO: deal with equipping if ship, fetch player entity first
+                    System.out.println("CANNOT EQUIP IN SHIP");
                 }
                 break;
             case KeyEvent.VK_ENTER:

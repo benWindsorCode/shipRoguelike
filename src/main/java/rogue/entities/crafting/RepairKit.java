@@ -4,6 +4,8 @@ import com.badlogic.ashley.core.Entity;
 import rogue.components.*;
 import rogue.components.actions.HealthActionComponent;
 import rogue.components.items.UseItemEffectComponent;
+import rogue.components.render.RenderableComponent;
+import rogue.components.render.TileComponent;
 import rogue.components.traits.CanBeCraftedComponent;
 import rogue.components.traits.CanBeDeconstructedComponent;
 import rogue.components.traits.IdComponent;

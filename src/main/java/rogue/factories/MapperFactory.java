@@ -6,6 +6,8 @@ import rogue.components.actions.*;
 import rogue.components.hunger.HungerComponent;
 import rogue.components.items.UseItemEffectComponent;
 import rogue.components.player.PlayerShipComponent;
+import rogue.components.render.RenderableComponent;
+import rogue.components.render.TileComponent;
 import rogue.components.ship.PlayerOnboardComponent;
 import rogue.components.traits.*;
 import rogue.components.world.SpawnLootComponent;
@@ -53,4 +55,7 @@ public class MapperFactory {
     public static final ComponentMapper<DeconstructActionComponent> deconstructActionComponent = ComponentMapper.getFor(DeconstructActionComponent.class);
     public static final ComponentMapper<HungerComponent> hungerComponent = ComponentMapper.getFor(HungerComponent.class);
     public static final ComponentMapper<HungerActionComponent> hungerActionComponent = ComponentMapper.getFor(HungerActionComponent.class);
+    public static final ComponentMapper<EquipActionComponent> equipActionComponent = ComponentMapper.getFor(EquipActionComponent.class);
+    public static final ComponentMapper<EquipmentComponent> equipmentComponent = ComponentMapper.getFor(EquipmentComponent.class);
+    public static final ComponentMapper<CanEquipComponent> canEquipComponent = ComponentMapper.getFor(CanEquipComponent.class);
 }

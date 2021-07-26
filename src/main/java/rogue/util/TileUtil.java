@@ -1,6 +1,6 @@
 package rogue.util;
 
-import rogue.components.TileComponent;
+import rogue.components.render.TileComponent;
 import rogue.factories.TileFactory;
 
 public class TileUtil {

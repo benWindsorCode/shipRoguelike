@@ -8,7 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import rogue.components.LootableComponent;
 import rogue.components.PositionComponent;
-import rogue.components.RenderableComponent;
+import rogue.components.render.RenderableComponent;
 import rogue.components.actions.HarvestActionComponent;
 import rogue.components.traits.CanHarvestComponent;
 import rogue.components.traits.CanBeHarvestedComponent;

@@ -3,9 +3,8 @@ package rogue.environment;
 import com.badlogic.ashley.core.Entity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import rogue.components.TileComponent;
+import rogue.components.render.TileComponent;
 import rogue.factories.MapperFactory;
-import rogue.systems.UpgradeSystem;
 
 public class WorldGrid {
     private final Entity[][] worldTiles;

@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import rogue.components.*;
 import rogue.components.actions.AttackActionComponent;
 import rogue.components.actions.MovingComponent;
+import rogue.components.render.RenderableComponent;
 import rogue.components.ship.PlayerOnboardComponent;
 import rogue.components.traits.CanBeAttackedComponent;
 import rogue.entities.PlayerCharacter;

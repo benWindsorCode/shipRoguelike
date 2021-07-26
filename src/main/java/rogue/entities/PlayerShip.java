@@ -3,6 +3,8 @@ package rogue.entities;
 import com.badlogic.ashley.core.Entity;
 import rogue.ai.PlayerShipAi;
 import rogue.components.*;
+import rogue.components.render.RenderableComponent;
+import rogue.components.render.TileComponent;
 import rogue.components.traits.CanBeAttackedComponent;
 import rogue.components.traits.IdComponent;
 import rogue.factories.TileFactory;

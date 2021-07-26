@@ -11,6 +11,7 @@ import rogue.components.*;
 import rogue.components.actions.SendMessageComponent;
 import rogue.components.hunger.HungerComponent;
 import rogue.components.player.PlayerShipComponent;
+import rogue.components.render.TileComponent;
 import rogue.components.ship.PlayerOnboardComponent;
 import rogue.components.actions.MovingComponent;
 import rogue.components.traits.CanAddToInventoryComponent;

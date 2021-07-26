@@ -9,16 +9,14 @@ import org.apache.logging.log4j.Logger;
 import rogue.components.HealthComponent;
 import rogue.components.InventoryComponent;
 import rogue.components.StrengthComponent;
-import rogue.components.TileComponent;
+import rogue.components.render.TileComponent;
 import rogue.components.actions.InventoryRemoveActionComponent;
 import rogue.components.actions.UpgradeShipComponent;
 import rogue.components.player.PlayerShipComponent;
-import rogue.components.world.SpawnPortalComponent;
 import rogue.factories.FamilyFactory;
 import rogue.factories.MapperFactory;
 import rogue.factories.TileFactory;
 import rogue.util.EntityUtil;
-import rogue.util.TileUtil;
 
 import java.util.ArrayList;
 import java.util.List;

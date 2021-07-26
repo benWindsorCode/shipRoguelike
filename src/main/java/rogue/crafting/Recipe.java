@@ -2,7 +2,7 @@ package rogue.crafting;
 
 import com.badlogic.ashley.core.Entity;
 import rogue.components.ExamineComponent;
-import rogue.components.TileComponent;
+import rogue.components.render.TileComponent;
 import rogue.components.traits.IdComponent;
 import rogue.factories.MapperFactory;
 import rogue.loot.LootTable;

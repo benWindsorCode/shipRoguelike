@@ -1,4 +1,4 @@
-package rogue.components;
+package rogue.components.render;
 
 import com.badlogic.ashley.core.Component;
 

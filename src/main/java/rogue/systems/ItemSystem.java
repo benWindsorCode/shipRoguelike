@@ -5,14 +5,14 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import rogue.components.EquipmentComponent;
 import rogue.components.InventoryComponent;
-import rogue.components.actions.DeconstructActionComponent;
-import rogue.components.actions.InventoryAddActionComponent;
-import rogue.components.actions.InventoryRemoveActionComponent;
-import rogue.components.actions.UseItemActionComponent;
+import rogue.components.actions.*;
 import rogue.components.items.UseItemEffectComponent;
 import rogue.components.traits.CanBeCraftedComponent;
-import rogue.crafting.Recipe;
+import rogue.equipment.EquipmentSlot;
 import rogue.factories.FamilyFactory;
 import rogue.factories.MapperFactory;
 import rogue.loot.LootTable;
@@ -24,16 +24,19 @@ import java.util.stream.Collectors;
 public class ItemSystem extends EntitySystem {
     private ImmutableArray<Entity> itemsUsed;
     private ImmutableArray<Entity> itemsToDeconstruct;
+    private ImmutableArray<Entity> itemsToEquip;
+    private final static Logger logger = LogManager.getLogger(ItemSystem.class);
 
     public void addedToEngine(Engine engine) {
-
         itemsUsed = engine.getEntitiesFor(FamilyFactory.itemsUsed);
         itemsToDeconstruct = engine.getEntitiesFor(FamilyFactory.deconstruct);
+        itemsToEquip = engine.getEntitiesFor(FamilyFactory.itemsToEquip);
     }
 
     public void update(float deltaTime) {
         itemsUsed.forEach(this::useItem);
         itemsToDeconstruct.forEach(this::deconstructItem);
+        itemsToEquip.forEach(this::equipItem);
     }
 
     private void useItem(Entity e) {
@@ -72,5 +75,21 @@ public class ItemSystem extends EntitySystem {
 
         e.add(new InventoryAddActionComponent(deconstructLoot));
         e.add(new InventoryRemoveActionComponent(toDeconstruct, true));
+    }
+
+    private void equipItem(final Entity e) {
+        EquipActionComponent equipActionComponent = MapperFactory.equipActionComponent.get(e);
+        EquipmentComponent equipmentComponent = MapperFactory.equipmentComponent.get(e);
+
+        e.remove(EquipActionComponent.class);
+
+        Entity toEquip = equipActionComponent.itemToEquip;
+        EquipmentSlot slot = MapperFactory.canEquipComponent.get(toEquip).slot;
+
+        equipmentComponent.equipItem(toEquip, slot);
+
+        e.add(new InventoryRemoveActionComponent(toEquip));
+
+        logger.info(String.format("Equipped item: %s", toEquip));
     }
 }

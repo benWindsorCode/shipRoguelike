@@ -29,6 +29,9 @@ public enum EntityId {
     ENEMY_SHIP_STRONG,
     WEAK_BANDIT,
 
+    // Equipment
+    LEATHER_BODY_ARMOUR,
+
     // Food
     RAT_MEAT,
     RAW_BEEF,

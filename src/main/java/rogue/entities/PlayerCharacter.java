@@ -5,12 +5,19 @@ import rogue.ai.PlayerCharacterAi;
 import rogue.components.*;
 import rogue.components.hunger.HungerComponent;
 import rogue.components.player.PlayerShipComponent;
+import rogue.components.render.RenderableComponent;
+import rogue.components.render.TileComponent;
 import rogue.components.traits.CanBeAttackedComponent;
 import rogue.components.traits.CanHarvestComponent;
 import rogue.components.traits.IdComponent;
+import rogue.equipment.EquipmentSlot;
 import rogue.factories.RecipeFactory;
 import rogue.factories.TileFactory;
 import rogue.util.EntityId;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class PlayerCharacter extends Entity {
     public PlayerCharacter(int x, int y, PlayerShip playerShip, boolean inControlOfPlayer, boolean isVisible) {
@@ -28,6 +35,7 @@ public class PlayerCharacter extends Entity {
         this.add(new HungerComponent(55));
         this.add(new StrengthComponent(5));
         this.add(new RecipeBookComponent(RecipeFactory.playerBook()));
+        this.add(new EquipmentComponent(new HashSet<>(Arrays.asList(EquipmentSlot.ARMS, EquipmentSlot.BODY, EquipmentSlot.FEET))));
         this.add(new ExamineComponent(
                 "Player",
                 "Players",

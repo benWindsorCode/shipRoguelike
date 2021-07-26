@@ -8,15 +8,9 @@ import rogue.ai.NaivePlayerLandAttackAi;
 import rogue.ai.NaivePlayerSeaAttackAi;
 import rogue.components.AiComponent;
 import rogue.components.PositionComponent;
-import rogue.components.TileComponent;
 import rogue.components.actions.MovingComponent;
 import rogue.factories.FamilyFactory;
 import rogue.factories.MapperFactory;
-import rogue.util.RandomUtil;
-import rogue.util.TileUtil;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class NaivePlayerAiAttackSystem extends EntitySystem {
     private ImmutableArray<Entity> entitiesToUpdate;

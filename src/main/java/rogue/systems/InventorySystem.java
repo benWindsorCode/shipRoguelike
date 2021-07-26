@@ -8,7 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import rogue.components.InventoryComponent;
 import rogue.components.PositionComponent;
-import rogue.components.RenderableComponent;
+import rogue.components.render.RenderableComponent;
 import rogue.components.actions.*;
 import rogue.environment.WorldGrid;
 import rogue.factories.FamilyFactory;
