@@ -15,6 +15,7 @@ import rogue.components.world.SpawnPortalComponent;
 import rogue.factories.FamilyFactory;
 import rogue.factories.MapperFactory;
 import rogue.factories.TileFactory;
+import rogue.util.EntityUtil;
 import rogue.util.TileUtil;
 
 import java.util.ArrayList;
@@ -64,15 +65,13 @@ public class UpgradeSystem extends EntitySystem {
 
         List<Entity> inventoryToRemove = new ArrayList<>();
         for(Entity item: inventory) {
-            TileComponent tile = MapperFactory.tileComponent.get(item);
-
-            if(TileUtil.isIron(tile) && ironToRemove > 0) {
+            if(EntityUtil.isIron(item) && ironToRemove > 0) {
                 System.out.println("Marking iron for remove");
                 inventoryToRemove.add(item);
                 ironToRemove--;
             }
 
-            if(TileUtil.isWood(tile) && woodToRemove > 0) {
+            if(EntityUtil.isWood(item) && woodToRemove > 0) {
                 System.out.println("Marking wood for remove");
                 inventoryToRemove.add(item);
                 woodToRemove--;

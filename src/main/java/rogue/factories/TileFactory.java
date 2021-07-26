@@ -8,7 +8,7 @@ import java.awt.*;
 // TODO: so much relies on glyphs + colors being equal, means cant have two entities with the same glyph + colour without them being considered equal
 public class TileFactory {
     public static final TileComponent bounds = new TileComponent('x', AsciiPanel.brightBlack);
-    public static final TileComponent grass = new TileComponent((char)219, AsciiPanel.green);
+    public static final TileComponent grass = new TileComponent((char)219, new Color(0, 100, 0));
     public static final TileComponent mountain = new TileComponent((char)30, new Color(0, 51, 0));
     public static final TileComponent highMountain = new TileComponent((char)30, new Color(0, 77, 0));
     public static final TileComponent deepSea = new TileComponent((char)247, new Color(0, 0, 77));

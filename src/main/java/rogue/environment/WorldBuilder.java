@@ -167,7 +167,7 @@ public class WorldBuilder {
 
         for (int newX = 0; newX < width; newX++) {
             for (int newY = 0; newY < height; newY++) {
-                if(tiles[newX][newY].equals(TileFactory.grass) && Math.random() > density) {
+                if(EntityUtil.isLand(tiles[newX][newY]) && Math.random() > density) {
                     Entity entity = entitySupplier.get();
                     PositionComponent pos = MapperFactory.positionComponent.get(entity);
                     pos.x = newX;

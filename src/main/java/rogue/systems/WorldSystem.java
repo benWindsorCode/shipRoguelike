@@ -127,7 +127,7 @@ public class WorldSystem extends EntitySystem {
         do {
             x = (int)(Math.random() * width);
             y = (int)(Math.random() * height);
-        } while (!TileUtil.isSea(worldGrid.getTileComponents()[x][y]));
+        } while (!EntityUtil.isSea(worldGrid.get(x, y)));
         // TODO: dont use world grid here, as the ships aren't appended on
 
         PositionComponent pos = MapperFactory.positionComponent.get(entity);
@@ -147,7 +147,7 @@ public class WorldSystem extends EntitySystem {
         do {
             x = (int)(Math.random() * width);
             y = (int)(Math.random() * height);
-        } while (!TileUtil.isLand(worldGrid.getTileComponents()[x][y]));
+        } while (!EntityUtil.isLand(worldGrid.get(x, y)));
         // TODO: dont use world grid here, as the ships aren't appended on
 
         PositionComponent pos = MapperFactory.positionComponent.get(entity);

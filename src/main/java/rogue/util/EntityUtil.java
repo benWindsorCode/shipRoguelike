@@ -51,4 +51,12 @@ public class EntityUtil {
     public static boolean isPortal(final Entity entity) {
         return matchesId(entity, EntityId.PORTAL);
     }
+
+    public static boolean isWood(final Entity entity) {
+        return matchesId(entity, EntityId.WOOD);
+    }
+
+    public static boolean isIron(final Entity entity) {
+        return matchesId(entity, EntityId.IRON);
+    }
 }

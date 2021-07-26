@@ -14,11 +14,6 @@ public class TileUtil {
         return TileUtil.sameTile(tile, TileFactory.grass);
     }
 
-    // ideally logic works on entities and entity has a 'passable through' component
-//    public static boolean canWalkOnItem(TileComponent tile) {
-//        return TileUtil.sameTile()
-//    }
-
     public static boolean isWood(TileComponent tile) {
         return TileUtil.sameTile(tile, TileFactory.wood);
     }
