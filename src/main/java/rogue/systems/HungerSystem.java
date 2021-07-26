@@ -21,7 +21,9 @@ public class HungerSystem extends EntitySystem {
 
     public void update(float deltaTime) {
         hungerActions.forEach(this::processHungerAction);
-        hungerUpdates.forEach(this::updateHunger);
+
+        if(deltaTime >= 1)
+            hungerUpdates.forEach(this::updateHunger);
     }
 
     private void updateHunger(final Entity e) {

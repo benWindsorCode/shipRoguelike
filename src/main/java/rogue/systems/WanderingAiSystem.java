@@ -26,7 +26,8 @@ public class WanderingAiSystem extends EntitySystem {
     }
 
     public void update(float deltaTime) {
-        entitiesToUpdate.forEach(this::processUpdates);
+        if(deltaTime >= 1)
+            entitiesToUpdate.forEach(this::processUpdates);
     }
 
     private void processUpdates(final Entity e) {

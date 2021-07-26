@@ -67,6 +67,10 @@ public class WorldSystem extends EntitySystem {
     }
 
     public void update(float deltaTime) {
+        // No world actions are classed as 'instant' currently
+        if(deltaTime < 1)
+            return;
+
         // TODO: inefficient :( perhaps better to keep track on every movement
         populateEntityListGrid();
 

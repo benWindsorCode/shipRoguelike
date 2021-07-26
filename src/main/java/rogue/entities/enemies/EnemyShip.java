@@ -29,12 +29,12 @@ public class EnemyShip extends Entity {
         this.add(shipPosition);
         this.add(new HealthComponent(7));
         //this.add(new AiComponent<>(new WanderingSeaAi<EnemyShip>(this)));
-        //this.add(new AiComponent<>(new AStarPlayerAttackAi(this)));
         this.add(new AiComponent<>(new NaivePlayerSeaAttackAi<>(this)));
         this.add(new ComputerControlledComponent());
         this.add(new StrengthComponent(3));
         this.add(new CanBeAttackedComponent());
         this.add(new LootableComponent(shipLootTable));
+        this.add(new InventoryComponent(5));
         this.add(new ExamineComponent(
                 "Enemy Ship",
                 "Enemy Ships",

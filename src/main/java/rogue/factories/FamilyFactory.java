@@ -9,6 +9,12 @@ import rogue.components.world.SpawnLootComponent;
 import rogue.components.world.SpawnPortalComponent;
 
 public class FamilyFactory {
+    public static final Family instantActions = Family.one(
+            InventoryRemoveActionComponent.class,
+            InventoryAddActionComponent.class,
+            InventoryTransferActionComponent.class,
+            CraftActionComponent.class
+    ).get();
     public static final Family renderable = Family.all(RenderableComponent.class, PositionComponent.class).get();
     public static final Family nonWorld = Family.all(PositionComponent.class).exclude(WorldTileComponent.class).get();
     public static final Family renderableNonWorld = Family.all(RenderableComponent.class, PositionComponent.class).exclude(WorldTileComponent.class).get();

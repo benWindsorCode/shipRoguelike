@@ -26,7 +26,8 @@ public class MovementSystem extends EntitySystem {
     }
 
     public void update(float deltaTime) {
-        entitiesToMove.forEach(this::processMoves);
+        if(deltaTime >= 1)
+            entitiesToMove.forEach(this::processMoves);
     }
 
     private void processMoves(Entity e) {

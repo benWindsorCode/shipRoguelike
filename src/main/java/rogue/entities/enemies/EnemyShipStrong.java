@@ -34,6 +34,7 @@ public class EnemyShipStrong extends Entity {
         this.add(new StrengthComponent(6));
         this.add(new CanBeAttackedComponent());
         this.add(new LootableComponent(shipLootTable));
+        this.add(new InventoryComponent(10));
         this.add(new ExamineComponent(
                 "Strong Enemy Ship",
                 "Strong Enemy Ships",

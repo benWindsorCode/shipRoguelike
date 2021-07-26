@@ -27,7 +27,9 @@ public class CombatSystem extends EntitySystem {
 
     public void update(float deltaTime) {
         healthUpdates.forEach(this::processHealthUpdate);
-        entitiesAttacking.forEach(this::processAttack);
+
+        if(deltaTime >= 1)
+            entitiesAttacking.forEach(this::processAttack);
     }
 
     private void processAttack(Entity e) {
@@ -65,16 +67,23 @@ public class CombatSystem extends EntitySystem {
             System.out.println("Killed entity");
             LootableComponent lootableComponent = MapperFactory.lootableComponent.get(attackedEntity);
 
+
             if(lootableComponent != null) {
                 WorldSystem worldSystem = getEngine().getSystem(WorldSystem.class);
                 Entity worldEntityUnderEnemy = worldSystem.getWorldGrid().get(attackedEntityPos.x, attackedEntityPos.y);
                 if(EntityUtil.isLand(worldEntityUnderEnemy)) {
                     e.add(new SpawnLootComponent(lootableComponent.lootTable, new PositionComponent(attackedEntityPos.x, attackedEntityPos.y)));
                 } else {
-                    // If loot going straight to inventory, then first register it with engine
-                    List<Entity> lootList = lootableComponent.lootTable.dropLoot();
-                    lootList.forEach(lootItem -> getEngine().addEntity(lootItem));
-                    e.add(new InventoryAddActionComponent(lootList));
+                    InventoryComponent inventoryComponent = MapperFactory.inventoryComponent.get(e);
+
+                    if(inventoryComponent != null) {
+                        // If loot going straight to inventory, then first register it with engine
+                        List<Entity> lootList = lootableComponent.lootTable.dropLoot();
+                        lootList.forEach(lootItem -> getEngine().addEntity(lootItem));
+                        e.add(new InventoryAddActionComponent(lootList));
+                    } else {
+                        System.out.println("Looted at sea by entity with no inventory, so no loot dropping");
+                    }
                 }
             }
 

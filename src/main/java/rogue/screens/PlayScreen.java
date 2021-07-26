@@ -3,6 +3,8 @@ package rogue.screens;
 import asciiPanel.AsciiPanel;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.Family;
+import com.badlogic.ashley.utils.ImmutableArray;
 import rogue.ai.CursorAi;
 import rogue.components.*;
 import rogue.components.actions.SendMessageComponent;
@@ -20,10 +22,7 @@ import rogue.entities.enemies.WeakBandit;
 import rogue.environment.Coordinate;
 import rogue.environment.EntityListGrid;
 import rogue.environment.WorldBuilder;
-import rogue.factories.EngineFactory;
-import rogue.factories.MapperFactory;
-import rogue.factories.PrefabFactory;
-import rogue.factories.TileFactory;
+import rogue.factories.*;
 import rogue.render.RenderGrid;
 import rogue.systems.*;
 import rogue.util.EntityUtil;
@@ -343,6 +342,20 @@ public class PlayScreen implements Screen {
         // TODO: perhaps put these updates in the non-subscreen branch of above, to freeze time when in subscreen?
         // Two updates, to mean that position updates then screen redraws, is there nicer way to do this?
         engine.update(1);
+
+        // Loop until all instant actions are complete, using a small time delta
+        boolean done = false;
+        int instantActionCount = 0;
+        while(!done && instantActionCount < 15) {
+            ImmutableArray<Entity> instant = engine.getEntitiesFor(FamilyFactory.instantActions);
+            if(instant.size() > 0) {
+                System.out.println(String.format("Processing instant actions for: %s", instant));
+                engine.update(0.1f);
+            }
+            done = instant.size() == 0 && instant.size() == 0;
+            instantActionCount++;
+        }
+
        // engine.update(1);
         return this;
     }

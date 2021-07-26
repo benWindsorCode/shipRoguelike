@@ -26,6 +26,7 @@ public class ItemSystem extends EntitySystem {
     private ImmutableArray<Entity> itemsToDeconstruct;
 
     public void addedToEngine(Engine engine) {
+
         itemsUsed = engine.getEntitiesFor(FamilyFactory.itemsUsed);
         itemsToDeconstruct = engine.getEntitiesFor(FamilyFactory.deconstruct);
     }
