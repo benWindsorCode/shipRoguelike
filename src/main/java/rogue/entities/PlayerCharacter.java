@@ -19,15 +19,14 @@ import rogue.util.EntityId;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Set;
 
 public class PlayerCharacter extends Entity {
     public PlayerCharacter(int x, int y, PlayerShip playerShip, boolean inControlOfPlayer, boolean isVisible) {
         super();
 
         StatsComponent playerStats = new StatsComponent();
-        playerStats.addStat(StatType.HEALTH, new Stat(StatType.HEALTH, 10, 10));
-        playerStats.addStat(StatType.STRENGTH, new Stat(StatType.STRENGTH, 5, 5));
+        playerStats.addStat(new Stat(StatType.HEALTH, 10, 10));
+        playerStats.addStat(new Stat(StatType.STRENGTH, 5, 5));
 
         this.add(playerStats);
         this.add(new RenderableComponent(isVisible));

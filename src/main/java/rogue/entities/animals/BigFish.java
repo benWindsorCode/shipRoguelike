@@ -27,8 +27,8 @@ public class BigFish extends Entity {
         fishLootTable.addLoot(new LootTableEntry(RawFish::new, 1.0, 2));
 
         StatsComponent shipStats = new StatsComponent();
-        shipStats.addStat(StatType.HEALTH, new Stat(StatType.HEALTH, 5, 5));
-        shipStats.addStat(StatType.STRENGTH, new Stat(StatType.STRENGTH, 0, 0));
+        shipStats.addStat(new Stat(StatType.HEALTH, 5, 5));
+        shipStats.addStat(new Stat(StatType.STRENGTH, 0, 0));
 
         PositionComponent fishPosition = new PositionComponent(x, y);
         this.add(new IdComponent(EntityId.BIG_FISH));

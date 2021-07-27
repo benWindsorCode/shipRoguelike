@@ -36,4 +36,8 @@ public class Stat {
     public void adjustMaxValue(double delta) {
         this.maxValue = this.maxValue + delta;
     }
+
+    public void adjustMinValue(double delta) {
+        this.minValue = this.minValue + delta;
+    }
 }

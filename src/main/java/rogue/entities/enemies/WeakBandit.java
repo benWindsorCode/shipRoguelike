@@ -28,8 +28,8 @@ public class WeakBandit extends Entity {
         banditLootTable.addLoot(new LootTableEntry(Gold::new, 1.0, 1));
 
         StatsComponent banditStats = new StatsComponent();
-        banditStats.addStat(StatType.HEALTH, new Stat(StatType.HEALTH, 3, 3));
-        banditStats.addStat(StatType.STRENGTH, new Stat(StatType.STRENGTH, 2, 2));
+        banditStats.addStat(new Stat(StatType.HEALTH, 3, 3));
+        banditStats.addStat(new Stat(StatType.STRENGTH, 2, 2));
 
         this.add(new RenderableComponent());
         this.add(new IdComponent(EntityId.WEAK_BANDIT));

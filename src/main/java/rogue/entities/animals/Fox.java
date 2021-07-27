@@ -20,7 +20,7 @@ public class Fox extends Entity {
         super();
 
         StatsComponent foxStats = new StatsComponent();
-        foxStats.addStat(StatType.HEALTH, new Stat(StatType.HEALTH, 5, 5));
+        foxStats.addStat(new Stat(StatType.HEALTH, 5, 5));
 
         PositionComponent foxPosition = new PositionComponent(x, y);
         this.add(new RenderableComponent());

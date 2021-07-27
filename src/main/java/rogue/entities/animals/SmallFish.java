@@ -27,8 +27,8 @@ public class SmallFish extends Entity {
         fishLootTable.addLoot(new LootTableEntry(RawFish::new, 1.0, 1));
 
         StatsComponent fishStats = new StatsComponent();
-        fishStats.addStat(StatType.HEALTH, new Stat(StatType.HEALTH, 5, 5));
-        fishStats.addStat(StatType.STRENGTH, new Stat(StatType.STRENGTH, 0, 0));
+        fishStats.addStat(new Stat(StatType.HEALTH, 5, 5));
+        fishStats.addStat(new Stat(StatType.STRENGTH, 0, 0));
 
         PositionComponent fishPosition = new PositionComponent(x, y);
         this.add(new RenderableComponent());

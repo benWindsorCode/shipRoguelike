@@ -12,15 +12,13 @@ import rogue.stats.Stat;
 import rogue.stats.StatType;
 import rogue.util.EntityId;
 
-// TODO: probably not wise having lot of if class == PlayerShip, as then we are tied to this entity
-//       better to somehow always check if entity == PlayerShipComponent.ship on the PlayerCharacter
 public class PlayerShip extends Entity {
     public PlayerShip(int x, int y, boolean inControlOfPlayer, boolean isVisible) {
         super();
 
         StatsComponent shipStats = new StatsComponent();
-        shipStats.addStat(StatType.HEALTH, new Stat(StatType.HEALTH, 40, 40));
-        shipStats.addStat(StatType.STRENGTH, new Stat(StatType.STRENGTH, 10, 10));
+        shipStats.addStat(new Stat(StatType.HEALTH, 40, 40));
+        shipStats.addStat(new Stat(StatType.STRENGTH, 10, 10));
 
         this.add(new RenderableComponent(isVisible));
         this.add(new IdComponent(EntityId.PLAYER_SHIP));

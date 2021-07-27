@@ -29,8 +29,8 @@ public class Cow extends Entity {
         cowLootTable.addLoot(new LootTableEntry(RawBeef::new, 1.0, 1));
 
         StatsComponent cowStats = new StatsComponent();
-        cowStats.addStat(StatType.HEALTH, new Stat(StatType.HEALTH, 12, 12));
-        cowStats.addStat(StatType.STRENGTH, new Stat(StatType.STRENGTH, 0, 0));
+        cowStats.addStat(new Stat(StatType.HEALTH, 12, 12));
+        cowStats.addStat(new Stat(StatType.STRENGTH, 0, 0));
 
         this.add(new IdComponent(EntityId.COW));
         this.add(new RenderableComponent());

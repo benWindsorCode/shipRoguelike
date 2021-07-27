@@ -28,7 +28,7 @@ public class Rat extends Entity {
         ratLootTable.addLoot(new LootTableEntry(RatMeat::new, 1.0, 1));
 
         StatsComponent ratStats = new StatsComponent();
-        ratStats.addStat(StatType.HEALTH, new Stat(StatType.HEALTH, 3,3 ));
+        ratStats.addStat(new Stat(StatType.HEALTH, 3,3 ));
 
         this.add(new RenderableComponent());
         this.add(new IdComponent(EntityId.RAT));

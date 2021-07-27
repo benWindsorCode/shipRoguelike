@@ -139,7 +139,7 @@ public class PlayScreen implements Screen {
             InventoryComponent playerInventory = MapperFactory.inventoryComponent.get(playerCharacter);
 
             terminal.write(String.format(
-                    "Health %f/%f. Inventory %d/%d. Hunger %d/%d.    Ship Health %f/%f. Ship Inventory %d/%d.",
+                    "Health %.0f/%.0f. Inventory %d/%d. Hunger %d/%d.    Ship Health %.0f/%.0f. Ship Inventory %d/%d.",
                     playerStats.getStatCurrentValue(StatType.HEALTH),
                     playerStats.getStatMaxValue(StatType.HEALTH),
                     playerInventory.currentSize,
@@ -168,7 +168,7 @@ public class PlayScreen implements Screen {
             InventoryComponent playerInventory = MapperFactory.inventoryComponent.get(playerCharacter);
 
             terminal.write(String.format(
-                    "Health %f/%f. Inventory %d/%d. Hunger %d/%d.     Ship Health %f/%f. Ship Inventory %d/%d.",
+                    "Health %f/%f. Inventory %d/%d. Hunger %d/%d.     Ship Health %.0f/%.0f. Ship Inventory %d/%d.",
                     playerStats.getStatCurrentValue(StatType.HEALTH),
                     playerStats.getStatMaxValue(StatType.HEALTH),
                     playerInventory.currentSize,

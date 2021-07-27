@@ -24,8 +24,8 @@ public class EnemyShipStrong extends Entity {
         super();
 
         StatsComponent shipStats = new StatsComponent();
-        shipStats.addStat(StatType.HEALTH, new Stat(StatType.HEALTH, 12, 12));
-        shipStats.addStat(StatType.STRENGTH, new Stat(StatType.STRENGTH, 6, 6));
+        shipStats.addStat(new Stat(StatType.HEALTH, 12, 12));
+        shipStats.addStat(new Stat(StatType.STRENGTH, 6, 6));
 
         PositionComponent shipPosition = new PositionComponent(x, y);
         LootTable shipLootTable = new LootTable();

@@ -28,8 +28,8 @@ public class EnemyShip extends Entity {
         shipLootTable.addLoot(new LootTableEntry(Iron::new, 1.0, 2));
 
         StatsComponent shipStats = new StatsComponent();
-        shipStats.addStat(StatType.HEALTH, new Stat(StatType.HEALTH, 7, 7 ));
-        shipStats.addStat(StatType.STRENGTH, new Stat(StatType.STRENGTH, 3, 3));
+        shipStats.addStat(new Stat(StatType.HEALTH, 7, 7 ));
+        shipStats.addStat(new Stat(StatType.STRENGTH, 3, 3));
 
         this.add(new RenderableComponent());
         this.add(new IdComponent(EntityId.ENEMY_SHIP));

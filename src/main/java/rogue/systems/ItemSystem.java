@@ -9,13 +9,16 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import rogue.components.EquipmentComponent;
 import rogue.components.InventoryComponent;
+import rogue.components.StatsComponent;
 import rogue.components.actions.*;
 import rogue.components.items.UseItemEffectComponent;
 import rogue.components.traits.CanBeCraftedComponent;
+import rogue.components.traits.CanEquipComponent;
 import rogue.equipment.EquipmentSlot;
 import rogue.factories.FamilyFactory;
 import rogue.factories.MapperFactory;
 import rogue.loot.LootTable;
+import rogue.modifier.Modifier;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -85,10 +88,14 @@ public class ItemSystem extends EntitySystem {
 
         Entity toEquip = equipActionComponent.itemToEquip;
         EquipmentSlot slot = MapperFactory.canEquipComponent.get(toEquip).slot;
+        CanEquipComponent canEquipComponent = MapperFactory.canEquipComponent.get(toEquip);
 
         equipmentComponent.equipItem(toEquip, slot);
 
         e.add(new InventoryRemoveActionComponent(toEquip));
+        StatsComponent statsComponent = MapperFactory.statsComponent.get(e);
+
+        canEquipComponent.modifiers.stream().map(Supplier::get).forEach(statsComponent::addModifier);
 
         logger.info(String.format("Equipped item: %s", toEquip));
     }
