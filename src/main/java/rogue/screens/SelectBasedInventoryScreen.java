@@ -93,7 +93,7 @@ public class SelectBasedInventoryScreen extends SelectBasedScreen {
 
         InventoryComponent inventoryComponent = MapperFactory.inventoryComponent.get(player);
         return String.format(
-                "Player inventory. %d/%d items. %f/%f health. 'enter' to use, 'd' to drop, 'c' to craft, 'k' to deconstruct, 'e' to wear",
+                "Player inventory. %d/%d items. %.0f/%.0f health. 'enter' to use, 'd' to drop, 'c' to craft, 'k' to deconstruct, 'e' to wear",
                 inventoryComponent.currentSize,
                 inventoryComponent.maxSize,
                 statsComponent.getStatCurrentValue(StatType.HEALTH),

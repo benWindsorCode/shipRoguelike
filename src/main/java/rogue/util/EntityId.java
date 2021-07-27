@@ -9,6 +9,7 @@ public enum EntityId {
     COW,
     FOX,
     RAT,
+    SHEEP,
     SMALL_FISH,
 
     // Buildings
@@ -51,6 +52,7 @@ public enum EntityId {
     WHEAT_PLANT,
     WHEAT_SEED,
     WOOD,
+    WOOL,
 
     // World
     WORLD_DEEP_SEA,

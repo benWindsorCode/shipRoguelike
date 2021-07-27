@@ -85,6 +85,7 @@ public class PlayScreen implements Screen {
                 .addEntityAtEmptyLandLocation(Rat::new, 12)
                 .addEntityAtEmptyLandLocation(Cow::new, 12)
                 .addEntityAtEmptyLandLocation(Chicken::new, 12)
+                .addEntityAtEmptyLandLocation(Sheep::new, 12)
                 .addPrefabUniformlyToLand(PrefabFactory.smallHouse(), 5)
                 .addPrefabUniformlyToLand(PrefabFactory.bigHouse(), 3)
                 .addPrefabUniformlyToLand(PrefabFactory.abandonedRails(), 5)

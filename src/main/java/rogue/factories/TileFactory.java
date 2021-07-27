@@ -42,8 +42,10 @@ public class TileFactory {
     public static final TileComponent smallFish = new TileComponent('f', new Color(102, 153, 255));
     public static final TileComponent bigFish = new TileComponent('F', new Color(102, 153, 255));
     public static final TileComponent cow = new TileComponent('c', AsciiPanel.brightWhite);
+    public static final TileComponent sheep = new TileComponent('s', AsciiPanel.brightWhite);
     public static final TileComponent chicken = new TileComponent('c', AsciiPanel.brightYellow);
     public static final TileComponent leather = new TileComponent('l', new Color(102, 51, 0));
+    public static final TileComponent wool = new TileComponent('w', AsciiPanel.brightWhite);
     public static final TileComponent leatherBodyArmour = new TileComponent('a', new Color(102, 51, 0));
     public static final TileComponent rat = new TileComponent('r', new Color(115, 115, 115));
     public static final TileComponent ratMeat = new TileComponent('r', AsciiPanel.brightRed);

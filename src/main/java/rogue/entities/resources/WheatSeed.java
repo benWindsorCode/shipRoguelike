@@ -18,7 +18,7 @@ public class WheatSeed extends Entity {
     public WheatSeed(int x, int y) {
         super();
 
-        this.add(new IdComponent(EntityId.WHEAT));
+        this.add(new IdComponent(EntityId.WHEAT_SEED));
         this.add(new RenderableComponent());
         this.add(new PositionComponent(x, y));
         this.add(new TileComponent(TileFactory.wheatSeed.glyph, TileFactory.wheatSeed.color));
