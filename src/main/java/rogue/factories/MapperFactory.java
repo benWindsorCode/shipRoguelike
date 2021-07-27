@@ -29,8 +29,6 @@ public class MapperFactory {
     public static final ComponentMapper<CanAddToInventoryComponent> canAddToInventoryComponent = ComponentMapper.getFor(CanAddToInventoryComponent.class);
     public static final ComponentMapper<CanBeAttackedComponent> canAttackComponent = ComponentMapper.getFor(CanBeAttackedComponent.class);
     public static final ComponentMapper<AttackActionComponent> attackComponent = ComponentMapper.getFor(AttackActionComponent.class);
-    public static final ComponentMapper<HealthComponent> healthComponent = ComponentMapper.getFor(HealthComponent.class);
-    public static final ComponentMapper<StrengthComponent> strengthComponent = ComponentMapper.getFor(StrengthComponent.class);
     public static final ComponentMapper<LootableComponent> lootableComponent = ComponentMapper.getFor(LootableComponent.class);
     public static final ComponentMapper<DropActionComponent> dropActionComponent = ComponentMapper.getFor(DropActionComponent.class);
     public static final ComponentMapper<DropDirectionActionComponent> dropDirectionActionComponent = ComponentMapper.getFor(DropDirectionActionComponent.class);
@@ -58,4 +56,5 @@ public class MapperFactory {
     public static final ComponentMapper<EquipActionComponent> equipActionComponent = ComponentMapper.getFor(EquipActionComponent.class);
     public static final ComponentMapper<EquipmentComponent> equipmentComponent = ComponentMapper.getFor(EquipmentComponent.class);
     public static final ComponentMapper<CanEquipComponent> canEquipComponent = ComponentMapper.getFor(CanEquipComponent.class);
+    public static final ComponentMapper<StatsComponent> statsComponent = ComponentMapper.getFor(StatsComponent.class);
 }

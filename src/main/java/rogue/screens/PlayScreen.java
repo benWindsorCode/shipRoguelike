@@ -26,6 +26,7 @@ import rogue.environment.EntityListGrid;
 import rogue.environment.WorldBuilder;
 import rogue.factories.*;
 import rogue.render.RenderGrid;
+import rogue.stats.StatType;
 import rogue.systems.*;
 import rogue.util.EntityUtil;
 import rogue.util.TileUtil;
@@ -130,22 +131,23 @@ public class PlayScreen implements Screen {
             PlayerOnboardComponent playerOnboardComponent = MapperFactory.playerOnboardComponent.get(playerShip);
             Entity playerCharacter = playerOnboardComponent.player;
 
-            HealthComponent shipHealth = MapperFactory.healthComponent.get(playerShip);
-            HealthComponent playerHealth = MapperFactory.healthComponent.get(playerCharacter);
+            StatsComponent shipStats = MapperFactory.statsComponent.get(playerShip);
+            StatsComponent playerStats = MapperFactory.statsComponent.get(playerCharacter);
+
             HungerComponent playerHunger = MapperFactory.hungerComponent.get(playerCharacter);
             InventoryComponent shipInventory = MapperFactory.inventoryComponent.get(playerShip);
             InventoryComponent playerInventory = MapperFactory.inventoryComponent.get(playerCharacter);
 
             terminal.write(String.format(
-                    "Health %d/%d. Inventory %d/%d. Hunger %d/%d.    Ship Health %d/%d. Ship Inventory %d/%d.",
-                    playerHealth.hitpoints,
-                    playerHealth.maxHitpoints,
+                    "Health %f/%f. Inventory %d/%d. Hunger %d/%d.    Ship Health %f/%f. Ship Inventory %d/%d.",
+                    playerStats.getStatCurrentValue(StatType.HEALTH),
+                    playerStats.getStatMaxValue(StatType.HEALTH),
                     playerInventory.currentSize,
                     playerInventory.maxSize,
                     playerHunger.currentHunger,
                     playerHunger.maxHunger,
-                    shipHealth.hitpoints,
-                    shipHealth.maxHitpoints,
+                    shipStats.getStatCurrentValue(StatType.HEALTH),
+                    shipStats.getStatMaxValue(StatType.HEALTH),
                     shipInventory.currentSize,
                     shipInventory.maxSize
                 ),
@@ -158,22 +160,23 @@ public class PlayScreen implements Screen {
             PlayerShipComponent playerShipComponent = MapperFactory.playerShipComponent.get(playerCharacter);
             Entity playerShip = playerShipComponent.playerShip;
 
-            HealthComponent shipHealth = MapperFactory.healthComponent.get(playerShip);
-            HealthComponent playerHealth = MapperFactory.healthComponent.get(playerCharacter);
+            StatsComponent shipStats = MapperFactory.statsComponent.get(playerShip);
+            StatsComponent playerStats = MapperFactory.statsComponent.get(playerCharacter);
+
             HungerComponent playerHunger = MapperFactory.hungerComponent.get(playerCharacter);
             InventoryComponent shipInventory = MapperFactory.inventoryComponent.get(playerShip);
             InventoryComponent playerInventory = MapperFactory.inventoryComponent.get(playerCharacter);
 
             terminal.write(String.format(
-                    "Health %d/%d. Inventory %d/%d. Hunger %d/%d.     Ship Health %d/%d. Ship Inventory %d/%d.",
-                    playerHealth.hitpoints,
-                    playerHealth.maxHitpoints,
+                    "Health %f/%f. Inventory %d/%d. Hunger %d/%d.     Ship Health %f/%f. Ship Inventory %d/%d.",
+                    playerStats.getStatCurrentValue(StatType.HEALTH),
+                    playerStats.getStatMaxValue(StatType.HEALTH),
                     playerInventory.currentSize,
                     playerInventory.maxSize,
                     playerHunger.currentHunger,
                     playerHunger.maxHunger,
-                    shipHealth.hitpoints,
-                    shipHealth.maxHitpoints,
+                    shipStats.getStatCurrentValue(StatType.HEALTH),
+                    shipStats.getStatMaxValue(StatType.HEALTH),
                     shipInventory.currentSize,
                     shipInventory.maxSize
                     ),
@@ -289,9 +292,9 @@ public class PlayScreen implements Screen {
                         if(examineComponent != null) {
                             String examineString = examineComponent.description;
 
-                            HealthComponent healthComponent = MapperFactory.healthComponent.get(cursorAi.getTileEntered());
-                            if(healthComponent != null) {
-                                examineString = String.format("%s (health: %d/%d)", examineString, healthComponent.hitpoints, healthComponent.maxHitpoints);
+                            StatsComponent statsComponent = MapperFactory.statsComponent.get(cursorAi.getTileEntered());
+                            if(statsComponent.hasStat(StatType.HEALTH)) {
+                                examineString = String.format("%s (health: %f/%f)", examineString, statsComponent.getStatCurrentValue(StatType.HEALTH), statsComponent.getStatMaxValue(StatType.HEALTH));
                             }
                             subscreen = new ExamineScreen(panelWidth, panelHeight, terminal, examineString);
                         } else {

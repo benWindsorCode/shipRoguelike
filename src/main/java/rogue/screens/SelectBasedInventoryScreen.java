@@ -2,10 +2,7 @@ package rogue.screens;
 
 import asciiPanel.AsciiPanel;
 import com.badlogic.ashley.core.Entity;
-import rogue.components.ExamineComponent;
-import rogue.components.HealthComponent;
-import rogue.components.InventoryComponent;
-import rogue.components.RecipeBookComponent;
+import rogue.components.*;
 import rogue.components.actions.DeconstructActionComponent;
 import rogue.components.actions.EquipActionComponent;
 import rogue.components.actions.UseItemActionComponent;
@@ -16,10 +13,8 @@ import rogue.components.traits.CanBeDeconstructedComponent;
 import rogue.components.traits.CanEquipComponent;
 import rogue.entities.PlayerCharacter;
 import rogue.entities.PlayerShip;
-import rogue.entities.crafting.RepairKit;
-import rogue.entities.food.RatMeat;
-import rogue.entities.food.RawFish;
 import rogue.factories.MapperFactory;
+import rogue.stats.StatType;
 import rogue.util.EntityId;
 import rogue.util.UseTarget;
 
@@ -94,14 +89,15 @@ public class SelectBasedInventoryScreen extends SelectBasedScreen {
 
     @Override
     protected String getMessage() {
-        HealthComponent healthComponent = MapperFactory.healthComponent.get(player);
+        StatsComponent statsComponent = MapperFactory.statsComponent.get(player);
+
         InventoryComponent inventoryComponent = MapperFactory.inventoryComponent.get(player);
         return String.format(
-                "Player inventory. %d/%d items. %d/%d health. 'enter' to use, 'd' to drop, 'c' to craft, 'k' to deconstruct, 'e' to wear",
+                "Player inventory. %d/%d items. %f/%f health. 'enter' to use, 'd' to drop, 'c' to craft, 'k' to deconstruct, 'e' to wear",
                 inventoryComponent.currentSize,
                 inventoryComponent.maxSize,
-                healthComponent.hitpoints,
-                healthComponent.maxHitpoints
+                statsComponent.getStatCurrentValue(StatType.HEALTH),
+                statsComponent.getStatMaxValue(StatType.HEALTH)
         );
     }
 

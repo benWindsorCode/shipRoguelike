@@ -14,6 +14,7 @@ import rogue.components.traits.CanBeAttackedComponent;
 import rogue.components.world.SpawnLootComponent;
 import rogue.factories.FamilyFactory;
 import rogue.factories.MapperFactory;
+import rogue.stats.StatType;
 import rogue.util.EntityUtil;
 
 import java.util.List;
@@ -49,23 +50,24 @@ public class CombatSystem extends EntitySystem {
             return;
         }
 
-        HealthComponent attackedHealth = MapperFactory.healthComponent.get(attackedEntity);
+        StatsComponent attackedStats = MapperFactory.statsComponent.get(attackedEntity);
+        StatsComponent attackerStats = MapperFactory.statsComponent.get(e);
 
-        StrengthComponent entityStrength = MapperFactory.strengthComponent.get(e);
-        int remainingHealth = Math.max(0, attackedHealth.hitpoints - entityStrength.strength);
+        double remainingHealth = Math.max(0, attackedStats.getStatCurrentValue(StatType.HEALTH) - attackerStats.getStatCurrentValue(StatType.STRENGTH));
 
         logger.info(String.format(
-                "%s Attacked opponent %s. %d -> %d (strength %d)",
+                "%s Attacked opponent %s. %f -> %f (strength %f)",
                 attackingExamineComponent.name,
                 attackedExamineComponent.name,
-                attackedHealth.hitpoints,
+                attackedStats.getStatCurrentValue(StatType.HEALTH),
                 remainingHealth,
-                entityStrength.strength
+                attackerStats.getStatCurrentValue(StatType.STRENGTH)
         ));
-        attackedHealth.hitpoints = remainingHealth;
+
+        attackedStats.adjustCurrentValue(StatType.HEALTH, -1 * attackerStats.getStatCurrentValue(StatType.STRENGTH));
 
         // TODO: in combat on sea which inventory to drop loot into? ship or player?
-        if(attackedHealth.hitpoints <= 0) {
+        if(attackedStats.getStatCurrentValue(StatType.HEALTH) <= 0) {
             logger.info(String.format("%s Killed entity %s", attackingExamineComponent.name, attackedExamineComponent.name));
             LootableComponent lootableComponent = MapperFactory.lootableComponent.get(attackedEntity);
 
@@ -95,14 +97,11 @@ public class CombatSystem extends EntitySystem {
 
     private void processHealthUpdate(Entity e) {
         HealthActionComponent healthActionComponent = MapperFactory.healActionComponent.get(e);
-        HealthComponent healthComponent = MapperFactory.healthComponent.get(e);
 
-        healthComponent.hitpoints = Math.max( 0, Math.min(
-                healthComponent.maxHitpoints,
-                healthComponent.hitpoints + healthActionComponent.pointsDelta
-        ) );
+        StatsComponent statsComponent = MapperFactory.statsComponent.get(e);
+        statsComponent.adjustCurrentValue(StatType.HEALTH, healthActionComponent.pointsDelta);
 
-        if(healthComponent.hitpoints == 0) {
+        if(statsComponent.getStatCurrentValue(StatType.HEALTH) == 0) {
             getEngine().removeEntity(e);
         }
 

@@ -16,7 +16,8 @@ public class FamilyFactory {
             InventoryAddActionComponent.class,
             InventoryTransferActionComponent.class,
             CraftActionComponent.class,
-            EquipActionComponent.class
+            EquipActionComponent.class,
+            UseItemActionComponent.class
     ).get();
 
     public static final Family renderable = Family.all(RenderableComponent.class, PositionComponent.class).get();
@@ -30,7 +31,7 @@ public class FamilyFactory {
     public static final Family inventoryAdd = Family.all(InventoryAddActionComponent.class, InventoryComponent.class).get();
     public static final Family inventoryRemove = Family.all(InventoryRemoveActionComponent.class, InventoryComponent.class).get();
     public static final Family attacking = Family.all(AttackActionComponent.class).get();
-    public static final Family healthUpdates = Family.all(HealthActionComponent.class, HealthComponent.class).get();
+    public static final Family healthUpdates = Family.all(HealthActionComponent.class, StatsComponent.class).get();
     public static final Family dropping = Family.all(DropActionComponent.class, InventoryComponent.class).get();
     public static final Family directionalDropping = Family.all(DropDirectionActionComponent.class, InventoryComponent.class).get();
     public static final Family transferring = Family.all(InventoryTransferActionComponent.class, InventoryComponent.class).get();
@@ -40,7 +41,7 @@ public class FamilyFactory {
     public static final Family spawnLoot = Family.all(SpawnLootComponent.class).get();
     public static final Family itemsUsed = Family.all(UseItemActionComponent.class).get();
     public static final Family deconstruct = Family.all(DeconstructActionComponent.class, InventoryComponent.class).get();
-    public static final Family hungerUpdates = Family.all(HungerComponent.class, HealthComponent.class).get();
+    public static final Family hungerUpdates = Family.all(HungerComponent.class, StatsComponent.class).get();
     public static final Family hungerActions = Family.all(HungerActionComponent.class, HungerComponent.class).get();
     public static final Family itemsToEquip = Family.all(EquipActionComponent.class, EquipmentComponent.class).get();
 }

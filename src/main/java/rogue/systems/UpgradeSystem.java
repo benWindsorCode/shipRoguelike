@@ -6,9 +6,8 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import rogue.components.HealthComponent;
 import rogue.components.InventoryComponent;
-import rogue.components.StrengthComponent;
+import rogue.components.StatsComponent;
 import rogue.components.render.TileComponent;
 import rogue.components.actions.InventoryRemoveActionComponent;
 import rogue.components.actions.UpgradeShipComponent;
@@ -16,6 +15,7 @@ import rogue.components.player.PlayerShipComponent;
 import rogue.factories.FamilyFactory;
 import rogue.factories.MapperFactory;
 import rogue.factories.TileFactory;
+import rogue.stats.StatType;
 import rogue.util.EntityUtil;
 
 import java.util.ArrayList;
@@ -54,12 +54,13 @@ public class UpgradeSystem extends EntitySystem {
         tileComponent.color = TileFactory.shipV2.color;
         shipInventory.maxSize += 10;
 
-        StrengthComponent strengthComponent = MapperFactory.strengthComponent.get(playerShip);
-        strengthComponent.strength += 5;
+        StatsComponent statsComponent = MapperFactory.statsComponent.get(playerShip);
 
-        HealthComponent healthComponent = MapperFactory.healthComponent.get(playerShip);
-        healthComponent.maxHitpoints += 10;
-        healthComponent.hitpoints = healthComponent.maxHitpoints;
+        statsComponent.adjustMaxValue(StatType.STRENGTH, +5);
+        statsComponent.adjustCurrentValue(StatType.STRENGTH, +5);
+
+        statsComponent.adjustMaxValue(StatType.HEALTH, +10);
+        statsComponent.adjustCurrentValue(StatType.HEALTH, +10);
 
         InventoryComponent inventoryComponent = MapperFactory.inventoryComponent.get(e);
         List<Entity> inventory = inventoryComponent.inventory;

@@ -12,6 +12,8 @@ import rogue.entities.resources.Leather;
 import rogue.factories.TileFactory;
 import rogue.loot.LootTable;
 import rogue.loot.LootTableEntry;
+import rogue.stats.Stat;
+import rogue.stats.StatType;
 import rogue.util.EntityId;
 
 public class Cow extends Entity {
@@ -26,15 +28,18 @@ public class Cow extends Entity {
         cowLootTable.addLoot(new LootTableEntry(Leather::new, 1.0, 1));
         cowLootTable.addLoot(new LootTableEntry(RawBeef::new, 1.0, 1));
 
+        StatsComponent cowStats = new StatsComponent();
+        cowStats.addStat(StatType.HEALTH, new Stat(StatType.HEALTH, 12, 12));
+        cowStats.addStat(StatType.STRENGTH, new Stat(StatType.STRENGTH, 0, 0));
+
         this.add(new IdComponent(EntityId.COW));
         this.add(new RenderableComponent());
         this.add(new TileComponent(TileFactory.cow.glyph, TileFactory.cow.color));
         this.add(new PositionComponent(x, y));
-        this.add(new HealthComponent(12));
+        this.add(cowStats);
         this.add(new AiComponent<>(new WanderingLandAi<>(this)));
         this.add(new ComputerControlledComponent());
         this.add(new CanBeAttackedComponent());
-        this.add(new StrengthComponent(0));
         this.add(new LootableComponent(cowLootTable));
         this.add(new ExamineComponent(
                 "Cow",

@@ -11,6 +11,8 @@ import rogue.entities.food.RatMeat;
 import rogue.factories.TileFactory;
 import rogue.loot.LootTable;
 import rogue.loot.LootTableEntry;
+import rogue.stats.Stat;
+import rogue.stats.StatType;
 import rogue.util.EntityId;
 
 public class Rat extends Entity {
@@ -25,11 +27,14 @@ public class Rat extends Entity {
         LootTable ratLootTable = new LootTable();
         ratLootTable.addLoot(new LootTableEntry(RatMeat::new, 1.0, 1));
 
+        StatsComponent ratStats = new StatsComponent();
+        ratStats.addStat(StatType.HEALTH, new Stat(StatType.HEALTH, 3,3 ));
+
         this.add(new RenderableComponent());
         this.add(new IdComponent(EntityId.RAT));
         this.add(new TileComponent(TileFactory.rat.glyph, TileFactory.rat.color));
         this.add(ratPosition);
-        this.add(new HealthComponent(3));
+        this.add(ratStats);
         this.add(new AiComponent<>(new WanderingLandAi<Rat>(this)));
         this.add(new ComputerControlledComponent());
         this.add(new CanBeAttackedComponent());

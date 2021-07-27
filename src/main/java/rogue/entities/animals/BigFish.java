@@ -11,6 +11,8 @@ import rogue.entities.food.RawFish;
 import rogue.factories.TileFactory;
 import rogue.loot.LootTable;
 import rogue.loot.LootTableEntry;
+import rogue.stats.Stat;
+import rogue.stats.StatType;
 import rogue.util.EntityId;
 
 public class BigFish extends Entity {
@@ -24,16 +26,19 @@ public class BigFish extends Entity {
         LootTable fishLootTable = new LootTable();
         fishLootTable.addLoot(new LootTableEntry(RawFish::new, 1.0, 2));
 
+        StatsComponent shipStats = new StatsComponent();
+        shipStats.addStat(StatType.HEALTH, new Stat(StatType.HEALTH, 5, 5));
+        shipStats.addStat(StatType.STRENGTH, new Stat(StatType.STRENGTH, 0, 0));
+
         PositionComponent fishPosition = new PositionComponent(x, y);
         this.add(new IdComponent(EntityId.BIG_FISH));
         this.add(new RenderableComponent());
         this.add(new TileComponent(TileFactory.bigFish.glyph, TileFactory.bigFish.color));
         this.add(fishPosition);
-        this.add(new HealthComponent(5));
+        this.add(shipStats);
         this.add(new AiComponent<>(new WanderingPeacefulSeaAi<>(this)));
         this.add(new ComputerControlledComponent());
         this.add(new CanBeAttackedComponent());
-        this.add(new StrengthComponent(0));
         this.add(new LootableComponent(fishLootTable));
         this.add(new ExamineComponent(
                 "Big Fish",

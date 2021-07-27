@@ -11,6 +11,8 @@ import rogue.entities.resources.Iron;
 import rogue.factories.TileFactory;
 import rogue.loot.LootTable;
 import rogue.loot.LootTableEntry;
+import rogue.stats.Stat;
+import rogue.stats.StatType;
 import rogue.util.EntityId;
 
 public class EnemyShipStrong extends Entity {
@@ -21,6 +23,10 @@ public class EnemyShipStrong extends Entity {
     public EnemyShipStrong(int x, int y) {
         super();
 
+        StatsComponent shipStats = new StatsComponent();
+        shipStats.addStat(StatType.HEALTH, new Stat(StatType.HEALTH, 12, 12));
+        shipStats.addStat(StatType.STRENGTH, new Stat(StatType.STRENGTH, 6, 6));
+
         PositionComponent shipPosition = new PositionComponent(x, y);
         LootTable shipLootTable = new LootTable();
         shipLootTable.addLoot(new LootTableEntry(Iron::new, 1.0, 4));
@@ -29,11 +35,10 @@ public class EnemyShipStrong extends Entity {
         this.add(new IdComponent(EntityId.ENEMY_SHIP_STRONG));
         this.add(new TileComponent(TileFactory.enemyShipStrong.glyph, TileFactory.enemyShipStrong.color));
         this.add(shipPosition);
-        this.add(new HealthComponent(12));
+        this.add(shipStats);
 //        this.add(new AiComponent<>(new WanderingSeaAi<EnemyShipStrong>(this)));
         this.add(new AiComponent<>(new NaivePlayerSeaAttackAi<>(this)));
         this.add(new ComputerControlledComponent());
-        this.add(new StrengthComponent(6));
         this.add(new CanBeAttackedComponent());
         this.add(new LootableComponent(shipLootTable));
         this.add(new InventoryComponent(10));
