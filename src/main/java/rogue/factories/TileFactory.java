@@ -28,7 +28,7 @@ public class TileFactory {
     public static final TileComponent wheatSeed = new TileComponent((char)176, new Color(255, 195, 77));
     public static final TileComponent wood = new TileComponent((char)186, new Color(77, 38, 0));
     public static final TileComponent iron = new TileComponent((char)219, new Color(115, 115, 115));
-    public static final TileComponent gold = new TileComponent((char)219, new Color(255, 163, 0));
+    public static final TileComponent gold = new TileComponent((char)42, new Color(255, 163, 0));
     public static final TileComponent portal = new TileComponent((char)219, new Color(153, 51, 102));
     public static final TileComponent rock = new TileComponent((char)42, new Color(115, 115, 115));
     public static final TileComponent stone = new TileComponent((char)177, new Color(115, 115, 115));
@@ -41,12 +41,14 @@ public class TileFactory {
     public static final TileComponent fox = new TileComponent('f', new Color(172, 57, 57));
     public static final TileComponent smallFish = new TileComponent('f', new Color(102, 153, 255));
     public static final TileComponent bigFish = new TileComponent('F', new Color(102, 153, 255));
-    public static final TileComponent cow = new TileComponent('c', new Color(102, 51, 0));
+    public static final TileComponent cow = new TileComponent('c', AsciiPanel.brightWhite);
+    public static final TileComponent chicken = new TileComponent('c', AsciiPanel.brightYellow);
     public static final TileComponent leather = new TileComponent('l', new Color(102, 51, 0));
     public static final TileComponent leatherBodyArmour = new TileComponent('a', new Color(102, 51, 0));
     public static final TileComponent rat = new TileComponent('r', new Color(115, 115, 115));
     public static final TileComponent ratMeat = new TileComponent('r', AsciiPanel.brightRed);
     public static final TileComponent rawBeef = new TileComponent('c', AsciiPanel.brightRed);
+    public static final TileComponent rawChicken = new TileComponent('c', AsciiPanel.brightRed);
     public static final TileComponent rawFish = new TileComponent('f', AsciiPanel.brightRed);
     public static final TileComponent stoneWall = new TileComponent((char)219, new Color(110, 115, 100));
     public static final TileComponent horizontalRail = new TileComponent((char)205, new Color(193, 196, 187));

@@ -139,7 +139,6 @@ public class WorldBuilder {
                 double noiseX = x/(double)width;
                 double noiseY = y/(double)height;
                 double noise = noisePlane.getValue(noiseX, noiseY);
-                //System.out.println(String.format("(%f, %f) %f", noiseX, noiseY, noise));
                 if(noise > 1.27) {
                     tiles[x][y] = new WorldHighMountain(x, y);
                 }else if(noise > 1.25) {

@@ -4,6 +4,7 @@ package rogue.util;
 public enum EntityId {
     // Animals
     BIG_FISH,
+    CHICKEN,
     CIVILIAN_SHIP,
     COW,
     FOX,
@@ -35,6 +36,7 @@ public enum EntityId {
     // Food
     RAT_MEAT,
     RAW_BEEF,
+    RAW_CHICKEN,
     RAW_FISH,
 
     // Resources

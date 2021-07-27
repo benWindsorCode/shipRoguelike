@@ -84,6 +84,7 @@ public class PlayScreen implements Screen {
                 .addEntityAtEmptyLandLocation(Fox::new, 8)
                 .addEntityAtEmptyLandLocation(Rat::new, 12)
                 .addEntityAtEmptyLandLocation(Cow::new, 12)
+                .addEntityAtEmptyLandLocation(Chicken::new, 12)
                 .addPrefabUniformlyToLand(PrefabFactory.smallHouse(), 5)
                 .addPrefabUniformlyToLand(PrefabFactory.bigHouse(), 3)
                 .addPrefabUniformlyToLand(PrefabFactory.abandonedRails(), 5)
@@ -168,7 +169,7 @@ public class PlayScreen implements Screen {
             InventoryComponent playerInventory = MapperFactory.inventoryComponent.get(playerCharacter);
 
             terminal.write(String.format(
-                    "Health %f/%f. Inventory %d/%d. Hunger %d/%d.     Ship Health %.0f/%.0f. Ship Inventory %d/%d.",
+                    "Health %.0f/%.0f. Inventory %d/%d. Hunger %d/%d.     Ship Health %.0f/%.0f. Ship Inventory %d/%d.",
                     playerStats.getStatCurrentValue(StatType.HEALTH),
                     playerStats.getStatMaxValue(StatType.HEALTH),
                     playerInventory.currentSize,
@@ -293,8 +294,8 @@ public class PlayScreen implements Screen {
                             String examineString = examineComponent.description;
 
                             StatsComponent statsComponent = MapperFactory.statsComponent.get(cursorAi.getTileEntered());
-                            if(statsComponent.hasStat(StatType.HEALTH)) {
-                                examineString = String.format("%s (health: %f/%f)", examineString, statsComponent.getStatCurrentValue(StatType.HEALTH), statsComponent.getStatMaxValue(StatType.HEALTH));
+                            if(statsComponent != null && statsComponent.hasStat(StatType.HEALTH)) {
+                                examineString = String.format("%s (Health %.0f/%.0f)", examineString, statsComponent.getStatCurrentValue(StatType.HEALTH), statsComponent.getStatMaxValue(StatType.HEALTH));
                             }
                             subscreen = new ExamineScreen(panelWidth, panelHeight, terminal, examineString);
                         } else {

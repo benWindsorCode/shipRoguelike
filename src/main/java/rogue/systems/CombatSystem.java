@@ -56,7 +56,7 @@ public class CombatSystem extends EntitySystem {
         double remainingHealth = Math.max(0, attackedStats.getStatCurrentValue(StatType.HEALTH) - attackerStats.getStatCurrentValue(StatType.STRENGTH));
 
         logger.info(String.format(
-                "%s Attacked opponent %s. %f -> %f (strength %f)",
+                "%s Attacked opponent %s. %.0f -> %.0f (strength %.0f)",
                 attackingExamineComponent.name,
                 attackedExamineComponent.name,
                 attackedStats.getStatCurrentValue(StatType.HEALTH),
