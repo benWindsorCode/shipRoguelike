@@ -40,7 +40,7 @@ public class PlayerCharacter extends Entity {
         this.add(new InventoryComponent(12));
         this.add(new HungerComponent(55));
         this.add(new RecipeBookComponent(RecipeFactory.playerBook()));
-        this.add(new EquipmentComponent(new HashSet<>(Arrays.asList(EquipmentSlot.ARMS, EquipmentSlot.BODY, EquipmentSlot.FEET))));
+        this.add(new EquipmentComponent(new HashSet<>(Arrays.asList(EquipmentSlot.ARMS, EquipmentSlot.HANDS, EquipmentSlot.BODY, EquipmentSlot.FEET))));
         this.add(new ExamineComponent(
                 "Player",
                 "Players",

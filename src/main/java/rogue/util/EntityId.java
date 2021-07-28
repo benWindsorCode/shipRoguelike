@@ -33,6 +33,7 @@ public enum EntityId {
 
     // Equipment
     LEATHER_BODY_ARMOUR,
+    LEATHER_SHOES,
 
     // Food
     RAT_MEAT,

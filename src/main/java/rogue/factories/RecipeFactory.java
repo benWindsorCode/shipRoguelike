@@ -6,6 +6,7 @@ import rogue.crafting.RecipeBook;
 import rogue.entities.buildings.StoneWall;
 import rogue.entities.crafting.*;
 import rogue.entities.equipment.LeatherBodyArmour;
+import rogue.entities.equipment.LeatherShoes;
 import rogue.entities.resources.*;
 import rogue.loot.LootTable;
 import rogue.loot.LootTableEntry;
@@ -55,6 +56,16 @@ public class RecipeFactory {
         deconstructLootTable.addLoot(new LootTableEntry(Leather::new, 0.8, 1));
 
         return new Recipe(LeatherBodyArmour::new, ingredients, deconstructLootTable);
+    }
+
+    public static Recipe leatherShoesRecipe() {
+        Map<Entity, Integer> ingredients = new HashMap<>();
+        ingredients.put(new Leather(), 1);
+
+        LootTable deconstructLootTable = new LootTable();
+        deconstructLootTable.addLoot(new LootTableEntry(Leather::new, 0.8, 1));
+
+        return new Recipe(LeatherShoes::new, ingredients, deconstructLootTable);
     }
 
     public static Recipe breadRecipe() {
@@ -109,6 +120,7 @@ public class RecipeFactory {
         recipeBook.addRecipe(RecipeFactory.breadRecipe());
         recipeBook.addRecipe(RecipeFactory.stoneWallRecipe());
         recipeBook.addRecipe(RecipeFactory.leatherBodyArmourRecipe());
+        recipeBook.addRecipe(RecipeFactory.leatherShoesRecipe());
 
         return recipeBook;
     }

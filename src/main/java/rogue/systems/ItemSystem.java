@@ -90,6 +90,9 @@ public class ItemSystem extends EntitySystem {
         EquipmentSlot slot = MapperFactory.canEquipComponent.get(toEquip).slot;
         CanEquipComponent canEquipComponent = MapperFactory.canEquipComponent.get(toEquip);
 
+        if(equipmentComponent.slotFull(slot)) {
+            logger.info(String.format("Couldn't equip item: %s, slot %s full", toEquip, slot));
+        }
         equipmentComponent.equipItem(toEquip, slot);
 
         e.add(new InventoryRemoveActionComponent(toEquip));
@@ -97,6 +100,6 @@ public class ItemSystem extends EntitySystem {
 
         canEquipComponent.modifiers.stream().map(Supplier::get).forEach(statsComponent::addModifier);
 
-        logger.info(String.format("Equipped item: %s", toEquip));
+        logger.info(String.format("Equipped item: %s to slot: %s", toEquip, slot));
     }
 }

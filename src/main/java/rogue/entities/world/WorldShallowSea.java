@@ -9,6 +9,11 @@ import rogue.components.traits.IdComponent;
 import rogue.components.traits.WorldTileComponent;
 import rogue.factories.TileFactory;
 import rogue.util.EntityId;
+import rogue.util.RandomUtil;
+
+import java.awt.*;
+import java.util.Arrays;
+import java.util.List;
 
 public class WorldShallowSea extends Entity {
     public WorldShallowSea(int x, int y) {
@@ -16,7 +21,18 @@ public class WorldShallowSea extends Entity {
         this.add(new WorldTileComponent());
         this.add(new IdComponent(EntityId.WORLD_SHALLOW_SEA));
         this.add(new RenderableComponent());
-        this.add(new TileComponent(TileFactory.shallowSea.glyph, TileFactory.shallowSea.color));
+
+        int red = TileFactory.shallowSea.color.getRed();
+        int green = TileFactory.shallowSea.color.getGreen();
+        int blue = TileFactory.shallowSea.color.getBlue();
+
+        // Add some texture to the sea
+        List<Integer> deviations = Arrays.asList(-12, -7, 0, 0, 0);
+        int blueDeviation = RandomUtil.getRandom(deviations);
+
+        this.add(new TileComponent(TileFactory.shallowSea.glyph, new Color(red, green + blueDeviation, blue + blueDeviation)));
+
+        //this.add(new TileComponent(TileFactory.shallowSea.glyph, TileFactory.shallowSea.color));
         this.add(new PositionComponent(x, y));
         this.add(new ExamineComponent(
                 "Shallow Sea",

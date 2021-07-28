@@ -47,6 +47,7 @@ public class TileFactory {
     public static final TileComponent leather = new TileComponent('l', new Color(102, 51, 0));
     public static final TileComponent wool = new TileComponent('w', AsciiPanel.brightWhite);
     public static final TileComponent leatherBodyArmour = new TileComponent('a', new Color(102, 51, 0));
+    public static final TileComponent leatherShoes = new TileComponent('s', new Color(102, 51, 0));
     public static final TileComponent rat = new TileComponent('r', new Color(115, 115, 115));
     public static final TileComponent ratMeat = new TileComponent('r', AsciiPanel.brightRed);
     public static final TileComponent rawBeef = new TileComponent('c', AsciiPanel.brightRed);
