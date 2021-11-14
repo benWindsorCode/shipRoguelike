@@ -1,9 +1,42 @@
 # Ship Roguelike
-A seafaring ship roguelike.
+A seafaring roguelike where the player alternates between land and sea adventures. 
 
-# Run
+Land and sea are randomly generated via noise and voronoi diagrams, giving a new experience for each run. There are various ruins of buildings placed around the map also with loot in.
+The player can craft walls, chests, armour and weapons as well as upgrade their ship to gain more storage space and hitpoints. 
+
+The player starts at a random position at see (see the orange triangle players ship at sea):
+
+![Player At Sea](./images/playerAtSea.PNG)
+
+By moving to the shore the player can disembark (see the parked ship and player now on land):
+
+![Player Disembarked](./images/playerDisembarked.PNG)
+
+After exploring you can attack enemies and chop down trees, interacting via the 'g' key to 'grab':
+
+![Grab Screen](./images/grabScreen.PNG)
+
+Gathering resources from crafting allows you to create new items, build and upgrade your ship. Press 'c' to 'craft':
+
+![Crafting Screen](./images/craftingScreen.PNG)
+
+To win the game you must build a stone alter, this will open a portal in the sea somewhere which you can navigate to.
+
+# To Run/Play The Game
 1. Import as gradle project
 2. run rogue.run.RogueLikeMain
+
+# Architecture
+The game is created using an ECS architecture. This allows for all systems to be modular and interact with large amounts of items and effects.
+See 'Code Tour' below for a more in depth look at the code.
+
+Features include:
+- Noise based world generation, giving a new experience for each play through
+- Loot system allowing entities to drop from a predefined loot table
+- Crafting system allowing recipies to be learned by the player, building up a recipe-book
+- Hunger system which requires player to gather food to stay alive
+- Gathering and building system, allowing the player to harvest loot and resources and craft items, storage, armour, walls, upgrades etc.
+- Extensible world placement system which can take prefabricated locations such as ruins with loot, and randomly distribute them across the world map
 
 # Code Tour
 Broken down by java modules:
