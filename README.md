@@ -6,19 +6,19 @@ The player can craft walls, chests, armour and weapons as well as upgrade their 
 
 The player starts at a random position at see (see the orange triangle players ship at sea):
 
-![Player At Sea](./images/playerAtSea.PNG)
+![Player At Sea](./images/playerAtSea.png)
 
 By moving to the shore the player can disembark (see the parked ship and player now on land):
 
-![Player Disembarked](./images/playerDisembarked.PNG)
+![Player Disembarked](./images/playerDisembarked.png)
 
 After exploring you can attack enemies and chop down trees, interacting via the 'g' key to 'grab':
 
-![Grab Screen](./images/grabScreen.PNG)
+![Grab Screen](./images/grabScreen.png)
 
 Gathering resources from crafting allows you to create new items, build and upgrade your ship. Press 'c' to 'craft':
 
-![Crafting Screen](./images/craftingScreen.PNG)
+![Crafting Screen](./images/craftingScreen.png)
 
 To win the game you must build a stone alter, this will open a portal in the sea somewhere which you can navigate to.
 
