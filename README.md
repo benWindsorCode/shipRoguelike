@@ -26,10 +26,7 @@ To win the game you must build a stone alter, this will open a portal in the sea
 1. Import as gradle project
 2. run rogue.run.RogueLikeMain
 
-# Architecture
-The game is created using an ECS architecture. This allows for all systems to be modular and interact with large amounts of items and effects.
-See 'Code Tour' below for a more in depth look at the code.
-
+# Features
 Features include:
 - Noise based world generation, giving a new experience for each play through
 - Loot system allowing entities to drop from a predefined loot table
@@ -38,7 +35,10 @@ Features include:
 - Gathering and building system, allowing the player to harvest loot and resources and craft items, storage, armour, walls, upgrades etc.
 - Extensible world placement system which can take prefabricated locations such as ruins with loot, and randomly distribute them across the world map
 
-# Code Tour
+# Architecture And Code Tour
+The game uses an ECS architecture to manage the large number of objects and interacting systems required in a roguelike. 
+This allows for all systems to be modular and interact with large amounts of items and effects.
+
 Broken down by java modules:
 - rogue.ai = houses all AI, this deals with onEnter and nextMove for both the player and the non player controlled entities in the game
 - rogue.components = the components of the ECS pattern, they function as both data stores and events to be processed by systems
